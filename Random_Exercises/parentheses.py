@@ -24,30 +24,18 @@ def validate_expression(user_input):
     # return(equal, mathematical)
 
 def validate_equal_parentheses(user_input):
-    counter = 0
-    open = 0
-    close = 0
-
     if user_input == None:
         raise GeneralError()
     input_length = len(user_input)
-
-    while counter < input_length:
-        if user_input[counter] in ("("):
-            open += 1
-            counter += 1
-        elif user_input[counter] in (")"):
-            close += 1
-            counter += 1
+    open = user_input.count("(")
+    close = user_input.count(")")
+    if input_length == open + close:
+        if open == close:
+            return True
         else:
-            raise NotValidString()
-
-    result = open == close
-    if result:
-        return result
+            raise NotEqualOpenCloseParentheses()
     else:
-        raise NotEqualOpenCloseParentheses()
-
+        raise NotValidString()
 
 def validate_math_logic(user_input):
     counter = 0
