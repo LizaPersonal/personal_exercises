@@ -21,7 +21,7 @@ def validate_expression(user_input):
         raise GeneralError()
     equal = validate_equal_parentheses(user_input)
     mathematical = validate_math_logic(user_input)
-    return(equal, mathematical)
+    # return(equal, mathematical)
 
 def validate_equal_parentheses(user_input):
     counter = 0
@@ -83,28 +83,13 @@ def validate_math_logic(user_input):
         raise NotMathematicalLogic() #What if the result isn't true because it is invalid?
 
 
-if __name__ == '__main__':
+def get_user_input_and_validate():
+    should_retry = False
+
     user_input = get_user_input()
-
-    # valid = validate_equal_parentheses(user_input)
-    #
-    # while not valid:
-    #     user_input = get_user_input()
-    #
-    #     valid = validate_equal_parentheses(user_input)
-
-
-
-
-    # if we need to reset:
-    #     user_input = get_user_input()
-
     try:
-        input = validate_expression(user_input)
-        if input.equal:
-            print("This string has equal open and close parentheses.\nIt passes this test.\n")
-        if input.mathematical:
-            print("This string has accurate mathematical logic.\nIt passes this test.\n")
+        validate_expression(user_input)
+        print("success!!!")
     except GeneralError:
         print("error")
     except NotEqualOpenCloseParentheses:
@@ -114,6 +99,16 @@ if __name__ == '__main__':
         print("This string does NOT follow mathematical logic.\nIt does not pass this test.\n")
     except NotValidString:
         print("Not a valid string")
+        should_retry = True
+
+    return should_retry
+
+
+if __name__ == '__main__':
+    retry = get_user_input_and_validate()
+    while retry:
+        retry = get_user_input_and_validate()
+
 
 
 
