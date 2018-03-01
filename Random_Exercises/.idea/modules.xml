@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../LearnHardWay/.idea/LearnHardWay.iml" filepath="$PROJECT_DIR$/../LearnHardWay/.idea/LearnHardWay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Programiz/.idea/Programiz.iml" filepath="$PROJECT_DIR$/../Programiz/.idea/Programiz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../PythonSoftwareFoundation/.idea/PythonSoftwareFoundation.iml" filepath="$PROJECT_DIR$/../PythonSoftwareFoundation/.idea/PythonSoftwareFoundation.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/untitled.iml" filepath="$PROJECT_DIR$/.idea/untitled.iml" />
     </modules>
   </component>

@@ -23,6 +23,8 @@ def validate_expression(user_input):
     validate_math_logic(user_input)
 
 def validate_equal_parentheses(user_input):
+    if user_input == None:
+        raise GeneralError()
     input_length = len(user_input)
     open = user_input.count("(")
     close = user_input.count(")")
@@ -37,7 +39,6 @@ def validate_equal_parentheses(user_input):
 def validate_math_logic(user_input):
     counter = 0
     pair = 0
-
     if user_input == None:
         raise GeneralError()
     input_length = len(user_input)
