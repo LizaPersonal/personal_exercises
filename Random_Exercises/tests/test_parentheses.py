@@ -1,30 +1,38 @@
 
 import unittest
 
-from parentheses import validate_expression
+from parentheses import validate_expression, GeneralError, NotMathematicalLogic, NotEqualOpenCloseParentheses
 
 
 class TestStringMethods(unittest.TestCase):
 
     def test_empty_string(self):
-        result = validate_expression("")
-        self.assertEqual(result, "This string has accurate mathematical logic.\nIt passes this test.\n")
+        try:
+            validate_expression("")
+        except Exception:
+            self.fail("a valid expression had failed")
 
     def test_none_string(self):
-        result = validate_expression(None)
-        self.assertEqual(result, "error")
+        with self.assertRaises(GeneralError):
+            validate_expression(None)
 
     def test_1_parenthesis_string(self):
-        result = validate_expression("()")
-        self.assertEqual(result, "This string has accurate mathematical logic.\nIt passes this test.\n")
+        try:
+            validate_expression("()")
+        except Exception:
+            self.fail("a valid expression had failed")
 
     def test_2_parenthesis_string(self):
-        result = validate_expression("(())")
-        self.assertEqual(result, "This string has accurate mathematical logic.\nIt passes this test.\n")
+        try:
+            validate_expression("(())")
+        except Exception:
+            self.fail("a valid expression had failed")
 
     def test_3_parenthesis_string(self):
-        result = validate_expression("((()))")
-        self.assertEqual(result, "This string has accurate mathematical logic.\nIt passes this test.\n")
+        try:
+            validate_expression("((()))")
+        except Exception:
+            self.fail("a valid expression had failed")
 
     # def test_parenthesis_with_number_string(self):
     #     result = validate_expression("(3)")
@@ -35,16 +43,16 @@ class TestStringMethods(unittest.TestCase):
     #     self.assertEqual(result, "\nThat is not a valid string.")
 
     def test_4_parenthesis_string(self):
-        result = validate_expression(")(")
-        self.assertEqual(result, "This string does NOT follow mathematical logic.\nIt does not pass this test.\n")
+        with self.assertRaises(NotMathematicalLogic):
+            validate_expression(")(")
 
     def test_5_parenthesis_string(self):
-        result = validate_expression(")()")
-        self.assertEqual(result, "\nThis string does NOT have equal open and close parentheses.\nIt does not pass this test.\n")
+        with self.assertRaises(NotEqualOpenCloseParentheses):
+            validate_expression(")()")
 
     def test_6_parenthesis_string(self):
-        result = validate_expression("())(((")
-        self.assertEqual(result, "\nThis string does NOT have equal open and close parentheses.\nIt does not pass this test.\n")
+        with self.assertRaises(NotMathematicalLogic):
+            validate_expression("())(()")
 
 
 
