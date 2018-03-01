@@ -19,9 +19,8 @@ def get_user_input():
 def validate_expression(user_input):
     if user_input == None:
         raise GeneralError()
-    equal = validate_equal_parentheses(user_input)
-    mathematical = validate_math_logic(user_input)
-    # return(equal, mathematical)
+    validate_equal_parentheses(user_input)
+    validate_math_logic(user_input)
 
 def validate_equal_parentheses(user_input):
     if user_input == None:
@@ -68,7 +67,7 @@ def validate_math_logic(user_input):
     if result:
         return result
     else:
-        raise NotMathematicalLogic() #What if the result isn't true because it is invalid?
+        raise NotMathematicalLogic()
 
 
 def get_user_input_and_validate():

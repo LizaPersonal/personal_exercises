@@ -27,8 +27,8 @@
       <file leaf-file-name="parentheses.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/parentheses.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="104" column="0" lean-forward="true" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+            <state relative-caret-position="-391">
+              <caret line="24" column="43" lean-forward="true" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -261,18 +261,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_parentheses_TestStringMethods_test_2_parenthesis_string - 2018.02.28 at 18h 55m 27s.xml">
-      <configuration name="Unittests for test_parentheses.TestStringMethods.test_2_parenthesis_string" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_parentheses_TestStringMethods_test_3_parenthesis_string - 2018.02.28 at 18h 55m 54s.xml">
-      <configuration name="Unittests for test_parentheses.TestStringMethods.test_3_parenthesis_string" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_parentheses_TestStringMethods_test_4_parenthesis_string - 2018.02.28 at 18h 56m 06s.xml">
-      <configuration name="Unittests for test_parentheses.TestStringMethods.test_4_parenthesis_string" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_parentheses_TestStringMethods_test_4_parenthesis_string - 2018.02.28 at 18h 57m 12s.xml">
-      <configuration name="Unittests for test_parentheses.TestStringMethods.test_4_parenthesis_string" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_for_test_parentheses_TestStringMethods_test_5_parenthesis_string - 2018.02.28 at 18h 57m 22s.xml">
       <configuration name="Unittests for test_parentheses.TestStringMethods.test_5_parenthesis_string" configurationId="tests" />
     </history-entry>
@@ -289,6 +277,18 @@
       <configuration name="Unittests for test_parentheses.TestStringMethods.test_empty_string" configurationId="tests" />
     </history-entry>
     <history-entry file="Unittests_in_test_parentheses_py - 2018.02.28 at 19h 49m 15s.xml">
+      <configuration name="Unittests in test_parentheses.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_parentheses_py - 2018.02.28 at 19h 50m 25s.xml">
+      <configuration name="Unittests in test_parentheses.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_parentheses_py - 2018.02.28 at 19h 50m 40s.xml">
+      <configuration name="Unittests in test_parentheses.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_parentheses_py - 2018.02.28 at 19h 51m 01s.xml">
+      <configuration name="Unittests in test_parentheses.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_parentheses_py - 2018.02.28 at 19h 51m 14s.xml">
       <configuration name="Unittests in test_parentheses.py" configurationId="tests" />
     </history-entry>
   </component>
@@ -425,8 +425,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/parentheses.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="104" column="0" lean-forward="true" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+        <state relative-caret-position="-391">
+          <caret line="24" column="43" lean-forward="true" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="43" />
           <folding />
         </state>
       </provider>
