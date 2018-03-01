@@ -1,4 +1,4 @@
-import urllib2
+import urllib.request
 
 link = "https://www.nytimes.com/"
 title_indicator = 'class="story-heading"'
@@ -11,7 +11,7 @@ header_index = 0
 counter = 0
 index = 0
 
-response = urllib2.urlopen(link)
+response = urllib.request.urlopen(link)
 front_page = str(response.read())
 front_page_end = front_page.find(text_end)
 total_headers = front_page.count(title_indicator, 0, front_page_end)
