@@ -9,8 +9,8 @@ y = f"Those who know {binary} and those who {do_not}."
 print(x)
 print(y)
 
-# The string x is put instide the print string
-print("I said:",x)
+# The string x is put inside the print string
+print("I said:", x)
 # The string y is put inside the print string
 print(f"I also said: '{y}'")
 
