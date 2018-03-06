@@ -1,10 +1,18 @@
+
 import urllib.request
 
-link = "https://www.nytimes.com/"
-title_indicator = 'class="story-heading"'
-header_link_start = '<a href="'
-header_name_end = '</a>'
-text_end = 'class="region c-column-middle-span-region"'
+
+class GeneralError(Exception):
+    pass
+
+
+def new_york_times_defined_values():
+    link = "https://www.nytimes.com/"
+    title_indicator = 'class="story-heading"'
+    header_link_start = '<a href="'
+    header_link_end = '</a>'
+    link_end = 'class="region c-column-middle-span-region"'
+    return link, title_indicator, header_link_start, header_link_end, link_end
 
 header_array = []
 header_index = 0
