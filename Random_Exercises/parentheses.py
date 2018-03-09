@@ -2,11 +2,14 @@
 class GeneralError(Exception):
     pass
 
+
 class NotMathematicalLogic(Exception):
     pass
 
+
 class NotEqualOpenCloseParentheses(Exception):
     pass
+
 
 class NotValidString(Exception):
     pass
@@ -16,11 +19,13 @@ def get_user_input():
     user_input = str(input("Please provide a string of parentheses: "))
     return user_input
 
+
 def validate_expression(user_input):
     if user_input == None:
         raise GeneralError()
     validate_equal_parentheses(user_input)
     validate_math_logic(user_input)
+
 
 def validate_equal_parentheses(user_input):
     if user_input == None:
@@ -35,6 +40,7 @@ def validate_equal_parentheses(user_input):
             raise NotEqualOpenCloseParentheses()
     else:
         raise NotValidString()
+
 
 def validate_math_logic(user_input):
     counter = 0
