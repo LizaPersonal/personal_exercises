@@ -1,3 +1,10 @@
+""" Assignment: Create budgets for flight, car, hotel, and base, which should be inherited by the others.
+ Base should have a method called generate that takes no parameters and returns a budget.
+ First Step: Flight should return 500, Hotel should return 400, Car should return 300
+ Second Step: Flight constructor gets number_of_legs and returns 500 * numer_of_legs
+              Hotel constructor gets number_of_nights and returns 400 * number_of_nights
+              Car constructor gets number_of_days and returns 300 * number_of_days """
+
 
 class Budget:
     def generate(self):
