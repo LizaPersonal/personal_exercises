@@ -45,14 +45,17 @@ class Car(Budget):
 
 if __name__ == '__main__':
 
-    number_of_legs = int(input("How many legs is your flight? "))
+    print("How many legs is your flight? ")
+    number_of_legs = int(input())
     flight_budget = Flight(number_of_legs)
-    print("Your flight budget is: {}\n".format(flight_budget.generate()))
+    print("Your flight budget is: {}".format(flight_budget.generate()))
 
-    number_of_nights = int(input("How many nights are you staying? "))
+    print("How many nights are you staying? ")
+    number_of_nights = int(input())
     hotel_budget = Hotel(number_of_nights)
-    print("Your hotel budget is: {}\n".format(hotel_budget.generate()))
+    print("Your hotel budget is: {}".format(hotel_budget.generate()))
 
-    number_of_days = int(input("How many days are you renting the car for? "))
+    print("How many days are you renting the car for? ")
+    number_of_days = int(input())
     car_budget = Car(number_of_days)
-    print("Your car budget is: {}\n".formate(car_budget.generate()))
+    print("Your car budget is: {}".format(car_budget.generate()))
