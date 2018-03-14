@@ -16,7 +16,6 @@ class GeneralError(Exception):
 
 link = "https://www.nytimes.com/"
 link1 = "https://www.cnn.com/"
-link2 = "https://www.foxnews.com/"
 
 title_indicator = 'class="story-heading"'
 header_link_start = '<a href="'
