@@ -31,10 +31,10 @@ def validate_equal_parentheses(user_input):
     if user_input == None:
         raise GeneralError()
     input_length = len(user_input)
-    open = user_input.count("(")
-    close = user_input.count(")")
-    if input_length == open + close:
-        if open == close:
+    open_parentheses = user_input.count("(")
+    close_parentheses = user_input.count(")")
+    if input_length == open_parentheses + close_parentheses:
+        if open_parentheses == close_parentheses:
             return True
         else:
             raise NotEqualOpenCloseParentheses()
