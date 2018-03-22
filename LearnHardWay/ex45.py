@@ -7,19 +7,27 @@ Create Game:
 """
 
 
+import random
+
+
+class GeneralError(Exception):
+    pass
+
+
+class NotValidString(Exception):
+    pass
+
+
 class GameBoard(object):
 
-    def __init__(self, level):
-        self.level = level
+    def __init__(self):
         self.board = []
+        self.level_options = {"expert": 17, "hard": 26, "medium": 32, "easy": 40}
 
     def create_board(self):
         for x in range(9):
             self.board.append(["[ ]"] * 9)
         return self.board
-
-    def starter_board(self):
-        pass
 
     def print_board(self):
         for row in self.board:
@@ -27,8 +35,6 @@ class GameBoard(object):
         print("______________________________")
 
     def validate_guess(self, row_guess, col_guess, guess):
-        valid_row = True
-        valid_column = True
         valid_box = True
 
         for check_row in range(9):
@@ -45,40 +51,112 @@ class GameBoard(object):
                 valid_column = False
                 break
 
-        box_row = (row_guess - (row_guess % 3))
-        box_column = (col_guess - (col_guess % 3))
-        while box_row < row_guess and valid_box:
-            while box_column < col_guess and valid_box:
-                if "[" + str(guess) + "]" != self.board[box_row][box_column]:
+        box_row_start = (row_guess - (row_guess % 3))
+        box_column_start = (col_guess - (col_guess % 3))
+
+        box_row_count = 0
+        while box_row_count < 3 and valid_box:
+            box_column_count = 0
+
+            while box_column_count < 3 and valid_box:
+                box_row_check = box_row_start + box_row_count
+                box_column_check = box_column_start + box_column_count
+
+                if "[" + str(guess) + "]" != self.board[box_row_check][box_column_check]:
                     valid_box = True
                 else:
                     valid_box = False
                     break
-                box_column += 1
-            box_row += 1
+
+                box_column_count += 1
+            box_row_count += 1
 
         valid_guess = valid_column and valid_row and valid_box
         return valid_guess
+
+    def validate_empty(self, row_guess, col_guess):
+        if self.board[row_guess][col_guess] == "[ ]":
+            return True
+        else:
+            return False
 
     def fill_guess(self, row_guess, col_guess, guess):
         self.board[row_guess][col_guess] = "[" + str(guess) + "]"
         return self.board
 
+    def start_board(self, level):
+        level_chosen = self.level_options[level]
+        count_placement = 1
+        while count_placement <= level_chosen:
+            random_guess = random.randint(1, 9)
+            random_row = random.randint(0, 8)
+            random_column = random.randint(0, 8)
+            validate = self.validate_guess(random_row, random_column, random_guess)
+            is_empty = self.validate_empty(random_row, random_column)
+            while validate and is_empty and count_placement <= level_chosen:
+                self.fill_guess(random_row, random_column, random_guess)
+                random_guess = random.randint(1, 9)
+                random_row = random.randint(0, 8)
+                random_column = random.randint(0, 8)
+                validate = self.validate_guess(random_row, random_column, random_guess)
+                is_empty = self.validate_empty(random_row, random_column)
+                count_placement += 1
 
-new_board = GameBoard(2)
+    # def fill_solution(self):
+    #     populate_number = 1
+    #     while populate_number <= 9:
+    #         count_placement = 1
+    #         while count_placement <= 9:
+    #             random_row = random.randint(0, 8)
+    #             random_column = random.randint(0, 8)
+    #             validate = self.validate_guess(random_row, random_column, populate_number)
+    #             is_empty = self.validate_empty(random_row, random_column)
+    #             while validate and is_empty and count_placement <= 9:
+    #                 self.fill_guess(random_row, random_column, populate_number)
+    #                 self.print_board()
+    #                 random_row = random.randint(0, 8)
+    #                 random_column = random.randint(0, 8)
+    #                 validate = self.validate_guess(random_row, random_column, populate_number)
+    #                 is_empty = self.validate_empty(random_row, random_column)
+    #                 count_placement += 1
+    #                 print("count_placement" + str(count_placement) + "for" + str(populate_number))
+    #         populate_number += 1
+
+
+new_board = GameBoard()
 new_board.create_board()
+print("How hard would you like the game to be?\n"
+      "expert, hard, medium, easy")
+chosen_level = input()
+new_board.start_board(chosen_level)
 new_board.print_board()
+
+MAX_GUESSES = 81
+
 fill_amount = 0
-while fill_amount < 81:
+while fill_amount < MAX_GUESSES:
+
     print("What column would you like to enter your guess?")
-    col_guess = int(input())
+    col_guess = int(input()) - 1
+    while 0 > col_guess or col_guess > 8:
+        print("That is not a valid column, please try again.")
+        col_guess = int(input()) - 1
+
     print("What row would you like to enter your guess?")
-    row_guess = int(input())
+    row_guess = int(input()) - 1
+    while 0 > row_guess or row_guess > 8:
+        print("That is not a valid row, please try again.")
+        row_guess = int(input()) - 1
+
     print("What is your guess?")
     guess = int(input())
+    while 1 > guess or guess > 9:
+        print("That is not a valid guess, please try again.")
+        guess = int(input())
     if new_board.validate_guess(row_guess, col_guess, guess):
         new_board.fill_guess(row_guess, col_guess, guess)
         new_board.print_board()
         fill_amount += 1
     else:
+        new_board.print_board()
         print("That is not a valid guess. Try again")
