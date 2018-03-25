@@ -6,7 +6,8 @@ Create Game:
     Solve, and Print the solve
 """
 
-
+import signal
+import sys
 import random
 
 
@@ -122,6 +123,11 @@ class GameBoard(object):
     #                 print("count_placement" + str(count_placement) + "for" + str(populate_number))
     #         populate_number += 1
 
+def signal_handler(signal, frame):
+    print('\nYou pressed Ctrl+C!\nEnding program execution gracefully')
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
 
 new_board = GameBoard()
 new_board.create_board()
@@ -160,3 +166,5 @@ while fill_amount < MAX_GUESSES:
     else:
         new_board.print_board()
         print("That is not a valid guess. Try again")
+
+signal.pause()
