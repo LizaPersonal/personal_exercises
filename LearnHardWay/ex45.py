@@ -35,26 +35,19 @@ class GameBoard(object):
             print(" ".join(row))
         print("______________________________")
 
-    def validate_guess(self, row_guess, col_guess, guess):
+    def validate_guess(self, row_guess, col_guess, guess) -> bool:
+        valid_row = self._check_row(guess, row_guess)  # bool
+        valid_column = self._check_column(col_guess, guess)
+        valid_box = self._check_box(col_guess, guess, row_guess)
+
+        valid_guess = valid_column and valid_row and valid_box
+
+        return valid_guess
+
+    def _check_box(self, row_guess, col_guess, guess):
         valid_box = True
-
-        for check_row in range(9):
-            if "[" + str(guess) + "]" != self.board[row_guess][check_row]:
-                valid_row = True
-            else:
-                valid_row = False
-                break
-
-        for check_column in range(9):
-            if "[" + str(guess) + "]" != self.board[check_column][col_guess]:
-                valid_column = True
-            else:
-                valid_column = False
-                break
-
         box_row_start = (row_guess - (row_guess % 3))
         box_column_start = (col_guess - (col_guess % 3))
-
         box_row_count = 0
         while box_row_count < 3 and valid_box:
             box_column_count = 0
@@ -71,9 +64,25 @@ class GameBoard(object):
 
                 box_column_count += 1
             box_row_count += 1
+        return valid_box
 
-        valid_guess = valid_column and valid_row and valid_box
-        return valid_guess
+    def _check_column(self, col_guess, guess):
+        for check_column in range(9):
+            if "[" + str(guess) + "]" != self.board[check_column][col_guess]:
+                valid_column = True
+            else:
+                valid_column = False
+                break
+        return valid_column
+
+    def _check_row(self, row_guess, guess):
+        for check_row in range(9):
+            if "[" + str(guess) + "]" != self.board[row_guess][check_row]:
+                valid_row = True
+            else:
+                valid_row = False
+                break
+        return valid_row
 
     def validate_empty(self, row_guess, col_guess):
         if self.board[row_guess][col_guess] == "[ ]":
@@ -85,6 +94,8 @@ class GameBoard(object):
         self.board[row_guess][col_guess] = "[" + str(guess) + "]"
         return self.board
 
+    # This attempts at filling a starting board with the bare minimum of numbers based on level selected,
+    # but it fails at creating a board that can be solved.
     def start_board(self, level):
         level_chosen = self.level_options[level]
         count_placement = 1
@@ -103,29 +114,41 @@ class GameBoard(object):
                 is_empty = self.validate_empty(random_row, random_column)
                 count_placement += 1
 
-    # def fill_solution(self):
-    #     populate_number = 1
+    # This will attempt at filling the whole solution randomly,
+    # but it fails when it runs into a position that has already been filled.
+    def fill_solution(self):
+        populate_number = 1
+        while populate_number <= 9:
+            count_placement = 1
+            while count_placement <= 9:
+                random_row = random.randint(0, 8)
+                random_column = random.randint(0, 8)
+                validate = self.validate_guess(random_row, random_column, populate_number)
+                is_empty = self.validate_empty(random_row, random_column)
+                while validate and is_empty and count_placement <= 9:
+                    self.fill_guess(random_row, random_column, populate_number)
+                    self.print_board()
+                    random_row = random.randint(0, 8)
+                    random_column = random.randint(0, 8)
+                    validate = self.validate_guess(random_row, random_column, populate_number)
+                    is_empty = self.validate_empty(random_row, random_column)
+                    count_placement += 1
+                    print("count_placement" + str(count_placement) + "for" + str(populate_number))
+            populate_number += 1
+
+    # def fill_squares(self):
+    #     rows = {"top": 3, "middle": 6, "bottom": 9}
+    #     columns = {"top": 3, "middle": 6, "bottom": 9}
+    #     for row in rows:
+    #
     #     while populate_number <= 9:
-    #         count_placement = 1
-    #         while count_placement <= 9:
-    #             random_row = random.randint(0, 8)
-    #             random_column = random.randint(0, 8)
-    #             validate = self.validate_guess(random_row, random_column, populate_number)
-    #             is_empty = self.validate_empty(random_row, random_column)
-    #             while validate and is_empty and count_placement <= 9:
-    #                 self.fill_guess(random_row, random_column, populate_number)
-    #                 self.print_board()
-    #                 random_row = random.randint(0, 8)
-    #                 random_column = random.randint(0, 8)
-    #                 validate = self.validate_guess(random_row, random_column, populate_number)
-    #                 is_empty = self.validate_empty(random_row, random_column)
-    #                 count_placement += 1
-    #                 print("count_placement" + str(count_placement) + "for" + str(populate_number))
-    #         populate_number += 1
+    #         random_row = random.randint()
+
 
 def signal_handler(signal, frame):
     print('\nYou pressed Ctrl+C!\nEnding program execution gracefully')
     sys.exit(0)
+
 
 signal.signal(signal.SIGINT, signal_handler)
 
@@ -159,6 +182,7 @@ while fill_amount < MAX_GUESSES:
     while 1 > guess or guess > 9:
         print("That is not a valid guess, please try again.")
         guess = int(input())
+
     if new_board.validate_guess(row_guess, col_guess, guess):
         new_board.fill_guess(row_guess, col_guess, guess)
         new_board.print_board()
