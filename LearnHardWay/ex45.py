@@ -36,9 +36,9 @@ class GameBoard(object):
         print("______________________________")
 
     def validate_guess(self, row_guess, col_guess, guess) -> bool:
-        valid_row = self._check_row(guess, row_guess)  # bool
+        valid_row = self._check_row(row_guess, guess)
         valid_column = self._check_column(col_guess, guess)
-        valid_box = self._check_box(col_guess, guess, row_guess)
+        valid_box = self._check_box(row_guess, col_guess, guess)
 
         valid_guess = valid_column and valid_row and valid_box
 

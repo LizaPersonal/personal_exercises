@@ -1,28 +1,21 @@
+from .ex48_convert import convert_number
+
 
 dictionary = {"north": "direction", "south": "direction", "east": "direction", "go": "verb", "kill": "verb",
               "eat": "verb", "the": "stop", "in": "stop", "of": "stop", "bear": "noun", "princess": "noun"}
-
-
-def convert_number(s):
-    try:
-        return int(s)
-    except ValueError:
-        return None
 
 
 def scan(user_input):
     sentence = []
     words = user_input.split()
     for word in words:
+        int_word = convert_number(word)
         if word.lower() in dictionary:
-            next_word = (dictionary[word], word)
-            sentence.append(next_word)
-        elif convert_number(word) != None:
-            number_not_word = ('number', int(word))
-            sentence.append(number_not_word)
+            sentence.append((dictionary[word], word))
+        elif int_word is not None:
+            sentence.append(('number', int_word))
         else:
-            next_word = ('error', word)
-            sentence.append(next_word)
+            sentence.append(('error', word))
     return sentence
 
 
