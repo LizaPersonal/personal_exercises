@@ -1,0 +1,1425 @@
+
+
+
+
+<html>
+    <head>
+<div class="review-top hidden">
+<h2>Questionnaire Review</h2>
+       </head>
+<body>
+<p><span class="form">
+
+Please review your answers for all the following questions.
+
+You can also print a copy for your own records.</span></p>
+<p><button id="other-back-button" class="button show-other" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Previous</button><button id="drawdown-back-button" class="button show-drawdown hidden" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Previous</button><button id="liquid-back-button" class="button show-liquid hidden" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Previous</button>&nbsp;&nbsp;<input class="button" name="Print" onclick="myFunction()" type="button" value="Print">&nbsp;&nbsp;<input class="button" name="Submit" type="submit" value="Submit"></p>
+
+
+
+</div>
+
+<div class="general" id="general-tag">
+<h2 id="general">General</h2>
+<p><span class="form">
+Headcount as of:
+</span></p>
+<table>
+<tr>
+<td class="indented" width="130">
+<p style="font-family: Arial, Helvetica, sans-serif;" id="last2Years"></p>
+</td>
+<td><input name="head-count-2-years-ago" type="number"></td>
+</tr>
+<tr>
+<td class="indented">
+<p style="font-family: Arial, Helvetica, sans-serif;" id="lastYear"></p> </td>
+<td><input name="head-count-1-year-ago" type="number">
+</td>
+</tr>
+</table>
+<p><span class="form">
+
+Any changes (departures, terminations, resignations, or hires) in senior individuals at the firm (Partners, C-Level) within the last 18 months?
+</span></p>
+<div class="indented">
+<input id="yes1" name="changes-in-senior-individuals" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no1" name="changes-in-senior-individuals" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text1">
+
+
+<textarea cols="100" name="changes-in-senior-individuals-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Are there any family relationships among senior employees?
+</span></p>
+<div class="indented">
+<input id="yes2" name="relationships-among-employees" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no2" name="relationships-among-employees" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text2">
+
+
+<textarea cols="100" name="relationships-among-employees-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Any new strategies, SMAs, or funds launched?
+</span></p>
+<div class="indented">
+<input id="yes3" name="new-strategies-sma-funds" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no3" name="new-strategies-sma-funds" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text3">
+
+
+<textarea cols="100" name="new-strategies-sma-funds-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+
+<div class="progress">
+<p><button class="button show-valuation" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Next</button></p>
+
+
+
+<div class="light-grey">
+<div class="orange" style="width:10%">10%</div>
+</div>
+</div>
+</div>
+
+
+<div class="valuation hidden">
+<h2>Valuation / Audited Financials</h2>
+<p><span class="form">
+Who calculates the NAV?</span>
+</p>
+<div class="indented">
+<select id="navSelect" name="calculates-the-nav" onchange="navOtherCheck();">
+<option disabled hidden="" selected style='display: none' value=''></option>
+<option value="fund-admin">Fund Admin</option>
+<option value="firm">Firm (GP)</option>
+<option value="valuation-agent">Valuation Agent</option>
+<option value="other">Other</option>
+</select>
+<div class="hidden" id="navOther">
+
+<textarea cols="100" name="calculates-the-nav-other-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+What is the frequency of NAV calculation?</span>
+</p>
+<div class="indented">
+<select name="frequency-of-nav-calculation">
+<option disabled hidden="" selected style='display: none' value=''></option>
+<option value="daily">Daily</option>
+<option value="weekly">Weekly</option>
+<option value="monthly">Monthly</option>
+<option value="quarterly">Quarterly</option>
+<option value="annually">Annually</option>
+</select>
+</div>
+<p><span class="form">
+
+Who sources the marks / valuations?</span>
+</p>
+<div class="indented">
+<select id="sourcesSelect" name="sources-the-marks-valuations" onchange="sourcesOtherCheck();">
+<option disabled hidden="" selected style='display: none' value=''></option>
+<option value="fund-admin">Fund Admin</option>
+<option value="firm">Firm (GP)</option>
+<option value="valuation-agent">Valuation Agent</option>
+<option value="other">Other</option>
+</select>
+<div class="hidden" id="sourcesOther">
+
+<textarea cols="100" name="sources-the-marks-valuations-other-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Do you make any adjustments to the NAV valuation received from your source?</span>
+</p>
+<div class="indented">
+<input id="yes4" name="adjustments-to-the-nav-valuation-from-source" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no4" name="adjustments-to-the-nav-valuation-from-source" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text4">
+
+<textarea cols="100" name="adjustments-to-the-nav-valuation-from-source-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Have there been any disputes in valuation or situation in which you disagreed with the Fund Admin or Valuation Agent's NAV?</span>
+</p>
+<div class="indented">
+<input id="yes5" name="level-3-hard-to-value-assets" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no5" name="level-3-hard-to-value-assets" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text5">
+
+<textarea cols="100" name="level-3-hard-to-value-assets-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Any level 3 / hard to value assets?</span>
+</p>
+<div class="indented">
+<input id="yes6" name="level-3-hard-to-value-assets" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no6" name="level-3-hard-to-value-assets" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text6">
+
+<textarea cols="100" name="level-3-hard-to-value-assets-explaination" placeholder="Who values hard to value assets?" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Please describe the types of expenses that are charged to the fund. (If the expenses cover any back-office functions provided by the Fund’s adviser / GP Management Company, please describe.)</span>
+</p>
+<div class="indented">
+<textarea cols="100" name="types-of-expenses-that-are-charged" rows="2" style="min-width: 300px;"></textarea>
+</div>
+<p><span class="form">
+
+Are there any categories of expenses that were not previously charged to the Fund but are now being passed through?</span>
+</p>
+<div class="indented">
+<input id="yes7" name="categories-of-expenses-that-were-not-previous-charged" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no7" name="categories-of-expenses-that-were-not-previous-charged" onchange="yesnoCheck();" type="radio" value="no"> No
+
+<div class="hidden" id="text7">
+
+<textarea cols="100" name="categories-of-expenses-that-were-not-previous-charged-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Please list the top 5 expense categories from greatest to least.</span>
+</p>
+<div class="indented">
+<textarea cols="100" name="expense-category-1" rows="2" style="min-width: 300px;"></textarea>
+<textarea cols="100" name="expense-category-2" rows="2" style="min-width: 300px;"></textarea>
+<textarea cols="100" name="expense-category-3" rows="2" style="min-width: 300px;"></textarea>
+<textarea cols="100" name="expense-category-4" rows="2" style="min-width: 300px;"></textarea>
+<textarea cols="100" name="expense-category-5" rows="2" style="min-width: 300px;"></textarea>
+</div>
+
+<div class="progress">
+<p><button class="button show-general" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Previous</button>&nbsp;&nbsp;<button class="button show-service" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Next</button></p>
+
+
+
+
+<div class="light-grey">
+<div class="orange" style="width:20%">20%</div>
+</div>
+</div>
+</div>
+
+<div class="service hidden">
+<h2>Service Providers</h2>
+<p><span class="form">
+Have any roles that were previously internal been shifted to a service provider in the last 18 months?
+</span></p>
+<div class="indented">
+<input id="yes8" name="previously-internal-shifted-to-service-provider-last-18-months" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no8" name="previously-internal-shifted-to-service-provider-last-18-months" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text8">
+
+
+<textarea cols="100" name="previously-internal-shifted-to-service-provider-last-18-months-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Have any responsibilities that a service provider previously covered been shifted to an internal role in the last 18 months?
+</span></p>
+<div class="indented">
+<input id="yes9" name="previously-service-provider-shifted-to-internal-last-18-months" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no9" name="previously-service-provider-shifted-to-internal-last-18-months" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text9">
+
+
+<textarea cols="100" name="previously-service-provider-shifted-to-internal-last-18-months-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Have there been any changes to service providers in the last 18 months?
+</span></p>
+<div class="indented">
+<input id="yes10" name="changes-to-service-provider-last-18-months" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no10" name="changes-to-service-provider-last-18-months" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text10">
+
+
+<textarea cols="100" name="changes-to-service-provider-last-18-months-explaination" placeholder="Which and why?" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+How frequently are service providers reviewed?</span>
+</p>
+<div class="indented">
+<select id="serviceFrequencySelect" name="frequency-of-service-provider-review" onchange="serviceFrequencyOtherCheck();">
+<option disabled hidden="" selected style='display: none' value=''></option>
+<option value="monthly">Monthly</option>
+<option value="quarterly">Quarterly</option>
+<option value="annually">Annually</option>
+<option value="bi-annually">Bi-Annually</option>
+<option value="5-years">Every 5 Years</option>
+<option value="other">Other</option>
+</select>
+<div class="hidden" id="serviceFrequencyOther">
+
+<textarea cols="100" name="frequency-of-service-provider-review-other-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Have there been any changes in the last 18 months to your service provider agreements?
+</span></p>
+<div class="indented">
+<input id="yes11" name="changes-to-service-provider-agreement-last-18-months" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no11" name="changes-to-service-provider-agreement-last-18-months" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text11">
+
+
+<textarea cols="100" name="changes-to-service-provider-agreement-last-18-months-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Were there any issues with your last audit?
+</span></p>
+<div class="indented">
+<input id="yes12" name="issues-with-last-audit" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no12" name="issues-with-last-audit" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text12">
+
+
+<textarea cols="100" name="issues-with-last-audit-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Please provide the percentage breakdown of counterparty exposure to top three counterparties:</span>
+</p>
+<table>
+<tr>
+<td class="indented" width="220">Counterparties</td>
+<td style="font-family: Arial, Helvetica, sans-serif;">Exposure (%)</td>
+</tr>
+<tr>
+<td class="indented"><input name="counterparty-name-1" type="text"></td>
+  <td><input name="counterparty-percentage-1" step="0.01" style="width: 65px" type="number"><span style="font-family: Arial, Helvetica, sans-serif;"> %</span></td>
+</tr>
+<tr>
+<td class="indented"><input name="counterparty-name-2" type="text"></td>
+  <td><input name="counterparty-percentage-2" step="0.01" style="width: 65px" type="number"><span style="font-family: Arial, Helvetica, sans-serif;"> %</span></td>
+</tr>
+<tr>
+<td class="indented"><input name="counterparty-name-3" type="text"></td>
+  <td><input name="counterparty-percentage-3" step="0.01" style="width: 65px" type="number"><span style="font-family: Arial, Helvetica, sans-serif;"> %</span></td>
+</tr>
+</table>
+
+
+<div class="progress">
+<p><button class="button show-valuation" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Previous</button>&nbsp;&nbsp;<button class="button show-operations" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Next</button></p>
+
+
+
+<div class="light-grey">
+<div class="orange" style="width:30%">30%</div>
+</div>
+</div>
+</div>
+
+<div class="operations hidden">
+<h2>Operations</h2>
+<p><span class="form">
+Any pending additions or recent additions to the senior level of the finance and operations team?
+</span></p>
+<div class="indented">
+<input id="yes13" name="pending-recent-additions-to-finance-operations-team" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no13" name="pending-recent-additions-to-finance-operations-team" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text13">
+
+
+<textarea cols="100" name="pending-recent-additions-to-finance-operations-team-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Are there any key initiatives in finance, operations, IT, or compliance that will be undertaken in the next 12-24 months?
+</span></p>
+<div class="indented">
+<input id="yes14" name="key-initiatives-next-12-24-months" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no14" name="key-initiatives-next-12-24-months" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text14">
+
+
+<textarea cols="100" name="key-initiatives-next-12-24-months-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+
+<div class="progress">
+<p><button class="button show-service" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Previous</button>&nbsp;&nbsp;<button class="button show-legal" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Next</button></p>
+
+
+
+<div class="light-grey">
+<div class="orange" style="width:40%">40%</div>
+</div>
+</div>
+</div>
+
+<div class="legal hidden">
+<h2>Legal / Regulatory</h2>
+<p><span class="form">
+Have there been any material changes to fund terms (e.g.: fees, liquidity, reporting, MFN, key man, etc.) in the last 18 months?
+</span></p>
+<div class="indented">
+<input id="yes15" name="changes-to-fund-terms-last-18-months" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no15" name="changes-to-fund-terms-last-18-months" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text15">
+
+
+<textarea cols="100" name="changes-to-fund-terms-last-18-months-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Have there been changes to policies around expenses / fees in the last 18 months?
+</span></p>
+<div class="indented">
+<input id="yes16" name="changes-to-policies-expenses-fees-last-18-months" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no16" name="changes-to-policies-expenses-fees-last-18-months" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text16">
+
+
+<textarea cols="100" name="changes-to-policies-expenses-fees-last-18-months-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Does the firm/fund(s) have any side letters or MFNs?
+</span></p>
+<div class="indented">
+<input id="yes17" name="any-side-letters-or-MFNs" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no17" name="any-side-letters-or-MFNs" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text17">
+
+
+<textarea cols="100" name="any-side-letters-or-MFNs-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+What regulatory bodies is the firm required to be registered with (please include full list)?
+</span></p>
+<div class="indented">
+<textarea cols="100" name="regulatory-bodies-required-registered-with" rows="5" style="min-width: 300px;"></textarea>
+</div>
+<p><span class="form">
+
+What regulatory bodies is the firm currently registered with (please include full list)?
+</span></p>
+<div class="indented">
+<textarea cols="100" name="regulatory-bodies-currently-registered-with" rows="5" style="min-width: 300px;"></textarea>
+</div>
+<p><span class="form">
+
+Does the firm have plans to register under any new regulatory bodies (CFTC, SEC, others) or under any directive such as AIFMD?
+</span></p>
+<div class="indented">
+<input id="yes18" name="register-under-new-regulatory-bodies-or-AIFMD" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no18" name="register-under-new-regulatory-bodies-or-AIFMD" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text18">
+
+
+<textarea cols="100" name="register-under-new-regulatory-bodies-or-AIFMD-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+When was the firm's last regulatory body examination? (Month, Year)
+</span></p>
+<div class="indented">
+<input name="last-regulatory-body-examination" type="month">
+</div>
+<p><span class="form">
+
+Any regulatory body enforcement inquiry, investigation or administrative proceeding (including settlements) involving the manager or its employees in the last five years?
+</span></p>
+<div class="indented">
+<input id="yes19" name="regulatory-body-inquiry-involving-manager-employees-last-five-years" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no19" name="regulatory-body-inquiry-involving-manager-employees-last-five-years" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text19">
+
+
+<textarea cols="100" name="regulatory-body-inquiry-involving-manager-employees-last-five-years-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Has the firm or any of its employees (present or former) been subpoenaed or involved in any civil, criminal, or securities related litigation or other actions over the last five years?
+</span></p>
+<div class="indented">
+<input id="yes20" name="firm-or-employees-subpoenaed-or-involved-in-litigation-in-last-five-years" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no20" name="firm-or-employees-subpoenaed-or-involved-in-litigation-in-last-five-years" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text20">
+
+
+<textarea cols="100" name="firm-or-employees-subpoenaed-or-involved-in-litigation-in-last-five-years-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Is the firm or any of its employees (present or former) involved in or been subpoenaed for any litigation or regulatory action currently?
+</span></p>
+<div class="indented">
+<input id="yes21" name="firm-or-employees-subpoenaed-or-involved-in-litigation-currently" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no21" name="firm-or-employees-subpoenaed-or-involved-in-litigation-currently" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text21">
+
+
+<textarea cols="100" name="firm-or-employees-subpoenaed-or-involved-in-litigation-currently-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Does the firm conduct an annual compliance review?
+</span></p>
+<div class="indented">
+<input id="yes22" name="firm-conduct-annual-compliance-review" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no22" name="firm-conduct-annual-compliance-review" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text22">
+
+
+<textarea cols="100" name="firm-conduct-annual-compliance-review-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Does the firm make use of expert networks?
+</span></p>
+<div class="indented">
+<input id="yes23" name="firm-make-use-of-expert-networks" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no23" name="firm-make-use-of-expert-networks" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text23">
+
+
+<textarea cols="100" name="firm-make-use-of-expert-networks-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Does the firm have:
+</span></p>
+<table>
+<tr>
+<td>
+<table>
+<tr>
+<td class="indented" width="260"><input name="compliance-manual" type="checkbox" value="compliance-manual"> Compliance Manual
+
+</td>
+<td width="300">Frequency of Review <select name="frequency-of-review-compliance-manual">
+<option disabled hidden="" selected style='display: none' value=''></option>
+<option value="quarterly">Quarterly</option>
+<option value="annually">Annually</option>
+<option value="bi-annually">Bi-Annually</option>
+<option value="5-years">Every 5 Years +</option>
+</select></td>
+<td>Date of last review / update <input name="date-last-review-compliance-manual" type="date"></td>
+</tr>
+<tr>
+<td class="indented"><input name="code-of-ethics" type="checkbox" value="code-of-ethics"> Code of Ethics</td>
+<td>Frequency of Review <select name="frequency-of-review-code-of-ethics">
+<option disabled hidden="" selected style='display: none' value=''></option>
+<option value="quarterly">Quarterly</option>
+<option value="annually">Annually</option>
+<option value="bi-annually">Bi-Annually</option>
+<option value="5-years">Every 5 Years +</option>
+</select></td>
+<td>Date of last review / update <input name="date-last-review-code-of-ethics" type="date"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indented">(including personal trading and insider trading policies)
+
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="indented" width="260"><input name="business-continuity-plan" type="checkbox" value="business-continuity-plan"> Business Continuity Plan</td>
+<td width="300">Frequency of Review <select name="frequency-of-review-business-continuity-plan">
+<option disabled hidden="" selected style='display: none' value=''></option>
+<option value="quarterly">Quarterly</option>
+<option value="annually">Annually</option>
+<option value="bi-annually">Bi-Annually</option>
+<option value="5-years">Every 5 Years +</option>
+</select>
+</td>
+<td>Date of last test <input name="date-last-test-business-continuity-plan" type="date">
+
+Date of last review / update <input name="date-last-review-business-continuity-plan" type="date"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indented">Any material changes to the BCP since last year?
+
+<div class="indented">
+<input id="yes24" class="required" name="material-changes-to-BCP-since-last-year" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no24" name="material-changes-to-BCP-since-last-year" onchange="yesnoCheck();" type="radio" value="no"> No
+
+<div class="hidden" id="text24">
+
+<textarea cols="100" name="material-changes-to-BCP-since-last-year-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<p><span class="form">
+
+Have there been any violations of the compliance policies or code of ethics in the past 18 months?
+</span></p>
+<div class="indented">
+<input id="yes25" name="violations-of-compliance-or-ethics-past-year" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no25" name="violations-of-compliance-or-ethics-past-year" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text25">
+
+
+<textarea cols="100" name="violations-of-compliance-or-ethics-past-year-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+What are the top three areas that present the highest degree of regulatory and/or operating risk that you have identified for your business? Please describe how your policies and procedures are designed to identify, monitor, and address these areas.
+</span></p>
+<div class="indented">
+<textarea cols="100" name="top-three-highest-degree-of-regulatory-risk" rows="5" style="min-width: 300px;"></textarea>
+</div>
+<p><span class="form">
+
+Have there been any material changes to the firm’s compliance team or resources in the past 18 months?
+</span></p>
+<div class="indented">
+<input id="yes26" name="material-changes-to-compliance-team-past-year" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no26" name="material-changes-to-compliance-team-past-year" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text26">
+
+
+<textarea cols="100" name="material-changes-to-compliance-team-past-year-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+What are the main compliance initiatives/projects that you have focused on in the past 18 months? What will you focus on in the coming year?
+</span></p>
+<div class="indented">
+<textarea cols="100" name="main-compliance-initiatives-past-year" rows="5" style="min-width: 300px;"></textarea>
+</div>
+
+<div class="progress">
+<p><button class="button show-operations" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Previous</button>&nbsp;&nbsp;<button class="button show-cybersecurity" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Next</button></p>
+
+
+
+<div class="light-grey">
+<div class="orange" style="width:50%">50%</div>
+</div>
+</div>
+</div>
+
+<div class="cybersecurity hidden">
+<h2>Cybersecurity / Identity Theft</h2>
+<p><span class="form">
+Has the firm adopted any policies and procedures to detect, prevent, and mitigate client or fund investor identity theft?
+</span></p>
+<div class="indented">
+<input name="policies-to-detect-prevent-mitigate-investor-identiy-theft" type="radio" value="yes"> Yes&nbsp;&nbsp; <input name="policies-to-detect-prevent-mitigate-investor-identiy-theft" type="radio" value="no"> No
+</div>
+<p><span class="form">
+
+Does the firm conduct periodic risk assessments to determine the risks of identity theft to clients/investors and to the safety and soundness of the firm from identity theft?
+</span></p>
+<div class="indented">
+<input name="periodic-risk-assessments-to-determine-risk-of-identity-theft" type="radio" value="yes"> Yes&nbsp;&nbsp; <input name="periodic-risk-assessments-to-determine-risk-of-identity-theft" type="radio" value="no"> No
+</div>
+<p><span class="form">
+
+Has the firm conducted any identity theft prevention training for the firm’s employees?
+</span></p>
+<div class="indented">
+<input name="indentity-theft-prevention-training-for-employees" type="radio" value="yes"> Yes&nbsp;&nbsp; <input name="indentity-theft-prevention-training-for-employees" type="radio" value="no"> No
+</div>
+<p><span class="form">
+
+Has the firm engaged an outside firm to assess security programs and/or do penetrating testing/white hat hacking?
+</span></p>
+<div class="indented">
+<input name="outside-firm-to-assess-security-programs" type="radio" value="yes"> Yes&nbsp;&nbsp; <input name="outside-firm-to-assess-security-programs" type="radio" value="no"> No
+</div>
+<p><span class="form">
+
+Have there been any data breaches or incidents of client or investor identity theft in the last 18 months?
+</span></p>
+<div class="indented">
+<input id="yes27" name="data-breaches-or-identiy-theft-last-18-months" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no27" name="data-breaches-or-identiy-theft-last-18-months" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text27">
+
+
+<textarea cols="100" name="data-breaches-or-identiy-theft-last-18-months-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+What are your escalation procedures when a potential identity theft is discovered?
+</span></p>
+<div class="indented">
+<textarea cols="100" name="escalation-procedures-when-identy-theft-is-discovered" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+<p><span class="form">
+
+Where are client documents held (internally, with the Fund Admin, outside counsel, etc.)?
+</span></p>
+<div class="indented">
+<textarea cols="100" name="where-are-client-documents-held" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+
+<div class="progress">
+<p><button class="button show-legal" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Previous</button>&nbsp;&nbsp;<button class="button show-other" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Next</button></p>
+
+
+
+<div class="light-grey">
+<div class="orange" style="width:60%">60%</div>
+</div>
+</div>
+</div>
+
+<div class="other hidden">
+<h2>Other</h2>
+<p><span class="form">Have the funds generated any UBTI or ECI historically?
+</span></p>
+<div class="indented">
+<input name="funds-generated-any-UBTI-or_ECI" type="radio" value="yes"> Yes&nbsp;&nbsp; <input name="funds-generated-any-UBTI-or_ECI" type="radio" value="no"> No
+</div>
+<p><span class="form">
+
+Has the fund invested in any PFICs?
+</span></p>
+<div class="indented">
+<input id="yes28" name="has-the-fund-invested-in-any-PFICs" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no28" name="has-the-fund-invested-in-any-PFICs" onchange="yesnoCheck();" type="radio" value="no"> No
+</div>
+<div class="hidden" id="text28">
+
+
+<p><span class="form">Do you provide appropriate information to enable investors to file a QEF election?
+</span></p>
+<div class="indented">
+<input name="has-the-fund-invested-in-any-PFICs-explaination" type="radio" value="yes"> Yes&nbsp;&nbsp; <input name="has-the-fund-invested-in-any-PFICs-explaination" type="radio" value="no"> No
+</div>
+</div>
+<p><span class="form">
+
+Is your firm willing to use DocuSign?
+</span></p>
+<div class="indented">
+<input name="docusign" type="radio" value="yes"> Yes&nbsp;&nbsp; <input name="docusign" type="radio" value="no"> No
+</div>
+<p><span class="form">
+
+For Commit / Drawdown structured funds, please click here. </span><input name="is-the-fund-a-drawdown-commit-structured-fund" id="drawdownYes" type="checkbox" value="yes" onchange="drawdownLiquidCheck(); drawdownCheck();">
+
+
+<p><span class="form">
+
+For Liquid structured funds, please click here. </span><input name="is-the-fund-liquid-structured-fund" id="liquidYes" type="checkbox" value="yes" onchange="drawdownLiquidCheck(); liquidCheck();">
+
+
+
+<div class="progress">
+<p><button class="button show-cybersecurity" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Previous</button>&nbsp;&nbsp;<button id="nodrawdown-noliquid-button" class="button show-review-nodrawdown-noliquid" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Next</button><button id="drawdown-button" class="button show-drawdown hidden" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Next</button><button id="liquidonly-button" class="button show-liquid hidden" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Next</button>
+</p>
+
+
+<div class="light-grey">
+<div class="orange" style="width:70%">70%</div>
+</div>
+</div>
+</div>
+
+<div class="drawdown hidden" id="drawdown">
+<h2>Drawdown/Commit Structure Funds</h2>
+<p><span class="form">Which fund(s) have accrued incentive fees?
+</span></p>
+<div class="indented">
+<textarea cols="100" name="funds-with-accrued-incentive-fees" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+<p><span class="form">
+
+Which fund(s) have distributed incentive fees to the GP?
+</span></p>
+<div class="indented">
+<textarea cols="100" name="funds-with-distributed-incentive-fees-to-gp" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+<p><span class="form" id="feeYears">
+
+
+</span></p>
+<div class="indented">
+<input id="yes29" name="drawdown-fees" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no29" name="drawdown-fees" onchange="yesnoCheck();" type="radio" value="no"> No
+</div>
+<div class="required-group hidden" id="text29">
+
+<table id="drawdownFees">
+<tr>
+<td class="indented" width="200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount</td>
+<td style="font-family: Arial, Helvetica, sans-serif;">Description</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td height="6"></td>
+</tr>
+<tr>
+<td class="indented">$MM <input name="fee-amount" type="number" style="border:1px solid #999999; width:100px"></td>
+</tr>
+</table>
+</td>
+<td>
+<table>
+<tr>
+<td height="6"></td>
+</tr>
+<tr>
+<td><textarea cols="58" name="fee-description" rows="2"></textarea></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<br/>
+<table>
+<tr>
+<td class="indented" width="200">
+<button type="button" id="addFees" class="button" onclick="infRow()">Add Fees</button>
+</td>
+<td style="font-family: Arial, Helvetica, sans-serif;">
+<button type="button" id="deleteFeeRow" class="button" onclick="deletefRow()">Delete</button>
+</td>
+</tr>
+</table>
+</div>
+<p><span class="form">
+
+Are there are any separate accounts or co-investors that invest alongside the fund(s)?
+</span></p>
+<div class="indented">
+<input id="yes30" name="separate-accounts-or-co-investors" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no30" name="separate-accounts-or-co-investors" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text30">
+
+
+<textarea cols="100" name="separate-accounts-or-co-investors-explaination" placeholder="Please describe how fees and expenses (including due diligence, as well as monitoring fees and expenses) are allocated between the Fund and any separate accounts / co-investors participating alongside the Fund." rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Are there GP-related investments in the fund(s)?
+</span></p>
+<div class="indented">
+<input id="yes31" name="gp-related-investments" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no31" name="gp-related-investments" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text31">
+
+
+<textarea cols="100" name="gp-related-investments-explaination" placeholder="How are expenses allocated between outside investors and the management company/employee investors?" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+Were there any affiliated transactions in the fund(s)? Either sales, transfers, or payments?
+</span></p>
+<div class="indented">
+<input id="yes32" name="affiliated-transactions-sales-transfers-payments" onchange="yesnoCheck();" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no32" name="affiliated-transactions-sales-transfers-payments" onchange="yesnoCheck();" type="radio" value="no"> No
+<div class="hidden" id="text32">
+
+
+<textarea cols="100" name="affiliated-transactions-sales-transfers-payments-explaination" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+</div>
+<p><span class="form">
+
+What is the current status of the fund(s)? Is there any visibility as to when the fund(s) will wind down or whether any extensions will be exercised?
+</span></p>
+<div class="indented">
+<textarea cols="100" name="current-status-of-the-funds" placeholder="Please describe" rows="5" style="min-width: 300px;"></textarea>
+</div>
+
+<div class="progress">
+<p><button class="button show-other" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Previous</button>&nbsp;&nbsp;<button id="noliquid-button" class="button show-review-drawdown-noliquid" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Next</button><button id="liquid-button" class="button show-liquid hidden" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Next</button>
+</p>
+
+
+
+<div class="light-grey">
+<div class="orange" style="width:80%">80%</div>
+</div>
+</div>
+</div>
+
+<div class="liquid hidden" id="liquid">
+<h2>Liquid Structure Funds</h2>
+<p><span class="form">Total Firm AUM
+</span></p>
+<div class="indented">
+$MM <input name="firm-aum" type="number"> as of <input name="firm-aum-date" type="date">
+</div>
+<p><span class="form">
+
+AUM by strategy &amp; vehicle (including any separately managed accounts, funds of one, etc.), as of <input name="strategy-aum-date" type="date">
+</span></p>
+<table id="strategyVehicleAUM">
+<tr>
+<td class="indented" width="220">Strategy</td>
+<td style="font-family: Arial, Helvetica, sans-serif;" width="180">Vehicle Name</td>
+<td style="font-family: Arial, Helvetica, sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AUM</td>
+</tr>
+<tr>
+<td class="indented"><input name="strategy-name" id="strategy-name" type="text"></td>
+<td><input name="vehicle-name" id="vehicle-name" type="text"></td>
+<td>$MM <input name="strategy-vehicle-aum" id="strategy-vehicle-aum" type="number"></td>
+</tr>
+</table>
+<br/>
+<table id="strategyVehicleAUMButtons">
+<tr>
+<td class="indented" width="220">
+<button type="button" id="addStrategy" class="button" onclick="insRow()">Add Strategy</button>
+</td>
+<td style="font-family: Arial, Helvetica, sans-serif;" width="180">
+<button type="button" id="addVehicle" class="button" onclick="invRow()">Add Vehicle</button>
+<td>
+<td style="font-family: Arial, Helvetica, sans-serif;">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button type="button" id="deleteLastRow" class="button" onclick="deleteRow()">Delete</button>
+</td>
+</tr>
+</table>
+ <p><span class="form">
+
+Percentage investor breakdown by type, as of <input name="firm-aum-date" type="date"></span>
+</p>
+<table>
+<tr>
+<td class="indented" width="250">Family Office (Single/Multi)</td>
+<td><input name="family-office-percent" step="0.01" style="width: 65px" type="number"> %</td>
+</tr>
+<tr>
+<td class="indented">Fund of Funds</td>
+<td><input name="fund-of-funds-percent" step="0.01" style="width: 65px" type="number"> %</td>
+</tr>
+<tr>
+<td class="indented">Consultant</td>
+<td><input name="consultant-percent" step="0.01" style="width: 65px" type="number"> %</td>
+</tr>
+<tr>
+<td class="indented">Endowment &amp; Foundation</td>
+<td><input name="endowment-foundation-percent" step="0.01" style="width: 65px" type="number"> %</td>
+</tr>
+<tr>
+<td class="indented">Pension (Public/Private)</td>
+<td><input name="pension-percent" step="0.01" style="width: 65px" type="number"> %</td>
+</tr>
+<tr>
+<td class="indented">Insurance Company</td>
+<td><input name="insurace-company-percent" step="0.01" style="width: 65px" type="number"> %</td>
+</tr>
+<tr>
+<td class="indented">Sovereign Wealth Fund</td>
+<td><input name="sovereign-wealth-fund-percent" step="0.01" style="width: 65px" type="number"> %</td>
+</tr>
+<tr>
+<td class="indented">Trust</td>
+<td><input name="trust-percent" step="0.01" style="width: 65px" type="number"> %</td>
+</tr>
+<tr>
+<td class="indented">Individuals</td>
+<td><input name="individuals-percent" step="0.01" style="width: 65px" type="number"> %</td>
+</tr>
+<tr>
+<td class="indented">Other</td>
+<td><input id="percentOther" name="other-percent" onchange="percentOtherCheck();" step="0.01" style="width: 65px" type="number"> %</td>
+</tr>
+</table>
+<div class="hidden indented" id="percentOtherDetails">
+
+
+<textarea cols="100" name="rother-investor-breakdown-percentage-explaination" placeholder="Please describe the other type" rows="5" style="min-width: 300px;"></textarea>
+</div>
+<p><span class="form">
+
+% AUM by:
+</span></p>
+<table>
+<tr>
+<td class="indented" width="250">Top Investor</td>
+<td><input name="top-investor-percent" step="0.01" style="width: 65px" type="number"> %</td>
+</tr>
+<tr>
+<td class="indented">Top 5 Investors</td>
+<td><input name="top-5-investors" step="0.01" style="width: 65px" type="number"> %</td>
+</tr>
+</table>
+<p><span class="form">
+
+Is HCP one of your Top 5 investors?
+</span></p>
+<div class="indented">
+<input id="yes0" name="changes-in-senior-individuals" type="radio" value="yes"> Yes&nbsp;&nbsp; <input id="no0" name="changes-in-senior-individuals" type="radio" value="no"> No
+</div>
+
+<div class="progress">
+<p><button id="other-button" class="button show-other" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Previous</button><button id="drawdown-liquid-button" class="button show-drawdown" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Previous</button>&nbsp;&nbsp;<button id="liquid-review-button" class="button show-review-nodrawdown-liquid" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Next</button><button id="review-all-button" class="button show-review-all" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Next</button></p>
+
+
+
+<div class="light-grey">
+<div class="orange" style="width:90%">90%</div>
+</div>
+</div>
+</div>
+
+<div class="review-top hidden">
+<p><button id="other-back-button2" class="button show-other" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Previous</button><button id="drawdown-back-button2" class="button show-drawdown hidden" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Previous</button><button id="liquid-back-button2" class="button show-liquid hidden" type="button" onclick="jumpToAnchor('top');jumpToAnchor('x')">Previous</button>&nbsp;&nbsp;<input class="button" name="Print" onclick="myFunction()" type="button" value="Print">&nbsp;&nbsp;<input class="button" name="Submit" type="submit" value="Submit"></p>
+
+
+
+<div class="light-grey">
+<div class="orange" style="width:100%">100%</div>
+</div>
+</div>
+</body>
+</html>
+
+<script type = "text/javascript">
+function navOtherCheck() {
+var dropdown1 = document.getElementById('navSelect');
+if (dropdown1.selectedIndex == 4) {
+document.getElementById("navOther").classList.remove('hidden');
+document.getElementById("navOther").classList.add('required');
+}
+else {
+document.getElementById("navOther").classList.add('hidden');
+document.getElementById("navOther").classList.remove('required');
+}
+}
+</script>
+
+<script type = "text/javascript">
+function sourcesOtherCheck() {
+var dropdown1 = document.getElementById('sourcesSelect');
+if (dropdown1.selectedIndex == 4) {
+document.getElementById("sourcesOther").classList.remove('hidden');
+document.getElementById("sourcesOther").classList.add('required');
+}
+else {
+document.getElementById("sourcesOther").classList.add('hidden');
+document.getElementById("sourcesOther").classList.remove('required');
+}
+}
+</script>
+
+<script type = "text/javascript">
+function serviceFrequencyOtherCheck() {
+var dropdown1 = document.getElementById('serviceFrequencySelect');
+if (dropdown1.selectedIndex == 6) {
+document.getElementById("serviceFrequencyOther").classList.remove('hidden');
+document.getElementById("serviceFrequencyOther").classList.add('required');
+}
+else {
+document.getElementById("serviceFrequencyOther").classList.add('hidden');
+document.getElementById("serviceFrequencyOther").classList.remove('required');
+}
+}
+</script>
+
+<script type = "text/javascript">
+function percentOtherCheck() {
+var otherpercent = document.getElementById('percentOther');
+if (otherpercent.value != '') {
+document.getElementById("percentOtherDetails").classList.remove('hidden');
+document.getElementById("percentOtherDetails").classList.add('required');
+}
+else {
+document.getElementById("percentOtherDetails").classList.add('hidden');
+document.getElementById("percentOtherDetails").classList.remove('required');
+}
+}
+</script>
+
+<script>
+function myFunction() {
+window.print();
+}
+</script>
+
+<script>
+var today = new Date();
+var year = today.getFullYear();
+var lastYear = year-1;
+document.getElementById("lastYear").innerHTML = '3/31/'+lastYear+':';
+</script>
+
+<script>
+var today = new Date();
+var year = today.getFullYear();
+var last2Years = year-2;
+document.getElementById("last2Years").innerHTML = '3/31/'+last2Years+':';
+</script>
+
+<script>
+var today = new Date();
+var year = today.getFullYear();
+var feeYears = year-1;
+document.getElementById("feeYears").innerHTML = 'Were any fees such as monitoring or director fees earned by the firm and/or general partner in '+feeYears+'?';
+</script>
+
+<script type="text/javascript">
+function drawdownLiquidCheck() {
+if (document.getElementById('liquidYes').checked) {
+if (document.getElementById('drawdownYes').checked) {
+document.getElementById('liquidonly-button').classList.add('hidden');
+document.getElementById('nodrawdown-noliquid-button').classList.add('hidden');
+document.getElementById('drawdown-button').classList.remove('hidden');
+document.getElementById('noliquid-button').classList.add('hidden');
+document.getElementById('liquid-button').classList.remove('hidden');
+document.getElementById('other-button').classList.add('hidden');
+document.getElementById('drawdown-liquid-button').classList.remove('hidden');
+document.getElementById('liquid-review-button').classList.add('hidden');
+document.getElementById('review-all-button').classList.remove('hidden');
+document.getElementById('other-back-button').classList.add('hidden');
+document.getElementById('drawdown-back-button').classList.add('hidden');
+document.getElementById('liquid-back-button').classList.remove('hidden');
+document.getElementById('other-back-button2').classList.add('hidden');
+document.getElementById('drawdown-back-button2').classList.add('hidden');
+document.getElementById('liquid-back-button2').classList.remove('hidden');
+}
+else {
+document.getElementById('liquidonly-button').classList.remove('hidden');
+document.getElementById('nodrawdown-noliquid-button').classList.add('hidden');
+document.getElementById('drawdown-button').classList.add('hidden');
+document.getElementById('other-button').classList.remove('hidden');
+document.getElementById('drawdown-liquid-button').classList.add('hidden');
+document.getElementById('liquid-review-button').classList.remove('hidden');
+document.getElementById('review-all-button').classList.add('hidden');
+document.getElementById('other-back-button').classList.add('hidden');
+document.getElementById('drawdown-back-button').classList.add('hidden');
+document.getElementById('liquid-back-button').classList.remove('hidden');
+document.getElementById('other-back-button2').classList.add('hidden');
+document.getElementById('drawdown-back-button2').classList.add('hidden');
+document.getElementById('liquid-back-button2').classList.remove('hidden');
+}
+}
+else if (document.getElementById('drawdownYes').checked) {
+document.getElementById('drawdown-button').classList.remove('hidden');
+document.getElementById('nodrawdown-noliquid-button').classList.add('hidden');
+document.getElementById('liquidonly-button').classList.add('hidden');
+document.getElementById('noliquid-button').classList.remove('hidden');
+document.getElementById('liquid-button').classList.add('hidden');
+document.getElementById('other-back-button').classList.add('hidden');
+document.getElementById('drawdown-back-button').classList.remove('hidden');
+document.getElementById('liquid-back-button').classList.add('hidden');
+document.getElementById('other-back-button2').classList.add('hidden');
+document.getElementById('drawdown-back-button2').classList.remove('hidden');
+document.getElementById('liquid-back-button2').classList.add('hidden');
+}
+else {
+document.getElementById('drawdown-button').classList.add('hidden');
+document.getElementById('nodrawdown-noliquid-button').classList.remove('hidden');
+document.getElementById('liquidonly-button').classList.add('hidden');
+document.getElementById('other-back-button').classList.remove('hidden');
+document.getElementById('drawdown-back-button').classList.add('hidden');
+document.getElementById('liquid-back-button').classList.add('hidden');
+document.getElementById('other-back-button2').classList.remove('hidden');
+document.getElementById('drawdown-back-button2').classList.add('hidden');
+document.getElementById('liquid-back-button2').classList.add('hidden');
+}
+}
+</script>
+
+<script type="text/javascript">
+function drawdownCheck() {
+if (document.getElementById('drawdownYes').checked) {
+if (document.getElementById('general-tag').classList.contains('hidden')) {
+document.getElementById('drawdown').classList.add('hidden');
+}
+else {
+document.getElementById('drawdown').classList.remove('hidden');
+}
+}
+else {
+document.getElementById('drawdown').classList.add('hidden');
+}
+}
+</script>
+
+<script type="text/javascript">
+function liquidCheck() {
+if (document.getElementById('liquidYes').checked) {
+if (document.getElementById('general-tag').classList.contains('hidden')) {
+document.getElementById('liquid').classList.add('hidden');
+}
+else {
+document.getElementById('liquid').classList.remove('hidden');
+}
+}
+else {
+document.getElementById('liquid').classList.add('hidden');
+}
+}
+</script>
+
+<script type="text/javascript">
+function yesnoCheck() {
+var i = 1;
+while (i<35){
+if (document.getElementById('yes'+i).checked) {
+document.getElementById('text'+i).classList.remove('hidden');
+document.getElementById('text'+i).classList.add('required');
+}
+else {
+document.getElementById('text'+i).classList.add('hidden');
+document.getElementById('text'+i).classList.remove('required');
+}
+i++;
+}
+}
+</script>
+
+<script type="text/javascript">
+function jumpToAnchor (target){
+window.location.hash=target;
+}
+</script>
+
+<script type="text/javascript">
+function deleteRow() {
+var i=document.getElementById('strategyVehicleAUM');
+var remove_row = i.rows.length;
+if (remove_row > 2) {
+i.deleteRow( remove_row -1);
+}
+}
+</script>
+
+<script type="text/javascript">
+function deletefRow() {
+var i=document.getElementById('drawdownFees');
+var remove_row = i.rows.length;
+if (remove_row > 2) {
+i.deleteRow( remove_row -1);
+}
+}
+</script>
+
+<script type="text/javascript">
+function invRow() {
+var x=document.getElementById('strategyVehicleAUM');
+var new_row = x.rows[1].cloneNode(true);
+var len = x.rows.length;
+new_row.cells[0].innerHTML = '';
+var inp1 = new_row.cells[1].getElementsByTagName('input')[0];
+inp1.id += len;
+inp1.name += len;
+inp1.value = '';
+var inp2 = new_row.cells[2].getElementsByTagName('input')[0];
+inp2.id += len;
+inp2.name += len;
+inp2.value = '';
+x.appendChild( new_row );
+}
+</script>
+
+<script type="text/javascript">
+function insRow() {
+var x=document.getElementById('strategyVehicleAUM');
+var new_row = x.rows[1].cloneNode(true);
+var len = x.rows.length;
+var inp0 = new_row.cells[0].getElementsByTagName('input')[0];
+inp0.id += len;
+inp0.name += len;
+inp0.value = '';
+var inp1 = new_row.cells[1].getElementsByTagName('input')[0];
+inp1.id += len;
+inp1.name += len;
+inp1.value = '';
+var inp2 = new_row.cells[2].getElementsByTagName('input')[0];
+inp2.id += len;
+inp2.name += len;
+inp2.value = '';
+x.appendChild( new_row );
+}
+</script>
+
+<script type="text/javascript">
+function infRow() {
+var x=document.getElementById('drawdownFees');
+var new_row = x.rows[1].cloneNode(true);
+var len = x.rows.length;
+var inp0 = new_row.cells[0].getElementsByTagName('input')[0];
+inp0.id += len;
+inp0.name += len;
+inp0.value = '';
+var inp1 = new_row.cells[1].getElementsByTagName('textarea')[0];
+inp1.id += len;
+inp1.name += len;
+inp1.value = '';
+x.appendChild( new_row );
+}
+</script>
+
+<script>
+$('.show-general').click(function() {
+$('.general').removeClass('hidden');
+$('.valuation').addClass('hidden');
+});
+$('.show-valuation').click(function() {
+$('.general').addClass('hidden');
+$('.valuation').removeClass('hidden');
+$('.service').addClass('hidden');
+});
+$('.show-service').click(function() {
+$('.valuation').addClass('hidden');
+$('.service').removeClass('hidden');
+$('.operations').addClass('hidden');
+});
+$('.show-operations').click(function() {
+$('.service').addClass('hidden');
+$('.operations').removeClass('hidden');
+$('.legal').addClass('hidden');
+});
+$('.show-legal').click(function() {
+$('.operations').addClass('hidden');
+$('.legal').removeClass('hidden');
+$('.cybersecurity').addClass('hidden');
+});
+$('.show-cybersecurity').click(function() {
+$('.legal').addClass('hidden');
+$('.cybersecurity').removeClass('hidden');
+$('.other').addClass('hidden');
+});
+$('.show-other').click(function() {
+$('.general').addClass('hidden');
+$('.valuation').addClass('hidden');
+$('.service').addClass('hidden');
+$('.operations').addClass('hidden');
+$('.legal').addClass('hidden');
+$('.cybersecurity').addClass('hidden');
+$('.other').removeClass('hidden');
+$('.drawdown').addClass('hidden');
+$('.liquid').addClass('hidden');
+$('.review-top').addClass('hidden');
+$('.progress').removeClass('hidden');
+});
+$('.show-drawdown').click(function() {
+$('.general').addClass('hidden');
+$('.valuation').addClass('hidden');
+$('.service').addClass('hidden');
+$('.operations').addClass('hidden');
+$('.legal').addClass('hidden');
+$('.cybersecurity').addClass('hidden');
+$('.other').addClass('hidden');
+$('.drawdown').removeClass('hidden');
+$('.liquid').addClass('hidden');
+$('.review-top').addClass('hidden');
+$('.progress').removeClass('hidden');
+});
+$('.show-liquid').click(function() {
+$('.general').addClass('hidden');
+$('.valuation').addClass('hidden');
+$('.service').addClass('hidden');
+$('.operations').addClass('hidden');
+$('.legal').addClass('hidden');
+$('.cybersecurity').addClass('hidden');
+$('.other').addClass('hidden');
+$('.drawdown').addClass('hidden');
+$('.liquid').removeClass('hidden');
+$('.review-top').addClass('hidden');
+$('.progress').removeClass('hidden');
+});
+$('.show-review-nodrawdown-noliquid').click(function() {
+$('.general').removeClass('hidden');
+$('.valuation').removeClass('hidden');
+$('.service').removeClass('hidden');
+$('.operations').removeClass('hidden');
+$('.legal').removeClass('hidden');
+$('.cybersecurity').removeClass('hidden');
+$('.other').removeClass('hidden');
+$('.drawdown').addClass('hidden');
+$('.liquid').addClass('hidden');
+$('.review-top').removeClass('hidden');
+$('.progress').addClass('hidden');
+});
+$('.show-review-drawdown-noliquid').click(function() {
+$('.general').removeClass('hidden');
+$('.valuation').removeClass('hidden');
+$('.service').removeClass('hidden');
+$('.operations').removeClass('hidden');
+$('.legal').removeClass('hidden');
+$('.cybersecurity').removeClass('hidden');
+$('.other').removeClass('hidden');
+$('.drawdown').removeClass('hidden');
+$('.liquid').addClass('hidden');
+$('.review-top').removeClass('hidden');
+$('.progress').addClass('hidden');
+});
+$('.show-review-nodrawdown-liquid').click(function() {
+$('.general').removeClass('hidden');
+$('.valuation').removeClass('hidden');
+$('.service').removeClass('hidden');
+$('.operations').removeClass('hidden');
+$('.legal').removeClass('hidden');
+$('.cybersecurity').removeClass('hidden');
+$('.other').removeClass('hidden');
+$('.drawdown').addClass('hidden');
+$('.liquid').removeClass('hidden');
+$('.review-top').removeClass('hidden');
+$('.progress').addClass('hidden');
+});
+$('.show-review-all').click(function() {
+$('.general').removeClass('hidden');
+$('.valuation').removeClass('hidden');
+$('.service').removeClass('hidden');
+$('.operations').removeClass('hidden');
+$('.legal').removeClass('hidden');
+$('.cybersecurity').removeClass('hidden');
+$('.other').removeClass('hidden');
+$('.drawdown').removeClass('hidden');
+$('.liquid').removeClass('hidden');
+$('.review-top').removeClass('hidden');
+$('.progress').addClass('hidden');
+});
+</script>
+
+<style>
+.indented {
+padding-left: 30pt;
+padding-right: 10pt;
+font-family: Arial, Helvetica, sans-serif;
+}
+.form {
+font-weight: bold;
+font-family: Arial, Helvetica, sans-serif;
+}
+.button {
+background: #F69125;
+border: medium none;
+color: #ffffff;
+font-size: 1em;
+padding: 0.75em;
+margin: 0;
+width: 150px;
+}
+.hidden {
+display: none;
+}
+.light-grey {
+color: #000000;
+background-color: #f1f1f1;
+}
+.orange {
+color: #ffffff;
+background-color: #f69125;
+text-align: center;
+padding: 0.01em 16px;
+}
+</style>

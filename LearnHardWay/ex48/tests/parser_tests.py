@@ -3,47 +3,63 @@ from ..ex48 import parser
 
 
 def test_peek():
-    assert_equal(lexicon.scan("north"), [('direction', 'north')])
-    result = lexicon.scan("north south east")
-    assert_equal(result, [('direction', 'north'),
-                          ('direction', 'south'),
-                          ('direction', 'east')])
+    assert_equal(parser.peek([('direction', 'north')]), 'direction')
+    result = parser.peek([('noun', 'ball'),
+                          ('verb', 'throw')])
+    assert_equal(result, 'noun')
 
 
-def test_verbs():
-    assert_equal(lexicon.scan("go"), [('verb', 'go')])
-    result = lexicon.scan("go kill eat")
-    assert_equal(result, [('verb', 'go'),
-                          ('verb', 'kill'),
-                          ('verb', 'eat')])
+def test_match():
+    assert_equal(parser.match([('direction', 'north')], 'direction'), ('direction', 'north'))
+    result = parser.match([('noun', 'ball'),
+                          ('verb', 'throw')], 'noun')
+    assert_equal(result, ('noun', 'ball'))
+    assert_equal(parser.match([('stop', 'the')], 'noun'), None)
 
 
-def test_stops():
-    assert_equal(lexicon.scan("the"), [('stop', 'the')])
-    result = lexicon.scan("the in of")
-    assert_equal(result, [('stop', 'the'),
-                          ('stop', 'in'),
-                          ('stop', 'of')])
+def test_skip():
+    pass
 
 
-def test_nouns():
-    assert_equal(lexicon.scan("bear"), [('noun', 'bear')])
-    result = lexicon.scan("bear princess")
-    assert_equal(result, [('noun', 'bear'),
-                          ('noun', 'princess')])
+def test_parse_verb():
+    assert_equal(parser.parse_verb([('verb', 'jump')]), ('verb', 'jump'))
+    result = parser.parse_verb([('stop', 'the'),
+                                ('verb', 'throw')])
+    assert_equal(result, ('verb', 'throw'))
+    # assert_raises(ParserError("Expected a verb next."), parser.parse_verb([('noun', 'cat')]))
 
 
-def test_numbers():
-    assert_equal(lexicon.scan("1234"), [('number', 1234)])
-    result = lexicon.scan("3 91234")
-    assert_equal(result, [('number', 3),
-                          ('number', 91234)])
+def test_parse_object():
+    assert_equal(parser.parse_object([('noun', 'building')]), ('noun', 'building'))
+    assert_equal(parser.parse_object([('direction', 'west')]), ('direction', 'west'))
+    result = parser.parse_object([('stop', 'the'),
+                                ('noun', 'chair')])
+    assert_equal(result, ('noun', 'chair'))
+
+
+def test_parse_subject():
+    assert_equal(parser.parse_subject([('noun', 'hair')]), ('noun', 'hair'))
+    assert_equal(parser.parse_subject([('verb', 'run')]), ('noun', 'player'))
+    result = parser.parse_subject([('stop', 'the'),
+                                  ('noun', 'tree')])
+    assert_equal(result, ('noun', 'tree'))
+
+
+def test_parse_sentence():
+    result = parser.parse_sentence([('stop', 'the'),
+                                    ('noun', 'boy'),
+                                    ('verb', 'ran'),
+                                    ('stop', 'to'),
+                                    ('noun', 'town')])
+    assert_equal(result.subject, 'boy')
+    assert_equal(result.verb, 'ran')
+    assert_equal(result.object, 'town')
+    result = parser.parse_sentence([('verb', 'walks'),
+                                    ('direction', 'left')])
+    assert_equal(result.subject, 'player')
+    assert_equal(result.verb, 'walks')
+    assert_equal(result.object, 'left')
 
 
 def test_errors():
-    assert_equal(lexicon.scan("ASDFADFASDF"),
-                 [('error', 'ASDFADFASDF')])
-    result = lexicon.scan("bear IAS princess")
-    assert_equal(result, [('noun', 'bear'),
-                          ('error', 'IAS'),
-                          ('noun', 'princess')])
+    pass
