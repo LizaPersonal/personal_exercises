@@ -26,7 +26,7 @@ def test_parse_verb():
     result = parser.parse_verb([('stop', 'the'),
                                 ('verb', 'throw')])
     assert_equal(result, ('verb', 'throw'))
-    # assert_raises(ParserError("Expected a verb next."), parser.parse_verb([('noun', 'cat')]))
+    # assert_raises(parser.ParserError("Expected a verb next."), parser.parse_verb([('noun', 'cat')]))
 
 
 def test_parse_object():

@@ -1,6 +1,5 @@
 
 import unittest
-
 from parentheses import validate_expression, GeneralError, NotMathematicalLogic, NotEqualOpenCloseParentheses
 
 

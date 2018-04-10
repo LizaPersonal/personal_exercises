@@ -1,14 +1,14 @@
-from nose.tools import *
-import sudoku
+import unittest
+from sudoku import GeneralError, NotValidString
 
 
-def setup():
-    print("SETUP!")
+class TestStringMethods(unittest.TestCase):
 
+    def test_create_board(self):
+        pass
 
-def teardown():
-    print("TEAR DOWN!")
+    def test_create_options(self):
+        pass
 
-
-def test_basic():
-    print("I RAN!")
+    def test_convert_board_to_string(self):
+        pass
