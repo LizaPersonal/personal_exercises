@@ -23,17 +23,26 @@ class GameBoard(object):
 
     def __init__(self):
         self.board = []
-        self.level_options = {"expert": 17, "hard": 26, "medium": 32, "easy": 40}
+        self.options = []
 
     def create_board(self):
         for x in range(9):
-            self.board.append(["[ ]"] * 9)
+            self.board.append(['[ ]'] * 9)
         return self.board
 
-    def print_board(self):
+    def board_options(self):
+        for x in range(9):
+            self.options.append([[1, 2, 3, 4, 5, 6, 7, 8, 9]] * 9)
+        return self.options
+
+    def convert_board_to_string(self):
+        board_string = "___________________________"
         for row in self.board:
-            print(" ".join(row))
-        print("______________________________")
+            board_string += "\n"
+            for box in row:
+                board_string += ''.join(box)
+        board_string += "\n___________________________"
+        return board_string
 
     def validate_guess(self, row_guess, col_guess, guess) -> bool:
         valid_row = self._check_row(row_guess, guess)
@@ -44,7 +53,7 @@ class GameBoard(object):
 
         return valid_guess
 
-    def _check_box(self, row_guess, col_guess, guess):
+    def _check_box(self, row_guess, col_guess, guess) -> bool:
         valid_box = True
         box_row_start = (row_guess - (row_guess % 3))
         box_column_start = (col_guess - (col_guess % 3))
@@ -66,7 +75,7 @@ class GameBoard(object):
             box_row_count += 1
         return valid_box
 
-    def _check_column(self, col_guess, guess):
+    def _check_column(self, col_guess, guess) -> bool:
         for check_column in range(9):
             if "[" + str(guess) + "]" != self.board[check_column][col_guess]:
                 valid_column = True
@@ -75,7 +84,7 @@ class GameBoard(object):
                 break
         return valid_column
 
-    def _check_row(self, row_guess, guess):
+    def _check_row(self, row_guess, guess) -> bool:
         for check_row in range(9):
             if "[" + str(guess) + "]" != self.board[row_guess][check_row]:
                 valid_row = True
@@ -97,15 +106,14 @@ class GameBoard(object):
     # This attempts at filling a starting board with the bare minimum of numbers based on level selected,
     # but it fails at creating a board that can be solved.
     def start_board(self, level):
-        level_chosen = self.level_options[level]
         count_placement = 1
-        while count_placement <= level_chosen:
+        while count_placement <= level:
             random_guess = random.randint(1, 9)
             random_row = random.randint(0, 8)
             random_column = random.randint(0, 8)
             validate = self.validate_guess(random_row, random_column, random_guess)
             is_empty = self.validate_empty(random_row, random_column)
-            while validate and is_empty and count_placement <= level_chosen:
+            while validate and is_empty and count_placement <= level:
                 self.fill_guess(random_row, random_column, random_guess)
                 random_guess = random.randint(1, 9)
                 random_row = random.randint(0, 8)
@@ -127,7 +135,7 @@ class GameBoard(object):
                 is_empty = self.validate_empty(random_row, random_column)
                 while validate and is_empty and count_placement <= 9:
                     self.fill_guess(random_row, random_column, populate_number)
-                    self.print_board()
+                    print(self.convert_board_to_string())
                     random_row = random.randint(0, 8)
                     random_column = random.randint(0, 8)
                     validate = self.validate_guess(random_row, random_column, populate_number)
@@ -152,15 +160,21 @@ def signal_handler(signal, frame):
 
 signal.signal(signal.SIGINT, signal_handler)
 
+
+MAX_GUESSES = 81
+LEVELS = {"expert": 17, "hard": 26, "medium": 32, "easy": 40}
+
+
 new_board = GameBoard()
 new_board.create_board()
+new_board.board_options()
+
 print("How hard would you like the game to be?\n"
       "expert, hard, medium, easy")
 chosen_level = input()
-new_board.start_board(chosen_level)
-new_board.print_board()
+new_board.start_board(LEVELS[chosen_level])
+print(new_board.convert_board_to_string())
 
-MAX_GUESSES = 81
 
 fill_amount = 0
 while fill_amount < MAX_GUESSES:
@@ -185,10 +199,10 @@ while fill_amount < MAX_GUESSES:
 
     if new_board.validate_guess(row_guess, col_guess, guess):
         new_board.fill_guess(row_guess, col_guess, guess)
-        new_board.print_board()
+        print(new_board.convert_board_to_string())
         fill_amount += 1
     else:
-        new_board.print_board()
+        print(new_board.convert_board_to_string())
         print("That is not a valid guess. Try again")
 
 signal.pause()
