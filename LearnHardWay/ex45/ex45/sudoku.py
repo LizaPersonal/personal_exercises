@@ -25,22 +25,22 @@ class GameBoard(object):
         self.board = []
         self.options = []
 
-    def create_board(self):
+    def create_blank_board(self):
         for x in range(9):
             self.board.append(['[ ]'] * 9)
         return self.board
 
-    def board_options(self):
+    def create_all_board_options(self):
         for x in range(9):
             self.options.append([[1, 2, 3, 4, 5, 6, 7, 8, 9]] * 9)
         return self.options
 
-    def convert_board_to_string(self):
+    def convert_board_to_string(self, board_to_print):
         board_string = "___________________________"
-        for row in self.board:
+        for row in board_to_print:
             board_string += "\n"
             for box in row:
-                board_string += ''.join(box)
+                board_string += ''.join(str(box))
         board_string += "\n___________________________"
         return board_string
 
@@ -106,17 +106,23 @@ class GameBoard(object):
     def remove_options(self, row_guess, col_guess, guess):
         pass
 
-    def remove_from_column(self, col_guess, guess):
+    def remove_from_column(self):
         for row_in_column in range(9):
-            available_options = self.options[row_in_column][col_guess]
-            if guess in available_options:
-                self.options[row_in_column][col_guess].remove(guess)
-            else:
-                break
+            print(row_in_column)
+            print(new_board.convert_board_to_string(self.options))
+            available_options = self.options[row_in_column][1]
+            print(available_options)
+            if 1 in available_options:
+                available_options.remove(1)
+                print(available_options)
         return self.options
 
-    def _remove_from_row(self, row_guess, guess):
-        pass
+    def remove_from_row(self, row_guess, guess):
+        for column_in_row in range(9):
+            available_options = self.options[row_guess][column_in_row]
+            if guess in available_options:
+                available_options.remove(guess)
+        return self.options
 
     def _remove_from_box(self, row_guess, col_guess, guess):
         pass
@@ -187,10 +193,12 @@ LEVELS = {"expert": 17, "hard": 26, "medium": 32, "easy": 40}
 
 
 new_board = GameBoard()
-new_board.create_board()
+new_board.create_blank_board()
+all_options = new_board.create_all_board_options()
 
-print(new_board.board_options())
-print(new_board.remove_from_column(1, 1))
+print(new_board.convert_board_to_string(all_options))
+new_board.convert_board_to_string(new_board.remove_from_row(1, 5))
+new_board.convert_board_to_string(new_board.remove_from_column())
 
 
 # print("How hard would you like the game to be?\n"
