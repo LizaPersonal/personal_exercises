@@ -24,15 +24,18 @@ class GameBoard(object):
     def __init__(self):
         self.board = []
         self.options = []
+        self.solution = []
 
     def create_blank_board(self):
-        for x in range(9):
-            self.board.append(['[ ]'] * 9)
+        self.board = [['[ ]' for y in range(9)] for x in range(9)]
         return self.board
 
+    def create_solution_board(self):
+        self.solution = [['[ ]' for y in range(9)] for x in range(9)]
+        return self.solution
+
     def create_all_board_options(self):
-        for x in range(9):
-            self.options.append([[1, 2, 3, 4, 5, 6, 7, 8, 9]] * 9)
+        self.options = [[[1, 2, 3, 4, 5, 6, 7, 8, 9] for y in range(9)] for x in range(9)]
         return self.options
 
     def convert_board_to_string(self, board_to_print):
@@ -44,19 +47,18 @@ class GameBoard(object):
         board_string += "\n___________________________"
         return board_string
 
-    def validate_guess(self, row_guess, col_guess, guess) -> bool:
+    def validate_guess(self, row_guess, column_guess, guess) -> bool:
         valid_row = self._check_row(row_guess, guess)
-        valid_column = self._check_column(col_guess, guess)
-        valid_box = self._check_box(row_guess, col_guess, guess)
+        valid_column = self._check_column(column_guess, guess)
+        valid_box = self._check_box(row_guess, column_guess, guess)
 
         valid_guess = valid_column and valid_row and valid_box
-
         return valid_guess
 
-    def _check_box(self, row_guess, col_guess, guess) -> bool:
+    def _check_box(self, row_guess, column_guess, guess) -> bool:
         valid_box = True
         box_row_start = (row_guess - (row_guess % 3))
-        box_column_start = (col_guess - (col_guess % 3))
+        box_column_start = (column_guess - (column_guess % 3))
         box_row_count = 0
         while box_row_count < 3 and valid_box:
             box_column_count = 0
@@ -103,30 +105,72 @@ class GameBoard(object):
         self.board[row_guess][col_guess] = "[" + str(guess) + "]"
         return self.board
 
-    def remove_options(self, row_guess, col_guess, guess):
-        pass
-
-    def remove_from_column(self):
-        for row_in_column in range(9):
-            print(row_in_column)
-            print(new_board.convert_board_to_string(self.options))
-            available_options = self.options[row_in_column][1]
-            print(available_options)
-            if 1 in available_options:
-                available_options.remove(1)
-                print(available_options)
+    def remove_options(self, row_guess, column_guess, guess):
+        self._remove_from_row(row_guess, guess)
+        self._remove_from_column(column_guess, guess)
+        self._remove_from_box(row_guess, column_guess, guess)
         return self.options
 
-    def remove_from_row(self, row_guess, guess):
+    def _remove_from_column(self, column_guess, guess):
+        for row_in_column in range(9):
+            available_options = self.options[row_in_column][column_guess]
+            if guess in available_options:
+                available_options.remove(guess)
+        return self.options
+
+    def _remove_from_row(self, row_guess, guess):
         for column_in_row in range(9):
             available_options = self.options[row_guess][column_in_row]
             if guess in available_options:
                 available_options.remove(guess)
         return self.options
 
-    def _remove_from_box(self, row_guess, col_guess, guess):
-        pass
+    def _remove_from_box(self, row_guess, column_guess, guess):
+        box_row_start = (row_guess - (row_guess % 3))
+        box_column_start = (column_guess - (column_guess % 3))
+        box_row_count = 0
 
+        while box_row_count < 3:
+            box_column_count = 0
+
+            while box_column_count < 3:
+                box_row_check = box_row_start + box_row_count
+                box_column_check = box_column_start + box_column_count
+
+                available_options = self.options[box_row_check][box_column_check]
+                if guess in available_options:
+                    available_options.remove(guess)
+
+                box_column_count += 1
+            box_row_count += 1
+        return self.options
+
+    def find_minimum_options(self):
+        minimum_row = 0
+        minimum_column = 0
+        minimum_number_available = 9
+        minimum_available = 0
+        for row in range(9):
+            for column in range(9):
+                is_empty = self.validate_empty(row, column)
+                if is_empty and 0 < len(self.options[row][column]) <= minimum_number_available:
+                    minimum_row = row
+                    minimum_column = column
+                    minimum_available = self.options[row][column]
+                    minimum_number_available = len(self.options[row][column])
+        return minimum_row, minimum_column, minimum_available
+
+    def solution(self):
+        count_placement = 1
+        while count_placement <= 81:
+            minimum_row, minimum_column, minimum_available = self.find_minimum_options()
+            random_guess = random.choice(minimum_available)
+            validate = self.validate_guess(minimum_row, minimum_column, random_guess)
+            is_empty = self.validate_empty(minimum_row, minimum_column)
+            if validate and is_empty:
+                self.fill_guess(minimum_row, minimum_column, random_guess)
+                self.remove_options(minimum_row, minimum_column, random_guess)
+                count_placement += 1
 
     # This attempts at filling a starting board with the bare minimum of numbers based on level selected,
     # but it fails at creating a board that can be solved.
@@ -138,13 +182,8 @@ class GameBoard(object):
             random_column = random.randint(0, 8)
             validate = self.validate_guess(random_row, random_column, random_guess)
             is_empty = self.validate_empty(random_row, random_column)
-            while validate and is_empty and count_placement <= level:
+            if validate and is_empty and count_placement <= level:
                 self.fill_guess(random_row, random_column, random_guess)
-                random_guess = random.randint(1, 9)
-                random_row = random.randint(0, 8)
-                random_column = random.randint(0, 8)
-                validate = self.validate_guess(random_row, random_column, random_guess)
-                is_empty = self.validate_empty(random_row, random_column)
                 count_placement += 1
 
     # This will attempt at filling the whole solution randomly,
@@ -169,16 +208,6 @@ class GameBoard(object):
                     print("count_placement" + str(count_placement) + "for" + str(populate_number))
             populate_number += 1
 
-    # This will attempt to fill a random number in a random location,
-    # It will then remove that option from all neighboring locations
-    # def fill_squares(self):
-    #     rows = {"top": 3, "middle": 6, "bottom": 9}
-    #     columns = {"top": 3, "middle": 6, "bottom": 9}
-    #     for row in rows:
-    #
-    #     while populate_number <= 9:
-    #         random_row = random.randint()
-
 
 def signal_handler(signal, frame):
     print('\nYou pressed Ctrl+C!\nEnding program execution gracefully')
@@ -193,13 +222,15 @@ LEVELS = {"expert": 17, "hard": 26, "medium": 32, "easy": 40}
 
 
 new_board = GameBoard()
-new_board.create_blank_board()
+blank_board = new_board.create_blank_board()
 all_options = new_board.create_all_board_options()
 
-print(new_board.convert_board_to_string(all_options))
-new_board.convert_board_to_string(new_board.remove_from_row(1, 5))
-new_board.convert_board_to_string(new_board.remove_from_column())
+new_board.solution()
 
+print(new_board.convert_board_to_string(new_board.board))
+
+
+# print(new_board.convert_board_to_string(new_board.remove_options(1, 1, 1)))
 
 # print("How hard would you like the game to be?\n"
 #       "expert, hard, medium, easy")
