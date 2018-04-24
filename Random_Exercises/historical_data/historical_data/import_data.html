@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Import Historical Data</title>
+</head>
+<body>
+<form action="{{ request.path }}" method="post" enctype="multipart/form-data" class="form-horizontal row-border js-upload-form" id="validate-1">
+    <label for="raw_historical_data_xls">Upload Historical Data</label>
+    <br>
+    <input type="file" name="raw_historical_data_xls" size="40">
+    <br><br><br>
+    <label for="tmc_name">Select the TMC</label>
+    <br>
+    <select name="tmc_name">
+        <option disabled hidden="" selected style='display: none' value=''></option>
+        <option value="default">Default</option>
+        <option value="cwt">CWT</option>
+        <option value="world_travel">World Travel</option>
+    </select>
+    <br><br><br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
+
+<script>
+    function showModal() {
+        $('#confirm-terminate-modal').modal('show');
+        return false;
+    }
+    function onSubmit() {
+        var checked = $('[name="terminate_employees"]').prop('checked');
+        if (checked) {
+            return showModal();
+        }
+        // Else let the submit button do it's thing
+    }
+    function resetSubmit() {
+        $(document).trigger('resetSubmitOnceButton');
+    }
+    function submitForm() {
+        $('.js-upload-form').submit();
+    }
+    $(function () {
+        $('.js-submit-button').click(onSubmit);
+        $('[data-dismiss="modal"]').click(resetSubmit);
+        $('.js-modal-submit').click(submitForm);
+    })
+</script>
+
+<style>
+.indented {
+padding-left: 30pt;
+padding-right: 10pt;
+font-family: Arial, Helvetica, sans-serif;
+}
+.form {
+font-weight: bold;
+font-family: Arial, Helvetica, sans-serif;
+}
+.button {
+background: #F69125;
+border: medium none;
+color: #ffffff;
+font-size: 1em;
+padding: 0.75em;
+margin: 0;
+width: 150px;
+}
+.hidden {
+display: none;
+}
+.light-grey {
+color: #000000;
+background-color: #f1f1f1;
+}
+.orange {
+color: #ffffff;
+background-color: #f69125;
+text-align: center;
+padding: 0.01em 16px;
+}
+</style>
