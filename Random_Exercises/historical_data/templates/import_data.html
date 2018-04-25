@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Import Historical Data</title>
+    </head>
+    <body>
+        <form method="post" action="" enctype="multipart/form-data">
+            <label for="raw_historical_data_xls">Upload Historical Data</label>
+            <br>
+            <input type="file" name="raw_historical_data_csv" size="40">
+            <br><br><br>
+            <label for="tmc_name">Select the TMC</label>
+            <br>
+            <select name="tmc_name" required="required">
+                <option disabled hidden="" selected style='display: none' value=''></option>
+                <option value="default">Default</option>
+                <option value="cwt">CWT</option>
+                <option value="world_travel">World Travel</option>
+            </select>
+            <br><br><br>
+            <label for="travel_mode">Select a travel mode</label>
+            <br>
+            <select name="travel_mode" required="required">
+                <option disabled hidden="" selected style='display: none' value=''></option>
+                <option value="flight">Flight</option>
+                <option value="hotel">Hotel</option>
+                <option value="car">Car</option>
+                <option value="rail">Rail</option>
+            </select>
+            <br><br><br>
+            <label for="organization_name">What organization are you uploading for?</label>
+            <br>
+            <input type="text" name="organization_name" size="40" placeholder="eg. Amgen" required="required">
+            <br><br><br>
+            <input type="submit" name="upload_date" value="Upload">
+        </form>
+
+        <p>{{error}}</p>
+    </body>
+</html>

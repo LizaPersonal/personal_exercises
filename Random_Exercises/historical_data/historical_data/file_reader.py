@@ -1,5 +1,5 @@
 import csv
-from ..tmc_templates import default
+# from ..tmc_templates import default
 
 
 def read_historical_data_file(file):
@@ -20,8 +20,9 @@ def print_historical_csv(read_file):
 
 def check_tmc_headers(tmc, headers):
     all_tmcs = {default: 0, cwt: 1, world_travel: 2}
-    if all_tmcs.get("tmc") is not None:
-        chosen_tmc = all_tmcs["tmc"]
+    if all_tmcs.get(tmc) is not None:
+        chosen_tmc = all_tmcs[tmc]
+    pass
 
 
 def create_historical_data_file_upload_log(file):
@@ -31,12 +32,12 @@ def create_historical_data_file_upload_log(file):
 
 
 filename = input("What file would you like to read? ")
-
-tmc = input("Which TMC is the file from? ")
-
-travel_mode = input("What type of travel are you looking to upload? ")
-
-organization_name = input("What is the name of the organization? ")
+#
+# tmc = input("Which TMC is the file from? ")
+#
+# travel_mode = input("What type of travel are you looking to upload? ")
+#
+# organization_name = input("What is the name of the organization? ")
 
 headers_after_reading, file_after_reading = read_historical_data_file(filename)
 print_historical_csv(file_after_reading)

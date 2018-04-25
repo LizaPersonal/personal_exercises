@@ -17,4 +17,6 @@ class BaseHistoricalFile(object):
                         route_desinations,
                         route_desinations_city,
                         exchange_rate,
-                        total_price_usd]
+                        total_price_usd,
+                        in_pilot,
+                        travel_group]
