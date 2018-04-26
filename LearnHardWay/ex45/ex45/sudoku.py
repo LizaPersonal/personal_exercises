@@ -26,12 +26,19 @@ class Board(object):
         self.board = []
 
     def convert_board_to_string(self) -> str:
-        board_string = "___________________________"
+        row_count = 1
+        board_string = "________________________________________"
         for row in self.board:
             board_string += "\n"
+            column_count = 1
             for box in row:
                 board_string += ''.join(str(box))
-        board_string += "\n___________________________"
+                if column_count % 3 == 0:
+                    board_string += "  |  "
+                column_count += 1
+            if row_count % 3 == 0:
+                board_string += "\n________________________________________"
+            row_count += 1
         return board_string
 
     def validate_guess(self, row_guess, column_guess, guess) -> bool:
@@ -105,7 +112,6 @@ class Board(object):
         mirror_column = 8 - col_guess
         self.board[mirror_row][mirror_column] = "[ ]"
         return self.board
-
 
     def remove_options(self, row_guess, column_guess, guess):
         self._remove_from_row(row_guess, guess)
@@ -234,7 +240,8 @@ class PlayGame(object):
                 print("That is not a valid guess, please try again.")
                 guess = int(input())
 
-            if self.game_board.validate_guess(row_guess, col_guess, guess):
+            if self.game_board.validate_guess(row_guess, col_guess, guess)\
+                    and self.starting_board.validate_empty(row_guess, col_guess):
                 self.game_board.fill_guess(row_guess, col_guess, guess)
                 print(self.game_board.convert_board_to_string())
                 level += 1

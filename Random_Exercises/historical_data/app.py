@@ -1,5 +1,4 @@
 from flask import Flask, render_template, flash, request, url_for, redirect
-import .historical_data.file_reader.*
 
 ALLOWED_EXTENSIONS = set(['csv'])
 
@@ -49,4 +48,3 @@ def upload_historical_data():
 
 if __name__ == "__main__":
     app.run()
-    headers_after_reading, file_after_reading = file_reader.read_historical_data_file(filename)
