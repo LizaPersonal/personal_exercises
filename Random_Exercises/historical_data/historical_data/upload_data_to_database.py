@@ -1,5 +1,5 @@
 from mysql.connector import MySQLConnection, Error
-from .python_mysql_connect import connect
+from python_mysql_connect import connect
 
 
 def update_flight_table(conn, data):
@@ -41,3 +41,4 @@ if __name__ == '__main__':
     connect_to_historical_read_write = connect()
 
     connect_to_historical_read_write.close()
+

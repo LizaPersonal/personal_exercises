@@ -9,7 +9,7 @@ def connect():
 
     try:
         print('Connecting to MySQL database...')
-        conn = MySQLConnection(**db_config)
+        conn: object = MySQLConnection(**db_config)
 
         if conn.is_connected():
             print('connection established.')
