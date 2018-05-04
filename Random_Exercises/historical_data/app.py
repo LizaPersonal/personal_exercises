@@ -34,7 +34,7 @@ def upload_historical_data():
                 print(travel)
                 print(client)
                 return "The {} has been uploaded to {} for {}, based on the {} template" \
-                    .format(upload_file.filename, travel, client, tmc)
+                    .format(upload_file.filename, travel, client, tmc), upload_file, tmc, travel, client
 
             elif not allowed_file(upload_file.filename):
                 error = "That file type is not allowed."
