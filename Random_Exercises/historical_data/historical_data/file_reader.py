@@ -1,6 +1,9 @@
 import csv
 # from ..tmc_templates import default
 import check_airline_vendors
+# import check_domestic_vs_international
+# import check_connecting_vs_nonstop
+# from ..app import upload_historical_data
 
 
 def read_historical_data_file(file):
@@ -23,9 +26,10 @@ def validate_airline(read_file):
     for row in read_file:
         header_to_look_for = 'Vendor *'
         airline_in_file = row[header_to_look_for]
-        vendor_code = check_airline_vendors.validate_airline_vendor({header_to_look_for: airline_in_file})
+        # vendor_code = check_airline_vendors.validate_airline_vendor({header_to_look_for: airline_in_file})
+        vendor_code = check_airline_vendors.validate_airline_vendor((airline_in_file, ))
         row[header_to_look_for] = vendor_code[0]
-        print(row)
+        # print(row)
     return read_file
 
 
@@ -35,18 +39,7 @@ def create_new_output_file(updated_file, fields):
     writer.writerows(updated_file)
 
 
-# def check_tmc_headers(tmc, headers):
-#     all_tmcs = {default: 0, cwt: 1, world_travel: 2}
-#     if all_tmcs.get(tmc) is not None:
-#         chosen_tmc = all_tmcs[tmc]
-#     pass
-#
-#
-# def create_historical_data_file_upload_log(file):
-#     log_file = open(file)
-#     log_file.write("")
-#     log_file.close()
-
+# filename, tmc, travel_mode, organization_name = upload_historical_data()
 
 filename = input("What file would you like to read? ")
 
