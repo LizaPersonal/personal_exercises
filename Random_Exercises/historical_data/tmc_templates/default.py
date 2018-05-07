@@ -1,12 +1,15 @@
-from .base import BaseHistoricalFile
 
+class DefaultHistoricalFile(object):
 
-class DefaultHistoricalFile(BaseHistoricalFile):
-    pass
+    def __init__(self):
+        self.flight_headers = {}
+        self.hotel_headers = []
+        self.car_headers = []
+        self.rail_headers = []
 
 
 class DefaultFlights(DefaultHistoricalFile):
-    FIELDS_MAPPING = {
+    flight_headers = {
         "Record ID": "",
         "Employee Name": "employee_name",
         "Employee ID": "employee_id",
@@ -14,7 +17,7 @@ class DefaultFlights(DefaultHistoricalFile):
         "Employee Department": "department",
         "Ticket Number": "ticket_number",
         "Booking Date": "booked",
-        "Vendor": "vendor",
+        "vendor": "Vendor *",
         "Route": "route",
         "Connecting vs Nonstop": "nonstop_or_connecting",
         "Trip Type": "",
@@ -29,7 +32,7 @@ class DefaultFlights(DefaultHistoricalFile):
         "Original Currency": "original_currency",
         "Total Price": "total_price",
         "LLA/LLF Chosen": "description",
-        "Low Fare": "llf",
+        "Low Fare": "llf"
     }
 
 
