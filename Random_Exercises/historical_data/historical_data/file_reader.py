@@ -1,6 +1,6 @@
 import csv
 import check_airline_vendors
-from ..tmc_templates import default
+# from ..tmc_templates import default
 # import check_domestic_vs_international
 # import check_connecting_vs_nonstop
 # from ..app import upload_historical_data
@@ -30,16 +30,19 @@ def validate_tmc():
 
 def _tmc_template_to_use(tmc):
     if tmc == 'default':
-        default_tmc_flight_headers = default.DefaultFlights()
+        # default_tmc_flight_headers = default.DefaultFlights()
+        default_tmc_flight_headers = {"vendor": "Vendor *",
+                                      "route": "Route",
+                                      "nonstop_or_connecting": "Connecting vs Nonstop"}
         return default_tmc_flight_headers
     else:
         print("That is not a valid TMC at this time.")
         return None
 
 
-def validate_airline(read_file, header_to_look_for):
+def validate_airline(read_file, flight_headers_in_file):
     for row in read_file:
-        header_to_look_for = 'Vendor *'
+        header_to_look_for = flight_headers_in_file["vendor"]
         airline_in_file = row[header_to_look_for]
         vendor_code = check_airline_vendors.validate_airline_vendor((airline_in_file, ))
         row[header_to_look_for] = vendor_code[0]
@@ -57,12 +60,11 @@ if __name__== "__main__":
     filename = input("What file would you like to read? ")
     flight_headers = validate_tmc()
 
-
     # travel_mode = input("What type of travel are you looking to upload? ")
     #
     # organization_name = input("What is the name of the organization? ")
 
     headers_after_reading, file_after_reading = read_historical_data_file(filename)
-    updated_airlines = validate_airline(file_after_reading)
+    updated_airlines = validate_airline(file_after_reading, flight_headers)
     create_new_output_file(updated_airlines, headers_after_reading)
 
