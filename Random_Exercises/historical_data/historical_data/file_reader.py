@@ -1,12 +1,22 @@
 import csv
 import check_airline_vendors
 import check_connecting_vs_nonstop
-# import ..tmc_templates.default
+# from..tmc_templates.default import
 # import check_domestic_vs_international
 # from ..app import upload_historical_data
 
 
+class GeneralError(Exception):
+    pass
+
+
+class NotValidFile(Exception):
+    pass
+
+
 def read_historical_data_file(file):
+    if file is None:
+        raise GeneralError()
     with open(file, "r", newline='') as historical_data_file:
         read_file = []
         reader = csv.DictReader(historical_data_file)
