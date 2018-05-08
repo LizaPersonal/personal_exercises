@@ -1,8 +1,8 @@
 import csv
 import check_airline_vendors
-# from ..tmc_templates import default
+import check_connecting_vs_nonstop
+# import ..tmc_templates.default
 # import check_domestic_vs_international
-# import check_connecting_vs_nonstop
 # from ..app import upload_historical_data
 
 
@@ -30,10 +30,10 @@ def validate_tmc():
 
 def _tmc_template_to_use(tmc):
     if tmc == 'default':
-        # default_tmc_flight_headers = default.DefaultFlights()
+        # default_tmc_flight_headers = tmc_templates.default.DefaultFlights()
         default_tmc_flight_headers = {"vendor": "Vendor *",
                                       "route": "Route",
-                                      "nonstop_or_connecting": "Connecting vs Nonstop"}
+                                      "nonstop_or_connecting": "Connecting vs Nonstop *"}
         return default_tmc_flight_headers
     else:
         print("That is not a valid TMC at this time.")
@@ -41,11 +41,21 @@ def _tmc_template_to_use(tmc):
 
 
 def validate_airline(read_file, flight_headers_in_file):
+    header_to_look_for = flight_headers_in_file["vendor"]
     for row in read_file:
-        header_to_look_for = flight_headers_in_file["vendor"]
         airline_in_file = row[header_to_look_for]
         vendor_code = check_airline_vendors.validate_airline_vendor((airline_in_file, ))
         row[header_to_look_for] = vendor_code[0]
+    return read_file
+
+
+def validate_connecting_vs_nonstop(read_file, flight_headers_in_file):
+    header_to_look_for = flight_headers_in_file["route"]
+    header_to_update = flight_headers_in_file["nonstop_or_connecting"]
+    for row in read_file:
+        route_type = row[header_to_look_for]
+        nonstop_connecting = check_connecting_vs_nonstop.nonstop_or_connecting(route_type)
+        row[header_to_update] = nonstop_connecting
     return read_file
 
 
@@ -66,5 +76,6 @@ if __name__== "__main__":
 
     headers_after_reading, file_after_reading = read_historical_data_file(filename)
     updated_airlines = validate_airline(file_after_reading, flight_headers)
-    create_new_output_file(updated_airlines, headers_after_reading)
+    updated_connecting_vs_nonstop = validate_connecting_vs_nonstop(updated_airlines, flight_headers)
+    create_new_output_file(updated_connecting_vs_nonstop, headers_after_reading)
 
