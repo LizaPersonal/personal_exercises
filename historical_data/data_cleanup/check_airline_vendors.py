@@ -1,8 +1,9 @@
-# from python_mysql_connect import connect_to_database
 from data_cleanup.python_mysql_connect import connect_to_database
 
 
 def validate_airline_vendor(airline_in_file):
+    cursor = None
+    historical_db_connection = None
     try:
         historical_db_connection = connect_to_database()
         cursor = historical_db_connection.cursor()
@@ -15,7 +16,7 @@ def validate_airline_vendor(airline_in_file):
         else:
             print(airline_in_file[0] + ' ---> ' + str(search_results))
         return search_results
-    except e:
+    except Exception as e:
         print(e)
     finally:
         if cursor:

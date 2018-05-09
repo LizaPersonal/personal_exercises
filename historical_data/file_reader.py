@@ -43,7 +43,7 @@ def _tmc_template_to_use(tmc):
         # default_tmc_flight_headers = {"vendor": "Vendor *",
         #                               "route": "Route",
         #                               "nonstop_or_connecting": "Connecting vs Nonstop *"}
-        return default_tmc_flight_headers
+        return default_tmc_flight_headers.flight_headers
     else:
         print("That is not a valid TMC at this time.")
         return None
@@ -77,6 +77,7 @@ def create_new_output_file(updated_file, fields):
 if __name__== "__main__":
 
     filename = input("What file would you like to read? ")
+    filename = "/Users/lizajohn/Documents/Historical_Data_Request_Template_copy.csv"
     flight_headers = validate_tmc()
 
     # travel_mode = input("What type of travel are you looking to upload? ")
