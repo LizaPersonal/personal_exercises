@@ -1,5 +1,5 @@
 import unittest
-from historical_data.file_reader import read_historical_data_file, GeneralError
+from file_reader import read_historical_data_file, GeneralError
 
 
 class TestStringMethods(unittest.TestCase):

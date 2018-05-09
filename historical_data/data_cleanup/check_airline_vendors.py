@@ -1,6 +1,14 @@
 from data_cleanup.python_mysql_connect import connect_to_database
 
 
+class GeneralError(Exception):
+    pass
+
+
+class NotValidAirline(Exception):
+    pass
+
+
 def validate_airline_vendor(airline_in_file):
     """ Connect to the historical database.
         Search in the airlines table for the airline from the file.
