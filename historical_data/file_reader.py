@@ -13,6 +13,8 @@ class NotValidFile(Exception):
 
 
 def read_historical_data_file(file):
+    """ Open a file and parse the headers and file content to be used later. """
+
     if file is None:
         raise GeneralError()
     with open(file, "r", newline='') as historical_data_file:
@@ -29,14 +31,19 @@ def read_historical_data_file(file):
 #         print(row)
 
 def validate_tmc():
+    """ Ask the user for the tmc, and validate we have a mapping for them. """
+
     tmc = input("Which TMC is the file from? ")
-    if _tmc_template_to_use(tmc) is None:
+    tmc_template_exists = _tmc_template_to_use(tmc)
+    if tmc_template_exists is None:
         validate_tmc()
     else:
-        return _tmc_template_to_use(tmc)
+        return tmc_template_exists
 
 
 def _tmc_template_to_use(tmc):
+    """ Identify which template headers should be used based on the user input. """
+
     if tmc == 'default':
         default_tmc_flight_headers = DefaultFlights()
         # default_tmc_flight_headers = {"vendor": "Vendor *",
@@ -49,6 +56,10 @@ def _tmc_template_to_use(tmc):
 
 
 def validate_airline(read_file, flight_headers_in_file):
+    """ Identify which column represents the vendor.
+        For each row search in the database in the airlines table for the vendor code.
+        Update the file with the vendor code rather than vendor name. """
+
     header_to_look_for = flight_headers_in_file["vendor"]
     for row in read_file:
         airline_in_file = row[header_to_look_for]
@@ -58,6 +69,10 @@ def validate_airline(read_file, flight_headers_in_file):
 
 
 def validate_connecting_vs_nonstop(read_file, flight_headers_in_file):
+    """ Identify which column represents the route and the nonstop/connecting.
+        For each row identify if the route is nonstop or connecting.
+        Update the file with the correcting indication in the nonstop/connecting column. """
+
     header_to_look_for = flight_headers_in_file["route"]
     header_to_update = flight_headers_in_file["nonstop_or_connecting"]
     for row in read_file:
@@ -68,6 +83,7 @@ def validate_connecting_vs_nonstop(read_file, flight_headers_in_file):
 
 
 def create_new_output_file(updated_file, fields):
+    """ Write to a new file all the changes made. """
     writer = csv.DictWriter(open('/tmp/output.csv', "w+"), fieldnames=fields)
     writer.writeheader()
     writer.writerows(updated_file)
