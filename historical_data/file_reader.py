@@ -1,5 +1,4 @@
 import csv
-# from tmc_templates.default import DefaultFlights
 # from historical_data import check_airline_vendors, check_connecting_vs_nonstop
 from data_cleanup import check_connecting_vs_nonstop, check_airline_vendors
 from tmc_templates.default import DefaultFlights
