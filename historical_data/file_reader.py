@@ -1,6 +1,5 @@
 import csv
-# from historical_data import check_airline_vendors, check_connecting_vs_nonstop
-from data_cleanup import check_connecting_vs_nonstop, check_airline_vendors
+from data_cleanup import check_connecting_vs_nonstop, check_airline_vendors, check_domestic_vs_international
 from tmc_templates.default import DefaultFlights
 
 
@@ -76,9 +75,23 @@ def validate_connecting_vs_nonstop(read_file, flight_headers_in_file):
     header_to_look_for = flight_headers_in_file["route"]
     header_to_update = flight_headers_in_file["nonstop_or_connecting"]
     for row in read_file:
-        route_type = row[header_to_look_for]
-        nonstop_connecting = check_connecting_vs_nonstop.nonstop_or_connecting(route_type)
+        route = row[header_to_look_for]
+        nonstop_connecting = check_connecting_vs_nonstop.nonstop_or_connecting(route)
         row[header_to_update] = nonstop_connecting
+    return read_file
+
+
+def validate_domestic_vs_international(read_file, flight_headers_in_file):
+    """ Identify which column represents the route and the domestic/international.
+        For each row identify if the route is nonstop or connecting.
+        Update the file with the correcting indication in the nonstop/connecting column. """
+
+    header_to_look_for = flight_headers_in_file["route"]
+    header_to_update = flight_headers_in_file["dom_or_int"]
+    for row in read_file:
+        route = row[header_to_look_for]
+        domestic_international = check_domestic_vs_international.domestic_or_international(route)
+        row[header_to_update] = domestic_international
     return read_file
 
 
@@ -102,5 +115,6 @@ if __name__== "__main__":
     headers_after_reading, file_after_reading = read_historical_data_file(filename)
     updated_airlines = validate_airline(file_after_reading, flight_headers)
     updated_connecting_vs_nonstop = validate_connecting_vs_nonstop(updated_airlines, flight_headers)
+    updated_domestic_vs_international = validate_domestic_vs_international(updated_connecting_vs_nonstop, flight_headers)
     create_new_output_file(updated_connecting_vs_nonstop, headers_after_reading)
 

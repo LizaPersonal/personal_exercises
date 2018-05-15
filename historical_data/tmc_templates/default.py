@@ -21,7 +21,7 @@ class DefaultFlights(DefaultHistoricalFile):
             "route_destinations": "",
             "route_destinations_city": "",
             "nonstop_or_connecting": "Connecting vs Nonstop *",
-            "dom_or_int": "Domestic vs International",
+            "dom_or_int": "Domestic vs International *",
             "base_price": "Base Price",
             "taxes_and_fees": "Taxes and Fees",
             "total_price": "Total Price",
