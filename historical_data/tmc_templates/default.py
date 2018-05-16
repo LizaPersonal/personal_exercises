@@ -3,9 +3,10 @@ class DefaultHistoricalFile(object):
 
     def __init__(self):
         self.flight_headers = {}
-        self.hotel_headers = []
-        self.car_headers = []
-        self.rail_headers = []
+        self.hotel_headers = {}
+        self.car_headers = {}
+        self.rail_headers = {}
+        self.route_symbols = {}
 
 
 class DefaultFlights(DefaultHistoricalFile):
@@ -40,6 +41,11 @@ class DefaultFlights(DefaultHistoricalFile):
             "ticket_number": "Ticket Number",
             "description": "LLA/LLF Chosen",
             "llf": "Low Fare"
+        }
+        self.route_symbols = {
+            "destination": "/",
+            "connecting": "-",
+            "openjaw": "*"
         }
 
 
