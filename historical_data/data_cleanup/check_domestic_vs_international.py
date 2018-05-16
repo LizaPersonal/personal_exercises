@@ -1,10 +1,11 @@
+from data_cleanup.check_route_destinations import identify_airports_in_route
 from data_cleanup.python_mysql_connect import connect_to_database
 
 
 def updated_domestic_vs_international(read_file, flight_headers_in_file):
     """ Identify which column represents the route and the domestic/international.
         For each row identify if the route is nonstop or connecting.
-        Update the file with the correcting indication in the nonstop/connecting column. """
+        Update the file with the correct indication in the nonstop/connecting column. """
 
     header_to_look_for = flight_headers_in_file["route"]
     header_to_update = flight_headers_in_file["dom_or_int"]
@@ -25,7 +26,7 @@ def _domestic_or_international(route_in_file):
     try:
         historical_db_connection = connect_to_database()
         cursor = historical_db_connection.cursor()
-        airports = _identify_airports_in_route(route_in_file)
+        airports = identify_airports_in_route(route_in_file)
         countries = []
         for airport in airports:
             countries.append(_search_airport_for_country(cursor, airport))
@@ -40,22 +41,6 @@ def _domestic_or_international(route_in_file):
             cursor.close()
         if historical_db_connection:
             historical_db_connection.close()
-
-
-def _identify_airports_in_route(route):
-    """ Take in a route and identify each airport. """
-
-    airports = []
-    character_count = 0
-    while character_count < len(route):
-        airport_name = route.find("/", character_count)
-        if airport_name == -1:
-            airports.append(route[character_count:(character_count + 3)])
-            return airports
-        else:
-            airports.append(route[character_count:(character_count+3)])
-            character_count = airport_name + 1
-    return airports
 
 
 def _search_airport_for_country(cursor, airport_to_search_for):
