@@ -1,7 +1,21 @@
 from data_cleanup.python_mysql_connect import connect_to_database
 
 
-def domestic_or_international(route_in_file):
+def updated_domestic_vs_international(read_file, flight_headers_in_file):
+    """ Identify which column represents the route and the domestic/international.
+        For each row identify if the route is nonstop or connecting.
+        Update the file with the correcting indication in the nonstop/connecting column. """
+
+    header_to_look_for = flight_headers_in_file["route"]
+    header_to_update = flight_headers_in_file["dom_or_int"]
+    for row in read_file:
+        route = row[header_to_look_for]
+        domestic_international = _domestic_or_international(route)
+        row[header_to_update] = domestic_international
+    return read_file
+
+
+def _domestic_or_international(route_in_file):
     """ Connect to the historical database.
         Search in the airports table for the airports in the route from the file.
         Close the connection to historical database. """
