@@ -1,5 +1,6 @@
 import string
 
+
 def update_employee_name(read_file, flight_headers_in_file):
     """ Identify which column represents the employee name.
         Identify if the column contains 'first last' or 'last, first'
@@ -45,10 +46,12 @@ def _update_name_format(name_in_file, starting_format):
     whole_name = ""
 
     if starting_format != '':
-        count = name_in_file.count(starting_format)
-        for starting_format in name_in_file:
-            whole_name.append(name_in_file.split(starting_format, count) + " ")
-            count -= 1
+        parsed_name = name_in_file.split(starting_format)
+        for name in range(len(parsed_name)):
+            name += 1
+            if name < len(parsed_name):
+                whole_name += parsed_name[name] + " "
+        whole_name += parsed_name[0]
     else:
         whole_name = name_in_file
 
