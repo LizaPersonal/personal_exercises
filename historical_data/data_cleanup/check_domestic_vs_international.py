@@ -46,7 +46,7 @@ def _domestic_or_international(route_in_file):
 def _search_airport_for_country(cursor, airport_to_search_for):
     """ Search for the airport country from the file in the historical database table airport. """
 
-    query = "SELECT country FROM airports WHERE iata = %s"
+    query = "SELECT airport_country FROM airports WHERE iata = %s"
     cursor.execute(query, airport_to_search_for)
     results = cursor.fetchone()
     return results
@@ -57,7 +57,6 @@ def _compare_countries(countries):
 
     start_country = countries[0]
     for country in countries:
-        if country == start_country:
-            return True
-        else:
+        if country != start_country:
             return False
+    return True

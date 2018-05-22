@@ -29,8 +29,8 @@ def _route_destinations_city(route_in_file):
         airports = identify_airports_in_route(route_in_file)
         destination_city = ""
         for airport in airports:
-            destination_city += _search_airport_for_destination_country(cursor, airport) + "/"
-            destination_city = destination_city[:-1]
+            destination_city += _search_airport_for_destination_country(cursor, airport)[0] + "/"
+        destination_city = destination_city[:-1]
         return destination_city
     except Exception as e:
         print(e)
@@ -44,7 +44,7 @@ def _route_destinations_city(route_in_file):
 def _search_airport_for_destination_country(cursor, airport_to_search_for):
     """ Search for the airport country from the file in the historical database table airport. """
 
-    query = "SELECT city FROM airports WHERE iata = %s"
+    query = "SELECT airport_city FROM airports WHERE iata = %s"
     cursor.execute(query, airport_to_search_for)
     results = cursor.fetchone()
     return results

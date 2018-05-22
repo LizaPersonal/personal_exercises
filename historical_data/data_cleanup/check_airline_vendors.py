@@ -31,8 +31,8 @@ def _validate_airline_vendor(airline_in_file):
             update_vendor_code = _get_new_airline_code(missing_airline)
             _update_database_with_new_airline(historical_db_connection, cursor, missing_airline, update_vendor_code)
             search_results = (update_vendor_code, missing_airline)
-        else:
-            print(airline_in_file[0] + ' ---> ' + str(search_results))
+        # else:
+        #     print(airline_in_file[0] + ' ---> ' + str(search_results))
         return search_results
     except Exception as e:
         print(e)
