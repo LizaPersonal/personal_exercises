@@ -13,7 +13,7 @@ class DefaultFlights(DefaultHistoricalFile):
 
     def __init__(self):
         self.flight_headers = {
-            "employee_name": "Employee Name",
+            "employee_name": "Employee Name *",
             "employee_id": "Employee ID",
             "organization": "",
             "fare_class": "Fare Class",

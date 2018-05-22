@@ -1,6 +1,6 @@
 import csv
 from data_cleanup import check_connecting_vs_nonstop, check_airline_vendors, check_domestic_vs_international,\
-                         check_route, check_route_destinations, check_route_destinations_city
+                         check_route, check_route_destinations, check_route_destinations_city, check_employee_name
 from tmc_templates import default, base
 
 
@@ -101,7 +101,8 @@ if __name__== "__main__":
     headers_after_reading, file_after_reading = read_historical_data_file(filename)
     compare_headers(headers_after_reading, template_to_use.flight_headers)
 
-    updated_airlines = check_airline_vendors.update_airline_vendor(file_after_reading, template_to_use.flight_headers)
+    # updated_employee_name = check_employee_name.update_employee_name(file_after_reading, template_to_use.flight_headers)
+    updated_airlines = check_airline_vendors.update_airline_vendor(updated_employee_name, template_to_use.flight_headers)
     updated_route = check_route.updated_route(updated_airlines, template_to_use.flight_headers,
                                               destination_symbol, connecting_symbol, openjaw_symbol)
     update_destinations = check_route_destinations.updated_route_destinations(updated_route, template_to_use.flight_headers)
