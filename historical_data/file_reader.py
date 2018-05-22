@@ -43,16 +43,16 @@ def _tmc_template_to_use(tmc):
         return None
 
 
-def compare_headers(flight_headers_from_file, tmc_template):
+def compare_headers(flight_headers_from_file, tmc_template_flights):
     """ Review the headers from the file, and if there are any missing required headers for the output,
         add those additional headers to the file headers. """
 
     flight_headers_needed_in_output = base.BaseHistoricalFile().flight_headers
 
     for header in flight_headers_needed_in_output:
-        if tmc_template[header] == "":
+        if tmc_template_flights[header] == "":
             flight_headers_from_file.append(header)
-            tmc_template[header] = header
+            tmc_template_flights[header] = header
 
 
 def update_organization(read_file, flight_headers_in_file, organization):

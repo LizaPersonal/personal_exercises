@@ -1,0 +1,4 @@
+{
+  "tests/test_file_reader.py::test_comparing_headers_with_matching_headers": true,
+  "tests/test_file_reader.py::test_comparing_headers_with_missing_header_from_file": true
+}
