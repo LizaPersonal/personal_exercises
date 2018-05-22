@@ -4,19 +4,9 @@ from data_cleanup import check_connecting_vs_nonstop, check_airline_vendors, che
 from tmc_templates import default, base
 
 
-class GeneralError(Exception):
-    pass
-
-
-class NotValidFile(Exception):
-    pass
-
-
 def read_historical_data_file(file):
     """ Open a file and parse the headers and file content to be used later. """
 
-    if file is None:
-        raise GeneralError()
     with open(file, "r", newline='') as historical_data_file:
         read_file = []
         reader = csv.DictReader(historical_data_file)
@@ -29,6 +19,7 @@ def read_historical_data_file(file):
 # def print_historical_csv(read_file):
 #     for row in read_file:
 #         print(row)
+
 
 def validate_tmc():
     """ Ask the user for the tmc, and validate we have a mapping for them. """
