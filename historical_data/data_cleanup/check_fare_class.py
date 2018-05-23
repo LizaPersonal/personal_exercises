@@ -28,11 +28,9 @@ def _validate_fare_class(fare_class_in_file):
         search_results = _search_fare_class_database(cursor, fare_class_in_file)
         if search_results is None:
             missing_fare_class = fare_class_in_file[0]
-            updated_fare_class = _get_new_airline_code(missing_fare_class)
+            updated_fare_class = _get_new_fare_class(missing_fare_class)
             _update_database_with_new_fare_class(historical_db_connection, cursor, missing_fare_class, updated_fare_class)
             search_results = (updated_fare_class, missing_fare_class)
-        else:
-            print(fare_class_in_file[0] + ' ---> ' + str(search_results))
         return search_results
     except Exception as e:
         print(e)
@@ -52,7 +50,7 @@ def _search_fare_class_database(cursor, fare_class_to_search_for):
     return results
 
 
-def _get_new_airline_code(missing_fare_class):
+def _get_new_fare_class(missing_fare_class):
     """ If the fare class from the file doesn't exist in the database yet,
         request what the fare class standardization should be from the user. """
 

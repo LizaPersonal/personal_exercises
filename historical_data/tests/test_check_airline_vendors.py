@@ -13,5 +13,3 @@ def test_airline_not_in_database():
     assert _search_airline_database(cursor, "Not Airline") is None
 
 
-# if __name__ == '__main__':
-#     unittest.main()

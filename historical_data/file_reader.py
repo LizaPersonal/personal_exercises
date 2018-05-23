@@ -1,6 +1,6 @@
 import csv
-from data_cleanup import check_connecting_vs_nonstop, check_airline_vendors, check_domestic_vs_international,\
-                         check_route, check_route_destinations, check_route_destinations_city, check_employee_name
+from data_cleanup import check_connecting_vs_nonstop, check_airline_vendors, check_domestic_vs_international, \
+    check_route, check_route_destinations, check_route_destinations_city, check_employee_name, check_fare_class
 from tmc_templates import default, base
 
 
@@ -14,11 +14,6 @@ def read_historical_data_file(file):
         for row in reader:
             read_file.append(row)
     return headers, read_file
-
-
-# def print_historical_csv(read_file):
-#     for row in read_file:
-#         print(row)
 
 
 def validate_tmc():
@@ -93,12 +88,16 @@ if __name__== "__main__":
     compare_headers(headers_after_reading, template_to_use.flight_headers)
 
     updated_employee_name = check_employee_name.update_employee_name(file_after_reading, template_to_use.flight_headers)
+
     updated_airlines = check_airline_vendors.update_airline_vendor(updated_employee_name, template_to_use.flight_headers)
-    updated_route = check_route.updated_route(updated_airlines, template_to_use.flight_headers,
+    update_fare_class = check_fare_class.update_fare_class(updated_airlines, template_to_use.flight_headers)
+
+    updated_route = check_route.updated_route(update_fare_class, template_to_use.flight_headers,
                                               destination_symbol, connecting_symbol, openjaw_symbol)
     update_destinations = check_route_destinations.updated_route_destinations(updated_route, template_to_use.flight_headers)
     update_destinations_city = check_route_destinations_city.updated_route_destinations_city(update_destinations, template_to_use.flight_headers)
     updated_connecting_vs_nonstop = check_connecting_vs_nonstop.update_connecting_vs_nonstop(update_destinations_city, template_to_use.flight_headers)
     updated_domestic_vs_international = check_domestic_vs_international.updated_domestic_vs_international(updated_connecting_vs_nonstop, template_to_use.flight_headers)
+
     updated_organization_column = update_organization(updated_domestic_vs_international, template_to_use.flight_headers, organization_name)
     create_new_output_file(updated_organization_column, headers_after_reading)

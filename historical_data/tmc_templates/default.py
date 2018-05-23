@@ -16,7 +16,7 @@ class DefaultFlights(DefaultHistoricalFile):
             "employee_name": "Employee Name *",
             "employee_id": "Employee ID",
             "organization": "",
-            "fare_class": "Fare Class",
+            "fare_class": "Fare Class *",
             "vendor": "Vendor *",
             "route": "Route",
             "route_destinations": "",
