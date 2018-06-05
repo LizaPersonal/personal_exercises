@@ -22,8 +22,6 @@ def _calculate_total_price(base_price_in_file, taxes_and_fees_in_file, total_pri
     elif total_price_in_file != "" and base_price_in_file != "":
         if total_price_in_file == (base_price_in_file + taxes_and_fees_in_file):
             total_price = total_price_in_file
-        
+
         return "Nonstop"
     return total_price
-
-def _check_

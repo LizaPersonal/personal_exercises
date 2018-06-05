@@ -1,4 +1,6 @@
 {
-  "tests/test_file_reader.py::test_comparing_headers_with_matching_headers": true,
-  "tests/test_file_reader.py::test_comparing_headers_with_missing_header_from_file": true
+  "tests/test_check_airline_vendors.py::test_airline_in_database": true,
+  "tests/test_check_airline_vendors.py::test_airline_not_in_database": true,
+  "tests/test_check_airline_vendors.py::test_update_airline_vendor": true,
+  "tests/test_file_reader.py::test_comparing_headers_with_matching_headers": true
 }

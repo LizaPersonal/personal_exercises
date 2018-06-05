@@ -38,11 +38,18 @@ def _tmc_template_to_use(tmc):
         return None
 
 
-def compare_headers(flight_headers_from_file, tmc_template_flights):
+class HeaderProvider(object):
+
+    def get_headers(self):
+        result = base.BaseHistoricalFile().flight_headers
+        return result
+
+
+def compare_headers(flight_headers_from_file, tmc_template_flights, header_provider=HeaderProvider()):
     """ Review the headers from the file, and if there are any missing required headers for the output,
         add those additional headers to the file headers. """
 
-    flight_headers_needed_in_output = base.BaseHistoricalFile().flight_headers
+    flight_headers_needed_in_output = header_provider.get_headers()
 
     for header in flight_headers_needed_in_output:
         if tmc_template_flights[header] == "":

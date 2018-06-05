@@ -33,8 +33,9 @@ def upload_historical_data():
                 print(tmc)
                 print(travel)
                 print(client)
-                return "The {} has been uploaded to {} for {}, based on the {} template" \
-                    .format(upload_file.filename, travel, client, tmc)
+                return render_template("review_data.html")
+                # return "The {} has been uploaded to {} for {}, based on the {} template" \
+                #     .format(upload_file.filename, travel, client, tmc)
 
             elif not allowed_file(upload_file.filename):
                 error = "That file type is not allowed."
@@ -45,6 +46,11 @@ def upload_historical_data():
     except Exception as e:
         print(e)
         return render_template("import_data.html", error=error)
+
+
+@app.route('/file/')
+def file_sample():
+    return render_template("review_data.html")
 
 
 if __name__ == "__main__":
