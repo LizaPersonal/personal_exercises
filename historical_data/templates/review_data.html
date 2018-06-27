@@ -17,104 +17,177 @@
         </style>
     </head>
     <body>
-    <p>This is where you would <a href="javascript:handleFiles(data);">review the data.</a></p>
-         <!--<script src="http://d3js.org/d3.v3.min.js"></script> -->
 
     {% block body %}
-    <p onload="handleFiles(data);">{{ data }}</p>
+         <p>The following data is meant for {{ parameters['organization_name'] }} {{ parameters['travel_mode'] }}s.</p>
     {% endblock %}
 
+        <!--<table border = 1>-->
+         <!--{% for key, value in parameters.items() %}-->
+
+            <!--<tr>-->
+               <!--<th> {{ key }} </th>-->
+               <!--<td> {{ value }} </td>-->
+            <!--</tr>-->
+
+         <!--{% endfor %}-->
+        <!--</table>-->
+
+    <br/>
+
         <table border = 1>
-         {% for key, value in result.items() %}
-
             <tr>
-               <th> {{ key }} </th>
-               <td> {{ value }} </td>
+                {% for i in headers %}
+                <th>
+                    <select name="mapping_header{{ loop.index }}" id="{{ loop.index }}" onchange="checkOptions({{ headers|length }});">
+                        <option disabled hidden="" selected style='display: none' value=''></option>
+                        <option value="employee_name">Employee Name</option>
+                        <option value="employee_id">Employee ID</option>
+                        <option value="organization">Organization</option>
+                        <option value="fare_class">Fare Class</option>
+                        <option value="vendor">Vendor</option>
+                        <option value="route">Route</option>
+                        <option value="route_destinations">Route Destinations</option>
+                        <option value="route_destinations_city">Route Destination Cities</option>
+                        <option value="nonstop_or_connecting">Nonstop or Connecting</option>
+                        <option value="dom_or_int">Domestic or International</option>
+                        <option value="base_price">Base Price</option>
+                        <option value="taxes_and_fees">Taxes and Fees</option>
+                        <option value="total_price">Total Price</option>
+                        <option value="original_currency">Original Currency</option>
+                        <option value="exchange_rate">Exchange Rate</option>
+                        <option value="total_price_usd">Total Price USD</option>
+                        <option value="booked">Booked</option>
+                        <option value="ap_days">AP Days</option>
+                        <option value="departure">Departure</option>
+                        <option value="return">Return</option>
+                        <option value="ticket_count">Ticket Count</option>
+                        <option value="department">Department</option>
+                        <option value="in_pilot">In Pilot</option>
+                        <option value="travel_group">Travel Group</option>
+                        <option value="ticket_number">Ticket Number</option>
+                        <option value="description">Description</option>
+                        <option value="llf">LLF Price</option>
+                        <option value="ignore">Do Not Map</option>
+                    </select>
+                </th>
+                {% endfor %}
             </tr>
-
-         {% endfor %}
+            <tr>
+                {% for item in headers %}
+                <th> {{ item }} </th>
+                {% endfor %}
+            </tr>
+            {% for item in data %}
+            <tr>
+                {% for key, value in item.items() %}
+                <td> {{ value }} </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
         </table>
 
-         <!--<script type="text/javascript">-->
-            <!--$.get("/Users/lizajohn/Documents/Historical_Data_Request_Template_copy.csv", function(data) {-->
-                <!--var build = '<table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">\n';-->
-                <!--var head = data.split("\n");-->
-                <!--for(var i=0;i<1;i++){-->
-                    <!--build += "<tr><th>" + head[i] + "</th></tr>";-->
-                    <!--for(var i=1;i<head.length;i++){-->
-                        <!--build += "<tr><td>" + head[i].split("\n") + "</td></tr>";-->
-                    <!--}-->
-                <!--}-->
-                <!--build += "</table>";-->
-                <!--$('#wrap').append(build);-->
-            <!--});-->
-         <!--</script>-->
+        <p>Would you like to save your mapping?</p>
+        <input id="yes1" name="new_config" type="radio" value="yes" onchange="yesnoCheck();"> Yes&nbsp;&nbsp;
+        <input id="no1" name="new_config" type="radio" value="no" onchange="yesnoCheck();"> No<br/>
+        <div id="text1" class="hidden">
+            <textarea cols="50" name="new_config_name" placeholder="Please name" rows="1"></textarea>
+        </div>
+        <br/>
+        <p><input type="submit" value="Clean File"></p>
 
-        <!--<script src="d3.min.js?v=3.2.8"></script>-->
-
-        <!--<script type="text/javascript"charset="utf-8">-->
-            <!--d3.csv(data, function(data) {-->
-                <!--var parsedCSV = d3.csv.parseRows(data);-->
-
-                <!--var container = d3.select("body")-->
-                    <!--.append("table")-->
-
-                    <!--.selectAll("tr")-->
-                        <!--.data(parsedCSV).enter()-->
-                        <!--.append("tr")-->
-
-                    <!--.selectAll("td")-->
-                        <!--.data(function(d) { return d; }).enter()-->
-                        <!--.append("td")-->
-                        <!--.text(function(d) { return d; });-->
-            <!--});-->
-        <!--</script>-->
     </body>
 </html>
 
-<script type="text/javascript"charset="utf-8">
-
-     function handleFiles(files) {
-      // Check for the various File API support.
-      if (window.FileReader) {
-          // FileReader are supported.
-          getAsText(files[0]);
-      } else {
-          alert('FileReader are not supported in this browser.');
-      }
-    }
-
-    function getAsText(fileToRead) {
-      var reader = new FileReader();
-      // Read file into memory as UTF-8
-      reader.readAsText(fileToRead);
-      // Handle errors load
-      reader.onload = loadHandler;
-      reader.onerror = errorHandler;
-    }
-
-    function loadHandler(event) {
-      var csv = event.target.result;
-      processData(csv);
-    }
-
-    function processData(csv) {
-        var allTextLines = csv.split(/\r\n|\n/);
-        var lines = [];
-        for (var i=0; i<allTextLines.length; i++) {
-            var data = allTextLines[i].split(';');
-                var tarr = [];
-                for (var j=0; j<data.length; j++) {
-                    tarr.push(data[j]);
-                }
-                lines.push(tarr);
+<script type="text/javascript">
+    function checkOptions(length) {
+        d=document;
+        myArray = [];
+        for (options=0;options<length;options++) {
+            myArray[options] = d.getElementById(options+1).value;
         }
-      console.log(lines);
-    }
-
-    function errorHandler(evt) {
-      if(evt.target.error.name == "NotReadableError") {
-          alert("Cannot read file !");
-      }
+        for (column=0;column<length;column++) {
+            for (selected=1;selected<29;selected++) {
+                d.getElementById(column+1).options[selected].style.display = "block";
+                for (available=0;available<28;available++) {
+                    if(d.getElementById(column+1).options[selected].value == myArray[available]) {
+                        d.getElementById(column+1).options[selected].style.display = "none";
+                    }
+                }
+            }
+        }
     }
 </script>
+
+<script type="text/javascript">
+    function yesnoCheck() {
+        var i = 1;
+        d=document;
+        while (i<5){
+            if (d.getElementById('yes'+i).checked) {
+                d.getElementById('text'+i).classList.remove('hidden');
+                d.getElementById('text'+i).classList.add('required');
+            }
+            else {
+                d.getElementById('text'+i).classList.add('hidden');
+                d.getElementById('text'+i).classList.remove('required');
+            }
+            i++;
+        }
+    }
+</script>
+
+<style>
+.hidden {
+    display: none;
+}
+</style>
+
+
+
+<!--<script type="text/javascript"charset="utf-8">-->
+
+     <!--function handleFiles(files) {-->
+      <!--// Check for the various File API support.-->
+      <!--if (window.FileReader) {-->
+          <!--// FileReader are supported.-->
+          <!--getAsText(files[0]);-->
+      <!--} else {-->
+          <!--alert('FileReader are not supported in this browser.');-->
+      <!--}-->
+    <!--}-->
+
+    <!--function getAsText(fileToRead) {-->
+      <!--var reader = new FileReader();-->
+      <!--// Read file into memory as UTF-8-->
+      <!--reader.readAsText(fileToRead);-->
+      <!--// Handle errors load-->
+      <!--reader.onload = loadHandler;-->
+      <!--reader.onerror = errorHandler;-->
+    <!--}-->
+
+    <!--function loadHandler(event) {-->
+      <!--var csv = event.target.result;-->
+      <!--processData(csv);-->
+    <!--}-->
+
+    <!--function processData(csv) {-->
+        <!--var allTextLines = csv.split(/\r\n|\n/);-->
+        <!--var lines = [];-->
+        <!--for (var i=0; i<allTextLines.length; i++) {-->
+            <!--var data = allTextLines[i].split(';');-->
+                <!--var tarr = [];-->
+                <!--for (var j=0; j<data.length; j++) {-->
+                    <!--tarr.push(data[j]);-->
+                <!--}-->
+                <!--lines.push(tarr);-->
+        <!--}-->
+      <!--console.log(lines);-->
+    <!--}-->
+
+    <!--function errorHandler(evt) {-->
+      <!--if(evt.target.error.name == "NotReadableError") {-->
+          <!--alert("Cannot read file !");-->
+      <!--}-->
+    <!--}-->
+<!--</script>-->

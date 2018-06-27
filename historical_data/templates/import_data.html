@@ -5,6 +5,10 @@
         <title>Import Historical Data</title>
     </head>
     <body>
+        {% block body %}
+        <p>{{ error }}</p>
+        {% endblock %}
+
         <form method="post" action="http://localhost:5000/file" enctype="multipart/form-data">
             <label for="raw_historical_data_xls">Upload Historical Data</label>
             <br>
@@ -34,7 +38,7 @@
             <br>
             <input type="text" name="organization_name" size="40" placeholder="eg. Amgen">
             <br><br><br>
-            <input type="submit" value="Upload">
+            <input type="submit" value="Review File">
         </form>
     </body>
 </html>
