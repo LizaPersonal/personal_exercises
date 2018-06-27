@@ -5,7 +5,7 @@
         <title>Import Historical Data</title>
     </head>
     <body>
-        <form method="post" action="" enctype="multipart/form-data">
+        <form method="post" action="http://localhost:5000/file" enctype="multipart/form-data">
             <label for="raw_historical_data_xls">Upload Historical Data</label>
             <br>
             <input type="file" name="raw_historical_data_csv" size="40">
@@ -34,7 +34,7 @@
             <br>
             <input type="text" name="organization_name" size="40" placeholder="eg. Amgen">
             <br><br><br>
-            <input type="submit" name="upload_date" value="Upload">
+            <input type="submit" value="Upload">
         </form>
     </body>
 </html>

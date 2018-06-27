@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <title>Review Data</title>
         <style>
             table {
                 border-collapse: collapse;
@@ -16,25 +17,104 @@
         </style>
     </head>
     <body>
-        <!-- <script src="http://d3js.org/d3.v3.min.js"></script> -->
-        <script src="d3.min.js?v=3.2.8"></script>
+    <p>This is where you would <a href="javascript:handleFiles(data);">review the data.</a></p>
+         <!--<script src="http://d3js.org/d3.v3.min.js"></script> -->
 
-        <script type="text/javascript"charset="utf-8">
-            d3.text("data.csv", function(data) {
-                var parsedCSV = d3.csv.parseRows(data);
+    {% block body %}
+    <p onload="handleFiles(data);">{{ data }}</p>
+    {% endblock %}
 
-                var container = d3.select("body")
-                    .append("table")
+        <table border = 1>
+         {% for key, value in result.items() %}
 
-                    .selectAll("tr")
-                        .data(parsedCSV).enter()
-                        .append("tr")
+            <tr>
+               <th> {{ key }} </th>
+               <td> {{ value }} </td>
+            </tr>
 
-                    .selectAll("td")
-                        .data(function(d) { return d; }).enter()
-                        .append("td")
-                        .text(function(d) { return d; });
-            });
-        </script>
+         {% endfor %}
+        </table>
+
+         <!--<script type="text/javascript">-->
+            <!--$.get("/Users/lizajohn/Documents/Historical_Data_Request_Template_copy.csv", function(data) {-->
+                <!--var build = '<table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">\n';-->
+                <!--var head = data.split("\n");-->
+                <!--for(var i=0;i<1;i++){-->
+                    <!--build += "<tr><th>" + head[i] + "</th></tr>";-->
+                    <!--for(var i=1;i<head.length;i++){-->
+                        <!--build += "<tr><td>" + head[i].split("\n") + "</td></tr>";-->
+                    <!--}-->
+                <!--}-->
+                <!--build += "</table>";-->
+                <!--$('#wrap').append(build);-->
+            <!--});-->
+         <!--</script>-->
+
+        <!--<script src="d3.min.js?v=3.2.8"></script>-->
+
+        <!--<script type="text/javascript"charset="utf-8">-->
+            <!--d3.csv(data, function(data) {-->
+                <!--var parsedCSV = d3.csv.parseRows(data);-->
+
+                <!--var container = d3.select("body")-->
+                    <!--.append("table")-->
+
+                    <!--.selectAll("tr")-->
+                        <!--.data(parsedCSV).enter()-->
+                        <!--.append("tr")-->
+
+                    <!--.selectAll("td")-->
+                        <!--.data(function(d) { return d; }).enter()-->
+                        <!--.append("td")-->
+                        <!--.text(function(d) { return d; });-->
+            <!--});-->
+        <!--</script>-->
     </body>
 </html>
+
+<script type="text/javascript"charset="utf-8">
+
+     function handleFiles(files) {
+      // Check for the various File API support.
+      if (window.FileReader) {
+          // FileReader are supported.
+          getAsText(files[0]);
+      } else {
+          alert('FileReader are not supported in this browser.');
+      }
+    }
+
+    function getAsText(fileToRead) {
+      var reader = new FileReader();
+      // Read file into memory as UTF-8
+      reader.readAsText(fileToRead);
+      // Handle errors load
+      reader.onload = loadHandler;
+      reader.onerror = errorHandler;
+    }
+
+    function loadHandler(event) {
+      var csv = event.target.result;
+      processData(csv);
+    }
+
+    function processData(csv) {
+        var allTextLines = csv.split(/\r\n|\n/);
+        var lines = [];
+        for (var i=0; i<allTextLines.length; i++) {
+            var data = allTextLines[i].split(';');
+                var tarr = [];
+                for (var j=0; j<data.length; j++) {
+                    tarr.push(data[j]);
+                }
+                lines.push(tarr);
+        }
+      console.log(lines);
+    }
+
+    function errorHandler(evt) {
+      if(evt.target.error.name == "NotReadableError") {
+          alert("Cannot read file !");
+      }
+    }
+</script>
