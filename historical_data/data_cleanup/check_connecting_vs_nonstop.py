@@ -5,11 +5,10 @@ def update_connecting_vs_nonstop(read_file, flight_headers_in_file):
         Update the file with the correcting indication in the nonstop/connecting column. """
 
     header_to_look_for = flight_headers_in_file["route"]
-    header_to_update = flight_headers_in_file["nonstop_or_connecting"]
     for row in read_file:
         route = row[header_to_look_for]
         nonstop_connecting = _nonstop_or_connecting(route)
-        row[header_to_update] = nonstop_connecting
+        row["nonstop_or_connecting"] = nonstop_connecting
     return read_file
 
 

@@ -8,11 +8,10 @@ def updated_domestic_vs_international(read_file, flight_headers_in_file):
         Update the file with the correct indication in the nonstop/connecting column. """
 
     header_to_look_for = flight_headers_in_file["route"]
-    header_to_update = flight_headers_in_file["dom_or_int"]
     for row in read_file:
         route = row[header_to_look_for]
         domestic_international = _domestic_or_international(route)
-        row[header_to_update] = domestic_international
+        row["dom_or_int"] = domestic_international
     return read_file
 
 

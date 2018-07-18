@@ -10,7 +10,7 @@ def update_fare_class(read_file, flight_headers_in_file):
     for row in read_file:
         fare_class_in_file = row[header_to_look_for]
         expected_fare_class = _validate_fare_class((fare_class_in_file, ))
-        row[header_to_look_for] = expected_fare_class[0]
+        row["fare_class"] = expected_fare_class[0]
     return read_file
 
 

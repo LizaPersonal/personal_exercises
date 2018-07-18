@@ -13,8 +13,8 @@ def update_employee_name(read_file, flight_headers_in_file):
     for row in read_file:
         name_in_file = row[header_to_look_for]
         formatted_name = _update_name_format(name_in_file, format_in_file)
-        case_corrected_name = _set_name_to_correct_case(formatted_name)
-        row[header_to_look_for] = case_corrected_name
+        case_corrected_name = set_name_to_correct_case(formatted_name)
+        row["employee_name"] = case_corrected_name
     return read_file
 
 
@@ -58,7 +58,7 @@ def _update_name_format(name_in_file, starting_format):
     return whole_name
 
 
-def _set_name_to_correct_case(name_in_file):
+def set_name_to_correct_case(name_in_file):
     """ Take the name and correct the casing of the letters. """
 
     corrected_name = string.capwords(name_in_file, ' ')

@@ -7,7 +7,7 @@ def updated_route(read_file, flight_headers_in_file, destination_symbol, connect
     for row in read_file:
         route_in_file = row[header_to_look_for]
         route = _validate_route_icons(route_in_file, destination_symbol, connecting_symbol, openjaw_symbol)
-        row[header_to_look_for] = route
+        row["route"] = route
     return read_file
 
 

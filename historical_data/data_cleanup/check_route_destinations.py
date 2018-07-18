@@ -7,13 +7,10 @@ def updated_route_destinations(read_file, flight_headers_in_file):
         Update the file with the correcting indication in the nonstop/connecting column. """
 
     header_to_look_for = flight_headers_in_file["route"]
-    header_to_update = flight_headers_in_file["route_destinations"]
-    if header_to_update == "":
-        header_to_update = "route_destinations"
     for row in read_file:
         route = row[header_to_look_for]
         route_destinations = _route_destinations(route)
-        row[header_to_update] = route_destinations
+        row["route_destinations"] = route_destinations
     return read_file
 
 

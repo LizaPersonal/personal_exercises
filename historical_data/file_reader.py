@@ -68,9 +68,20 @@ def update_organization(read_file, flight_headers_in_file, organization):
     return read_file
 
 
-def create_new_output_file(updated_file, fields):
+# def update_headers(flight_headers_from_file, template_headers):
+#
+#     for needed_header in template_headers:
+#         for index, header in enumerate(flight_headers_from_file):
+#             if template_headers[needed_header] == header:
+#                 flight_headers_from_file[index] = needed_header
+#                 break
+#     return flight_headers_from_file
+
+
+def create_new_output_file(updated_file, header_provider=HeaderProvider()):
     """ Write to a new file all the changes made. """
-    writer = csv.DictWriter(open('/tmp/output.csv', "w+"), fieldnames=fields)
+    standard_headers = header_provider.get_headers()
+    writer = csv.DictWriter(open('/tmp/output.csv', "w+"), fieldnames=standard_headers, extrasaction='ignore')
     writer.writeheader()
     writer.writerows(updated_file)
 
@@ -109,4 +120,4 @@ if __name__== "__main__":
     updated_domestic_vs_international = check_domestic_vs_international.updated_domestic_vs_international(updated_connecting_vs_nonstop, template_to_use.flight_headers)
 
     updated_organization_column = update_organization(updated_domestic_vs_international, template_to_use.flight_headers, organization_name)
-    create_new_output_file(updated_organization_column, headers_after_reading)
+    create_new_output_file(updated_organization_column)

@@ -1,3 +1,4 @@
+from data_cleanup.check_employee_name import set_name_to_correct_case
 from data_cleanup.python_mysql_connect import connect_to_database
 
 
@@ -10,7 +11,7 @@ def update_airline_vendor(read_file, flight_headers_in_file):
     for row in read_file:
         airline_in_file = row[header_to_look_for]
         vendor_code = _validate_airline_vendor((airline_in_file,))
-        row[header_to_look_for] = vendor_code[0]
+        row["vendor"] = vendor_code[0]
     return read_file
 
 
@@ -28,6 +29,7 @@ def _validate_airline_vendor(airline_in_file):
         search_results = _search_airline_database(cursor, airline_in_file)
         if search_results is None:
             missing_airline = airline_in_file[0]
+            missing_airline = set_name_to_correct_case(missing_airline)
             update_vendor_code = _get_new_airline_code(cursor, missing_airline)
             if _check_suggested_vendor_code(cursor, update_vendor_code):
                 _update_database_with_new_airline_alias(historical_db_connection, cursor, missing_airline, update_vendor_code)
@@ -125,20 +127,41 @@ def _collect_additional_new_airline_info(missing_airline, missing_vendor_code):
 
     print(missing_vendor_code + " is a new iata code not currently in the database. "
                                 "Please provide some additional information for this new airline " + missing_airline)
-    iata_numeric = input("What is the IATA numberic code?")
-    icao_code = input("What is the ICAO code?")
-    country = input("Where are the airline headquarters?")
-    active = input("Is this airline still in service? (Y/N)")
-    low_cost_carrier = input("Is this a low cost carrier? (Y/N)")
+    iata_numeric = input("What is the IATA numberic code?\n")
+    icao_code = _convert_input_empty_string_to_null(input("What is the ICAO code?\n"))
+    country = input("Where are the airline headquarters? (Country)\n")
+    active_acceptable_value = 2
+    while active_acceptable_value == 2:
+        active = input("Is this airline still in service? (Y/N)\n")
+        active_acceptable_value = _convert_input_to_binary(active)
+    low_cost_acceptable_value = 2
+    while low_cost_acceptable_value ==2:
+        low_cost_carrier = input("Is this a low cost carrier? (Y/N)\n")
+        low_cost_acceptable_value = _convert_input_to_binary(low_cost_carrier)
+    return iata_numeric, icao_code, country, active_acceptable_value, low_cost_acceptable_value
 
-    return iata_numeric, icao_code, country, active, low_cost_carrier
+
+def _convert_input_to_binary(input):
+    if input == 'Y':
+        return 1
+    elif input == 'N':
+        return 0
+    else:
+        return 2
+
+
+def _convert_input_empty_string_to_null(input):
+    if input == '':
+        return 'NULL'
+    else:
+        return input
 
 
 def _update_database_with_new_airline(connection, cursor, new_airline, iata_alpha, iata_numeric, icao, country, active, low_cost):
 
     update_query = "INSERT INTO airlines (airline_formal_name, iata_alpha_2_code, iata_numeric_code, " \
                    "icao_alpha_3_code, country_id, is_active, low_cost_carrier) " \
-                   "VALUES (%s, %s, %s, %s, (SELECT country.id " \
+                   "VALUES (%s, %s, %s, %s, (SELECT country_id " \
                    "FROM countries_aliases " \
                    "WHERE countries_aliases.alias_name = %s), %s, %s)"
     data = (new_airline, iata_alpha, iata_numeric, icao, country, active, low_cost)
