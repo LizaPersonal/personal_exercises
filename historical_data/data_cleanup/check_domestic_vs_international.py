@@ -2,12 +2,12 @@ from data_cleanup.check_route_destinations import identify_airports_in_route
 from data_cleanup.python_mysql_connect import connect_to_database
 
 
-def updated_domestic_vs_international(read_file, flight_headers_in_file):
+def updated_domestic_vs_international(read_file):
     """ Identify which column represents the route and the domestic/international.
         For each row identify if the route is nonstop or connecting.
         Update the file with the correct indication in the nonstop/connecting column. """
 
-    header_to_look_for = flight_headers_in_file["route"]
+    header_to_look_for = "route"
     for row in read_file:
         route = row[header_to_look_for]
         domestic_international = _domestic_or_international(route)
@@ -45,7 +45,11 @@ def _domestic_or_international(route_in_file):
 def _search_airport_for_country(cursor, airport_to_search_for):
     """ Search for the airport country from the file in the historical database table airport. """
 
-    query = "SELECT airport_country FROM airports WHERE iata = %s"
+    query = "SELECT countries.country_formal_name " \
+            "FROM countries " \
+            "JOIN airports " \
+            "ON countries.id = airports.airport_country_id " \
+            "WHERE airports.iata = %s"
     cursor.execute(query, airport_to_search_for)
     results = cursor.fetchone()
     return results

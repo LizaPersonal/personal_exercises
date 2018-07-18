@@ -114,10 +114,10 @@ if __name__== "__main__":
 
     updated_route = check_route.updated_route(update_fare_class, template_to_use.flight_headers,
                                               destination_symbol, connecting_symbol, openjaw_symbol)
-    update_destinations = check_route_destinations.updated_route_destinations(updated_route, template_to_use.flight_headers)
-    update_destinations_city = check_route_destinations_city.updated_route_destinations_city(update_destinations, template_to_use.flight_headers)
-    updated_connecting_vs_nonstop = check_connecting_vs_nonstop.update_connecting_vs_nonstop(update_destinations_city, template_to_use.flight_headers)
-    updated_domestic_vs_international = check_domestic_vs_international.updated_domestic_vs_international(updated_connecting_vs_nonstop, template_to_use.flight_headers)
-
+    update_destinations = check_route_destinations.updated_route_destinations(updated_route)
+    update_destinations_city = check_route_destinations_city.updated_route_destinations_city(update_destinations)
+    updated_connecting_vs_nonstop = check_connecting_vs_nonstop.update_connecting_vs_nonstop(update_destinations_city)
+    updated_domestic_vs_international = check_domestic_vs_international.updated_domestic_vs_international(updated_connecting_vs_nonstop)
     updated_organization_column = update_organization(updated_domestic_vs_international, template_to_use.flight_headers, organization_name)
+
     create_new_output_file(updated_organization_column)
