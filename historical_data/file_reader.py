@@ -1,7 +1,7 @@
 import csv
 from data_cleanup import check_connecting_vs_nonstop, check_airline_vendors, check_domestic_vs_international, \
     check_route, check_route_destinations, check_route_destinations_city, check_employee_name, check_fare_class
-from tmc_templates import default, base
+from tmc_templates import default, base, cwt
 
 
 def read_historical_data_file(file):
@@ -31,11 +31,13 @@ def _tmc_template_to_use(tmc):
     """ Identify which template headers should be used based on the user input. """
 
     if tmc == 'default':
-        default_tmc = default.DefaultFlights()
-        return default_tmc
+        tmc_template = default.DefaultFlights()
+    elif tmc == 'cwt':
+        tmc_template = cwt.CWTTemplate()
     else:
         print("That is not a valid TMC at this time.")
         return None
+    return tmc_template
 
 
 class HeaderProvider(object):
@@ -76,7 +78,7 @@ def create_new_output_file(updated_file, fields):
 if __name__== "__main__":
 
     filename = input("What file would you like to read? ")
-    filename = "/Users/lizajohn/Documents/Historical_Data_Request_Template_copy.csv"
+    filename = "/Users/lizajohn/Documents/CWT_Template_test.csv"
     template_to_use = validate_tmc()
     if template_to_use.route_symbols is None:
         destination_symbol = input("What symbol represents the destinations of the route in this file?")
