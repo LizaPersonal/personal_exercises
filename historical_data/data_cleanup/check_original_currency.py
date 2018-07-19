@@ -29,10 +29,18 @@ def _get_currency_from_price(price):
     if not price[0].isdigit():
         if price[0] != ' ':
             price_currency = price[0]
+            currency_name = _define_currency(price_currency)
     elif not price[last_digit].isdigit():
         price_currency = price[last_digit]
-    return price_currency
+        currency_name = _define_currency(price_currency)
+    else:
+        currency_name = input("No currency was defined. What should be the default currency for the file?")
+    return currency_name
 
 
-def _find_currency_in_database(currency_symbol):
-    pass
+def _define_currency(currency_symbol):
+    if currency_symbol == "$":
+        currency_name = "USD"
+    else:
+        currency_name = input("What currency is "+currency_symbol)
+    return currency_name
