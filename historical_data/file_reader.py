@@ -2,7 +2,8 @@ import csv
 from data_cleanup import check_connecting_vs_nonstop, check_airline_vendors, check_domestic_vs_international, \
     check_route, check_route_destinations, check_route_destinations_city, check_employee_name, check_fare_class, \
     check_employee_id, check_base_price, check_taxes_and_fees, check_total_price, check_original_currency, \
-    check_exchange_rate, check_total_price_usd
+    check_exchange_rate, check_total_price_usd, check_llf, check_in_pilot, check_travel_group, check_ticket_number, \
+    check_description, check_department, check_ticket_count, check_booked, check_departure, check_return, check_ap_days
 from tmc_templates import default, base, cwt
 
 
@@ -128,5 +129,18 @@ if __name__== "__main__":
     updated_file = check_original_currency.update_original_currency(updated_file, template_to_use.flight_headers)
     updated_file = check_exchange_rate.update_exchange_rate(updated_file)
     updated_file = check_total_price_usd.update_total_price_usd(updated_file)
+    updated_file = check_llf.update_llf(updated_file, template_to_use.flight_headers)
+
+    # updated_file = check_booked.update_booked(updated_file, template_to_use.flight_headers)
+    # updated_file = check_departure.update_departure(updated_file, template_to_use.flight_headers)
+    # updated_file = check_return.update_return(updated_file, template_to_use.flight_headers)
+    # updated_file = check_ap_days.update_ap_days(updated_file, template_to_use.flight_headers)
+
+    updated_file = check_ticket_count.update_ticket_count(updated_file, template_to_use.flight_headers)
+    updated_file = check_department.update_department(updated_file, template_to_use.flight_headers)
+    updated_file = check_in_pilot.update_in_pilot(updated_file, template_to_use.flight_headers)
+    updated_file = check_travel_group.update_travel_group(updated_file, template_to_use.flight_headers)
+    updated_file = check_ticket_number.update_ticket_number(updated_file, template_to_use.flight_headers)
+    updated_file = check_description.update_description(updated_file, template_to_use.flight_headers)
 
     create_new_output_file(updated_file)

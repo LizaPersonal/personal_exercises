@@ -32,7 +32,7 @@ class CWTTemplate(DefaultHistoricalFile):
             "id": "",
             "ticket_number": "Ticket Number",
             "description": "RC Missed Global Description",
-            "llf": "Lowest Fare Amount"
+            "llf": " Lowest Fare Amount "
         }
         self.route_symbols = {
             "destination": " ",

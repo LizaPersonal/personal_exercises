@@ -5,9 +5,10 @@ def update_in_pilot(read_file, flight_headers_in_file):
 
     header_to_look_for = flight_headers_in_file["in_pilot"]
     for row in read_file:
-        pilot_in_file = row[header_to_look_for]
-        formatted_pilot = _standardize_pilot_field(pilot_in_file)
-        row["in_pilot"] = formatted_pilot
+        if row.get(header_to_look_for) is not None:
+            pilot_in_file = row[header_to_look_for]
+            formatted_pilot = _standardize_pilot_field(pilot_in_file)
+            row["in_pilot"] = formatted_pilot
     return read_file
 
 

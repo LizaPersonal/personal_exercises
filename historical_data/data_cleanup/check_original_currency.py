@@ -1,3 +1,5 @@
+from data_cleanup.check_base_price import check_price_format
+
 
 def update_original_currency(read_file, flight_headers_in_file):
 
@@ -26,13 +28,24 @@ def update_original_currency(read_file, flight_headers_in_file):
 
 def _get_currency_from_price(price):
     last_digit = len(price) - 1
+    currency_name = ''
     if not price[0].isdigit():
-        if price[0] != ' ':
+        while price[0] == ' ':
+            price = price[1:]
+            last_digit -= 1
+        if price[0] in ['-', '(']:
+            price_currency = price[1]
+            currency_name = _define_currency(price_currency)
+        elif not price[0].isdigit():
             price_currency = price[0]
             currency_name = _define_currency(price_currency)
     elif not price[last_digit].isdigit():
-        price_currency = price[last_digit]
-        currency_name = _define_currency(price_currency)
+        while price[last_digit] == ' ':
+            price = price[:-1]
+            last_digit -= 1
+        if not price[last_digit].isdigit():
+            price_currency = price[last_digit]
+            currency_name = _define_currency(price_currency)
     else:
         currency_name = input("No currency was defined. What should be the default currency for the file?")
     return currency_name
