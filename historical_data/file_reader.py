@@ -131,10 +131,10 @@ if __name__== "__main__":
     updated_file = check_total_price_usd.update_total_price_usd(updated_file)
     updated_file = check_llf.update_llf(updated_file, template_to_use.flight_headers)
 
-    # updated_file = check_booked.update_booked(updated_file, template_to_use.flight_headers)
-    # updated_file = check_departure.update_departure(updated_file, template_to_use.flight_headers)
-    # updated_file = check_return.update_return(updated_file, template_to_use.flight_headers)
-    # updated_file = check_ap_days.update_ap_days(updated_file, template_to_use.flight_headers)
+    updated_file = check_booked.update_booked(updated_file, template_to_use.flight_headers)
+    updated_file = check_departure.update_departure(updated_file, template_to_use.flight_headers)
+    updated_file = check_return.update_return(updated_file, template_to_use.flight_headers)
+    updated_file = check_ap_days.update_ap_days(updated_file, template_to_use.flight_headers)
 
     updated_file = check_ticket_count.update_ticket_count(updated_file, template_to_use.flight_headers)
     updated_file = check_department.update_department(updated_file, template_to_use.flight_headers)
