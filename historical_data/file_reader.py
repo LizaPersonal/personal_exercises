@@ -1,7 +1,8 @@
 import csv
 from data_cleanup import check_connecting_vs_nonstop, check_airline_vendors, check_domestic_vs_international, \
     check_route, check_route_destinations, check_route_destinations_city, check_employee_name, check_fare_class, \
-    check_employee_id, check_base_price, check_taxes_and_fees, check_total_price
+    check_employee_id, check_base_price, check_taxes_and_fees, check_total_price, check_original_currency, \
+    check_exchange_rate, check_total_price_usd
 from tmc_templates import default, base, cwt
 
 
@@ -124,5 +125,8 @@ if __name__== "__main__":
     updated_file = check_base_price.update_base_price(updated_file, template_to_use.flight_headers)
     updated_file = check_taxes_and_fees.update_taxes_and_fees(updated_file, template_to_use.flight_headers)
     updated_file = check_total_price.update_total_price(updated_file, template_to_use.flight_headers)
+    updated_file = check_original_currency.update_original_currency(updated_file, template_to_use.flight_headers)
+    updated_file = check_exchange_rate.update_exchange_rate(updated_file)
+    updated_file = check_total_price_usd.update_total_price_usd(updated_file)
 
     create_new_output_file(updated_file)
