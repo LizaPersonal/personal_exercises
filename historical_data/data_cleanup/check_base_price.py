@@ -17,18 +17,21 @@ def update_base_price(read_file, flight_headers_in_file):
 def check_price_format(price):
     last_digit = len(price)-1
     price_is_negative = ""
-    if price[0] in ["(", "-"]:
-        price_is_negative = "-"
-    while not price[0].isdigit() and last_digit != 0:
-        price = price[1:]
-        last_digit -= 1
-    while not price[last_digit].isdigit() and last_digit != 0:
-        price = price[:-1]
-        last_digit -= 1
-    if price == ' ':
+    if price == '':
         formatted_price = 0.00
     else:
-        if price_is_negative == "-":
-            price = price_is_negative + price
-        formatted_price = price.replace(',', '')
+        if price[0] in ["(", "-"]:
+            price_is_negative = "-"
+        while not price[0].isdigit() and last_digit != 0:
+            price = price[1:]
+            last_digit -= 1
+        while not price[last_digit].isdigit() and last_digit != 0:
+            price = price[:-1]
+            last_digit -= 1
+        if price == ' ':
+            formatted_price = 0.00
+        else:
+            if price_is_negative == "-":
+                price = price_is_negative + price
+            formatted_price = price.replace(',', '')
     return formatted_price

@@ -95,9 +95,9 @@ if __name__== "__main__":
     filename = "/Users/lizajohn/Documents/Clients/ServiceNow/International/GB_Air_Rocketrip_Extract_test.csv"
     template_to_use = validate_tmc()
     if template_to_use.route_symbols is None:
-        destination_symbol = input("What symbol represents the destinations of the route in this file?")
-        connecting_symbol = input("What symbol represents the route is connecting in this file?")
-        openjaw_symbol = input("What symbol represents the route has an open jaw in this file?")
+        destination_symbol = input("What symbol represents the destinations of the route in this file? ")
+        connecting_symbol = input("What symbol represents the route is connecting in this file? ")
+        openjaw_symbol = input("What symbol represents the route has an open jaw in this file? ")
     else:
         destination_symbol = template_to_use.route_symbols["destination"]
         connecting_symbol = template_to_use.route_symbols["connecting"]
@@ -106,6 +106,7 @@ if __name__== "__main__":
     # travel_mode = input("What type of travel are you looking to upload? ")
 
     organization_name = input("What is the name of the organization? ")
+    default_currency = input("If there is no currency indicated, what should be used as the default? ")
 
     headers_after_reading, file_after_reading = read_historical_data_file(filename)
     compare_headers(headers_after_reading, template_to_use.flight_headers)
@@ -139,7 +140,7 @@ if __name__== "__main__":
     print(u"\u2713"+" Taxes and Fees                44.4%")
     updated_file = check_total_price.update_total_price(updated_file, template_to_use.flight_headers)
     print(u"\u2713"+" Total Price                   48.1%")
-    updated_file = check_original_currency.update_original_currency(updated_file, template_to_use.flight_headers)
+    updated_file = check_original_currency.update_original_currency(updated_file, template_to_use.flight_headers, default_currency)
     print(u"\u2713"+" Currency                      51.8%")
     updated_file = check_exchange_rate.update_exchange_rate(updated_file)
     print(u"\u2713"+" Exchange Rate                 55.5%")
