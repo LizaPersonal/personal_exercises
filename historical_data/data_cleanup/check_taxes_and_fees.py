@@ -5,7 +5,10 @@ def update_taxes_and_fees(read_file, flight_headers_in_file):
 
     header_to_look_for = flight_headers_in_file["taxes_and_fees"]
     for row in read_file:
-        base_price_in_file = row[header_to_look_for]
-        base_price = check_price_format(base_price_in_file)
-        row["taxes_and_fees"] = base_price
+        taxes_and_fees_in_file = row[header_to_look_for]
+        if taxes_and_fees_in_file != "":
+            taxes_and_fees = check_price_format(taxes_and_fees_in_file)
+            row["taxes_and_fees"] = taxes_and_fees
+        else:
+            row["taxes_and_fees"] = taxes_and_fees_in_file
     return read_file

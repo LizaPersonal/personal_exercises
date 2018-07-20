@@ -92,7 +92,7 @@ def create_new_output_file(updated_file, header_provider=HeaderProvider()):
 if __name__== "__main__":
 
     filename = input("What file would you like to read? ")
-    filename = "/Users/lizajohn/Documents/CWT_Template_test.csv"
+    filename = "/Users/lizajohn/Documents/Clients/ServiceNow/International/GB_Air_Rocketrip_Extract.csv"
     template_to_use = validate_tmc()
     if template_to_use.route_symbols is None:
         destination_symbol = input("What symbol represents the destinations of the route in this file?")
@@ -111,36 +111,63 @@ if __name__== "__main__":
     compare_headers(headers_after_reading, template_to_use.flight_headers)
 
     updated_file = check_employee_name.update_employee_name(file_after_reading, template_to_use.flight_headers)
+    print("\n"+u"\u2713"+" Employee Name                 3.7%")
     updated_file = check_employee_id.update_employee_name_id(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" Employee ID                   7.4%")
     updated_file = update_organization(updated_file, template_to_use.flight_headers, organization_name)
+    print(u"\u2713"+" Organization                  11.1%")
     updated_file = check_fare_class.update_fare_class(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" Fare Class                    14.8%")
     updated_file = check_airline_vendors.update_airline_vendor(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" Vendor                        18.5%")
 
     updated_file = check_route.updated_route(updated_file, template_to_use.flight_headers,
                                              destination_symbol, connecting_symbol, openjaw_symbol)
+    print(u"\u2713"+" Route                         22.2%")
     updated_file = check_route_destinations.updated_route_destinations(updated_file)
+    print(u"\u2713"+" Route Destinations            25.9%")
     updated_file = check_route_destinations_city.updated_route_destinations_city(updated_file)
+    print(u"\u2713"+" Route Destinations City       29.6%")
     updated_file = check_connecting_vs_nonstop.update_connecting_vs_nonstop(updated_file)
+    print(u"\u2713"+" Non-stop vs. Connecting       33.3%")
     updated_file = check_domestic_vs_international.updated_domestic_vs_international(updated_file)
+    print(u"\u2713"+" Domestic vs. International    37.0%")
 
     updated_file = check_base_price.update_base_price(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" Base Price                    40.7%")
     updated_file = check_taxes_and_fees.update_taxes_and_fees(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" Taxes and Fees                44.4%")
     updated_file = check_total_price.update_total_price(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" Total Price                   48.1%")
     updated_file = check_original_currency.update_original_currency(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" Currency                      51.8%")
     updated_file = check_exchange_rate.update_exchange_rate(updated_file)
+    print(u"\u2713"+" Exchange Rate                 55.5%")
     updated_file = check_total_price_usd.update_total_price_usd(updated_file)
+    print(u"\u2713"+" Total Price USD               59.2%")
     updated_file = check_llf.update_llf(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" LLF                           62.9%")
 
     updated_file = check_booked.update_booked(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" Booked Date                   66.6%")
     updated_file = check_departure.update_departure(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" Departure Date                70.3%")
     updated_file = check_return.update_return(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" Return Date                   74.0%")
     updated_file = check_ap_days.update_ap_days(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" AP Days                       77.7%")
 
     updated_file = check_ticket_count.update_ticket_count(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" Ticket Count                  81.4%")
     updated_file = check_department.update_department(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" Department                    85.1%")
     updated_file = check_in_pilot.update_in_pilot(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" In Pilot                      88.8%")
     updated_file = check_travel_group.update_travel_group(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" Travel Group                  92.5%")
     updated_file = check_ticket_number.update_ticket_number(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" Ticket Number                 96.2%")
     updated_file = check_description.update_description(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" Description                   100%")
 
     create_new_output_file(updated_file)
