@@ -92,7 +92,7 @@ def create_new_output_file(updated_file, header_provider=HeaderProvider()):
 if __name__== "__main__":
 
     filename = input("What file would you like to read? ")
-    filename = "/Users/lizajohn/Documents/Clients/ServiceNow/International/GB_Air_Rocketrip_Extract_test.csv"
+    filename = "/Users/lizajohn/Documents/Clients/ServiceNow/International/NL_Air_Rocketrip_Extract.csv"
     template_to_use = validate_tmc()
     if template_to_use.route_symbols is None:
         destination_symbol = input("What symbol represents the destinations of the route in this file? ")
@@ -117,22 +117,22 @@ if __name__== "__main__":
     print(u"\u2713"+" Employee ID                   7.4%")
     updated_file = update_organization(updated_file, template_to_use.flight_headers, organization_name)
     print(u"\u2713"+" Organization                  11.1%")
-    # updated_file = check_fare_class.update_fare_class(updated_file, template_to_use.flight_headers)
-    # print(u"\u2713"+" Fare Class                    14.8%")
-    # updated_file = check_airline_vendors.update_airline_vendor(updated_file, template_to_use.flight_headers)
-    # print(u"\u2713"+" Vendor                        18.5%")
-    #
-    # updated_file = check_route.updated_route(updated_file, template_to_use.flight_headers,
-    #                                          destination_symbol, connecting_symbol, openjaw_symbol)
-    # print(u"\u2713"+" Route                         22.2%")
-    # updated_file = check_route_destinations.updated_route_destinations(updated_file)
-    # print(u"\u2713"+" Route Destinations            25.9%")
-    # updated_file = check_route_destinations_city.updated_route_destinations_city(updated_file)
-    # print(u"\u2713"+" Route Destinations City       29.6%")
-    # updated_file = check_connecting_vs_nonstop.update_connecting_vs_nonstop(updated_file)
-    # print(u"\u2713"+" Non-stop vs. Connecting       33.3%")
-    # updated_file = check_domestic_vs_international.updated_domestic_vs_international(updated_file)
-    # print(u"\u2713"+" Domestic vs. International    37.0%")
+    updated_file = check_fare_class.update_fare_class(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" Fare Class                    14.8%")
+    updated_file = check_airline_vendors.update_airline_vendor(updated_file, template_to_use.flight_headers)
+    print(u"\u2713"+" Vendor                        18.5%")
+
+    updated_file = check_route.updated_route(updated_file, template_to_use.flight_headers,
+                                             destination_symbol, connecting_symbol, openjaw_symbol)
+    print(u"\u2713"+" Route                         22.2%")
+    updated_file = check_route_destinations.updated_route_destinations(updated_file)
+    print(u"\u2713"+" Route Destinations            25.9%")
+    updated_file = check_route_destinations_city.updated_route_destinations_city(updated_file)
+    print(u"\u2713"+" Route Destinations City       29.6%")
+    updated_file = check_connecting_vs_nonstop.update_connecting_vs_nonstop(updated_file)
+    print(u"\u2713"+" Non-stop vs. Connecting       33.3%")
+    updated_file = check_domestic_vs_international.updated_domestic_vs_international(updated_file)
+    print(u"\u2713"+" Domestic vs. International    37.0%")
 
     updated_file = check_base_price.update_base_price(updated_file, template_to_use.flight_headers)
     print(u"\u2713"+" Base Price                    40.7%")

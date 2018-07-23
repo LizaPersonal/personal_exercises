@@ -5,11 +5,13 @@ def update_ap_days(read_file, flight_headers_in_file):
 
     for row in read_file:
         ap_days_in_file = row[header_for_ap_days]
-        booked_in_file = row['booked']
-        departure_in_file = row['departure']
+        booked_in_file = row["booked"]
+        departure_in_file = row["departure"]
         if ap_days_in_file != "":
             row["ap_days"] = ap_days_in_file
-        else:
+        elif booked_in_file != "" and departure_in_file != "":
             ap_days = departure_in_file - booked_in_file
             row["ap_days"] = ap_days
+        else:
+            row["ap_days"] = "NULL"
     return read_file

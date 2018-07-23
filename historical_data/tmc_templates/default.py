@@ -47,10 +47,33 @@ class DefaultFlights(DefaultHistoricalFile):
             "connecting": "-",
             "openjaw": "*"
         }
-
-
-class DefaultHotels(DefaultHistoricalFile):
-    pass
+        self.hotel_headers = {
+            "employee_name": "Employee Name *",
+            "employee_id": "Employee ID",
+            "organization": "",
+            "room_type": "Room Type",
+            "hotel_brand": "Hotel Chain *",
+            "hotel_property": "Hotel Name *",
+            "hotel_city": "Hotel City *",
+            "hotel_state": "Hotel State *",
+            "hotel_country": "Hotel Country *",
+            "base_price": "Base Price",
+            "taxes_and_fees": "Taxes and Fees",
+            "total_price": "Total Price *",
+            "original_currency": "Original Currency",
+            "exchange_rate": "",
+            "base_price_usd": "",
+            "total_price_usd": "",
+            "room_rate_usd": "Nightly Rate",
+            "booked": "Booking Date *",
+            "ap_days": "Days Purchased in Advance",
+            "checkin": "Check In Date *",
+            "checkout": "Check Out Date *",
+            "hotel_nights": "Number of Nights",
+            "department": "Employee Department",
+            "in_pilot": "",
+            "travel_group": "Employee Traveler Level/Rule Class*",
+            "ticket_number": "Invoice Number"}
 
 
 class DefaultCars(DefaultHistoricalFile):

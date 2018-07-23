@@ -13,8 +13,11 @@ def update_booked(read_file, flight_headers_in_file):
 
 def validate_date(date_text):
     correct_formatted_date = ''
-    if datetime.datetime.strptime(date_text, '%m/%d/%y'):
-        correct_formatted_date = date_text
-    elif datetime.datetime.strptime(date_text, '%d/%m/%y'):
-        correct_formatted_date = datetime.datetime.strptime(date_text, '%d/%m/%y').strftime('%m/%d/%y')
+    if date_text == '':
+        correct_formatted_date = ''
+    else:
+        if datetime.datetime.strptime(date_text, '%m/%d/%y'):
+            correct_formatted_date = date_text
+        elif datetime.datetime.strptime(date_text, '%d/%m/%y'):
+            correct_formatted_date = datetime.datetime.strptime(date_text, '%d/%m/%y').strftime('%m/%d/%y')
     return correct_formatted_date
