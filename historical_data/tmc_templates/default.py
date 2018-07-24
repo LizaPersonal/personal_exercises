@@ -55,10 +55,8 @@ class DefaultTemplate(DefaultHistoricalFile):
             "hotel_brand": "Hotel Chain *",
             "hotel_property": "Hotel Name *",
             "hotel_city": "Hotel City *",
-            "hotel_state": "Hotel State *",
-            "hotel_state_id": "",
-            "hotel_country": "Hotel Country *",
-            "hotel_country_id": "",
+            "hotel_state_id": "Hotel State *",
+            "hotel_country_id": "Hotel Country *",
             "base_price": "Base Price",
             "taxes_and_fees": "Taxes and Fees",
             "total_price": "Total Price *",
@@ -77,10 +75,3 @@ class DefaultTemplate(DefaultHistoricalFile):
             "travel_group": "Employee Traveler Level/Rule Class*",
             "ticket_number": "Invoice Number"}
 
-
-class DefaultCars(DefaultHistoricalFile):
-    pass
-
-
-class DefaultRail(DefaultHistoricalFile):
-    pass

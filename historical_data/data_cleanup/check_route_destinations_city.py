@@ -7,9 +7,8 @@ def updated_route_destinations_city(read_file):
         For each row identify if the route is nonstop or connecting.
         Update the file with the correcting indication in the nonstop/connecting column. """
 
-    header_to_look_for = "route"
     for row in read_file:
-        route = row[header_to_look_for]
+        route = row["route"]
         route_destinations_city = _route_destinations_city(route)
         row["route_destinations_city"] = route_destinations_city
     return read_file
@@ -28,7 +27,7 @@ def _route_destinations_city(route_in_file):
         airports = identify_airports_in_route(route_in_file)
         destination_city = ""
         for airport in airports:
-            destination_city += _search_airport_for_destination_country(cursor, airport)[0] + "/"
+            destination_city += _search_airport_for_destination_city(cursor, airport)[0] + "/"
         destination_city = destination_city[:-1]
         return destination_city
     except Exception as e:
@@ -40,7 +39,7 @@ def _route_destinations_city(route_in_file):
             historical_db_connection.close()
 
 
-def _search_airport_for_destination_country(cursor, airport_to_search_for):
+def _search_airport_for_destination_city(cursor, airport_to_search_for):
     """ Search for the airport country from the file in the historical database table airport. """
 
     query = "SELECT airport_city FROM airports WHERE iata = %s"

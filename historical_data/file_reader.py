@@ -5,7 +5,8 @@ from data_cleanup import check_connecting_vs_nonstop, check_airline_vendors, che
     check_exchange_rate, check_total_price_usd, check_llf, check_in_pilot, check_travel_group, check_ticket_number, \
     check_description, check_department, check_ticket_count, check_booked, check_departure, \
     check_return, check_ap_days, check_room_type, check_base_price_usd, check_checkin, check_checkout, \
-    check_hotel_nights, check_room_rate_usd
+    check_hotel_nights, check_room_rate_usd, check_hotel_brand, check_hotel_property, check_hotel_city, \
+    check_hotel_country, check_hotel_state
 from tmc_templates import default, base, cwt
 
 
@@ -178,11 +179,16 @@ def clean_hotel_data(file, hotel_headers, organization, currency):
 
     updated_file = check_room_type.update_room_type(updated_file, hotel_headers)
     print(u"\u2713" + " Room Type                     15.2%")
+    updated_file = check_hotel_brand.update_hotel_brand(updated_file, hotel_headers)
     print(u"\u2713" + " Hotel Brand                   19.0%")
+    updated_file = check_hotel_property.update_hotel_property(updated_file, hotel_headers)
     print(u"\u2713" + " Hotel Property                22.8%")
+    updated_file = check_hotel_city.update_hotel_city(updated_file, hotel_headers)
     print(u"\u2713" + " Hotel City                    26.6%")
-    print(u"\u2713" + " Hotel State                   30.4%")
-    print(u"\u2713" + " Hotel Country                 34.2%")
+    updated_file = check_hotel_country.update_hotel_country(updated_file, hotel_headers)
+    print(u"\u2713" + " Hotel Country                 30.4%")
+    updated_file = check_hotel_state.update_hotel_state(updated_file, hotel_headers)
+    print(u"\u2713" + " Hotel State                   34.2%")
 
     updated_file = check_base_price.update_base_price(updated_file, hotel_headers)
     print(u"\u2713" + " Base Price                    38.0%")
