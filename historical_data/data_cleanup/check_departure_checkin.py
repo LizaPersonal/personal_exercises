@@ -1,7 +1,7 @@
 from data_cleanup.check_booked import validate_date
 
 
-def update_departure(read_file, flight_headers_in_file):
+def update_departure_checkin(read_file, flight_headers_in_file):
 
     header_to_look_for = flight_headers_in_file["departure"]
     for row in read_file:

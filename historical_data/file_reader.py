@@ -3,7 +3,7 @@ from data_cleanup import check_connecting_vs_nonstop, check_airline_vendors, che
     check_route, check_route_destinations, check_route_destinations_city, check_employee_name, check_fare_class, \
     check_employee_id, check_base_price, check_taxes_and_fees, check_total_price, check_original_currency, \
     check_exchange_rate, check_total_price_usd, check_llf, check_in_pilot, check_travel_group, check_ticket_number, \
-    check_description, check_department, check_ticket_count, check_booked, check_departure, check_return, check_ap_days
+    check_description, check_department, check_ticket_count, check_booked, check_departure_checkin, check_return_checkout, check_ap_days
 from tmc_templates import default, base, cwt
 
 
@@ -144,9 +144,9 @@ def clean_flight_data(file, flight_headers, organization, destination, connectin
 
     updated_file = check_booked.update_booked(updated_file,flight_headers)
     print(u"\u2713"+" Booked Date                   66.6%")
-    updated_file = check_departure.update_departure(updated_file, flight_headers)
+    updated_file = check_departure_checkin.update_departure_checkin(updated_file, flight_headers)
     print(u"\u2713"+" Departure Date                70.3%")
-    updated_file = check_return.update_return(updated_file, flight_headers)
+    updated_file = check_return_checkout.update_return_checkout(updated_file, flight_headers)
     print(u"\u2713"+" Return Date                   74.0%")
     updated_file = check_ap_days.update_ap_days(updated_file, flight_headers)
     print(u"\u2713"+" AP Days                       77.7%")
@@ -176,6 +176,39 @@ def clean_hotel_data(file, hotel_headers, organization, currency):
     updated_file = update_organization(updated_file, hotel_headers, organization)
     print(u"\u2713" + " Organization                  11.1%")
 
+    updated_file = check_base_price.update_base_price(updated_file, hotel_headers)
+    print(u"\u2713" + " Base Price                    40.7%")
+    updated_file = check_taxes_and_fees.update_taxes_and_fees(updated_file, hotel_headers)
+    print(u"\u2713" + " Taxes and Fees                44.4%")
+    updated_file = check_total_price.update_total_price(updated_file, hotel_headers)
+    print(u"\u2713" + " Total Price                   48.1%")
+    updated_file = check_original_currency.update_original_currency(updated_file, hotel_headers, currency)
+    print(u"\u2713" + " Currency                      51.8%")
+    updated_file = check_exchange_rate.update_exchange_rate(updated_file)
+    print(u"\u2713" + " Exchange Rate                 55.5%")
+    updated_file = check_base_price_usd.update_base_price_usd(updated_file)
+    print(u"\u2713" + " Base Price USD                55.5%")
+    updated_file = check_total_price_usd.update_total_price_usd(updated_file)
+    print(u"\u2713" + " Total Price USD               59.2%")
+
+    updated_file = check_booked.update_booked(updated_file,hotel_headers)
+    print(u"\u2713"+" Booked Date                     66.6%")
+    updated_file = check_departure_checkin.update_departure_checkin(updated_file, hotel_headers)
+    print(u"\u2713"+" Departure Date                  70.3%")
+    updated_file = check_return_checkout.update_return_checkout(updated_file, hotel_headers)
+    print(u"\u2713"+" Return Date                     74.0%")
+    updated_file = check_ap_days.update_ap_days(updated_file, hotel_headers)
+    print(u"\u2713"+"AP Date                          ")
+
+    updated_file = check_department.update_department(updated_file, hotel_headers)
+    print(u"\u2713" + " Department                    85.1%")
+    updated_file = check_in_pilot.update_in_pilot(updated_file, hotel_headers)
+    print(u"\u2713" + " In Pilot                      88.8%")
+    updated_file = check_travel_group.update_travel_group(updated_file, hotel_headers)
+    print(u"\u2713" + " Travel Group                  92.5%")
+    updated_file = check_ticket_number.update_ticket_number(updated_file, hotel_headers)
+    print(u"\u2713" + " Ticket Number                 96.2%")
+    
     return updated_file
 
 
