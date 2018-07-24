@@ -87,7 +87,7 @@ def cleaning_data():
 
         print(mapping)
 
-    return render_template("cleaning_data.html")
+    return render_template("cleaning_data.html", mapping=mapping)
 
 
 def _parse_at_comma(headers_string):

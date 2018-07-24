@@ -9,7 +9,7 @@ class DefaultHistoricalFile(object):
         self.route_symbols = {}
 
 
-class DefaultFlights(DefaultHistoricalFile):
+class DefaultTemplate(DefaultHistoricalFile):
 
     def __init__(self):
         self.flight_headers = {
