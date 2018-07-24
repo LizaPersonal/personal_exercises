@@ -46,7 +46,6 @@ def file_sample():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             headers_after_reading, file_after_reading = read_historical_data_file(UPLOAD_FOLDER+'/'+filename)
             print(headers_after_reading)
-            print(file_after_reading)
             return render_template("review_data.html", filename=filename, parameters=file_view, data=file_after_reading, headers=headers_after_reading)
             # return "The {} has been uploaded to {} for {}, based on the {} template" \
             #     .format(upload_file.filename, travel, client, tmc)
@@ -66,6 +65,45 @@ def file_sample():
         # print(headers_after_reading)
         # print(file_after_reading)
         #
+
+
+@app.route("/cleaning", methods=["GET", "POST"])
+def cleaning_data():
+    if request.method == "POST":
+
+        # error = ""
+
+        mapping = {}
+        headers = request.form.get("headers_from_file")
+        headers_list = _parse_at_comma(headers)
+        headers_list = _remove_unnecessary_characters(headers_list)
+        index_counter = 1
+
+        for header in headers_list:
+            form_name = "mapping_header_"+str(index_counter)
+            mapping_value = request.form[form_name]
+            mapping[mapping_value] = header
+            index_counter += 1
+
+        print(mapping)
+
+    return render_template("cleaning_data.html")
+
+
+def _parse_at_comma(headers_string):
+    headers_list = headers_string.split(",")
+    return headers_list
+
+
+def _remove_unnecessary_characters(headers):
+    index = 0
+    for header in headers:
+        remove_bracket = header.replace("[", "")
+        remove_quote = remove_bracket.replace("'", "")
+        remove_second_bracket = remove_quote.replace("]", "")
+        headers[index] = remove_second_bracket
+        index += 1
+    return headers
 
 
 if __name__ == "__main__":

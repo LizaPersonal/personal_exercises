@@ -33,68 +33,72 @@
          <!--{% endfor %}-->
         <!--</table>-->
 
-    <br/>
+        <form method="post" action="/cleaning">
+            <!--<p>Would you like to save your mapping?</p>-->
+            <!--<input id="yes1" name="new_config" type="radio" value="yes" onchange="yesnoCheck();"> Yes&nbsp;&nbsp;-->
+            <!--<input id="no1" name="new_config" type="radio" value="no" onchange="yesnoCheck();"> No<br/>-->
+            <!--<div id="text1" class="hidden">-->
+                <!--<textarea cols="50" name="new_config_name" placeholder="Please name" rows="1"></textarea>-->
+            <!--</div>-->
+            <!--<br/>-->
+            <div class="hidden">
+            <input id="headers_from_file" name="headers_from_file" value="{{ headers }}">
+            </div>
+            <p><input type="submit" value="Clean File"></p>
 
-        <table border = 1>
-            <tr>
-                {% for i in headers %}
-                <th>
-                    <select name="mapping_header{{ loop.index }}" id="{{ loop.index }}" onchange="checkOptions({{ headers|length }});">
-                        <option disabled hidden="" selected style='display: none' value=''></option>
-                        <option value="employee_name">Employee Name</option>
-                        <option value="employee_id">Employee ID</option>
-                        <option value="organization">Organization</option>
-                        <option value="fare_class">Fare Class</option>
-                        <option value="vendor">Vendor</option>
-                        <option value="route">Route</option>
-                        <option value="route_destinations">Route Destinations</option>
-                        <option value="route_destinations_city">Route Destination Cities</option>
-                        <option value="nonstop_or_connecting">Nonstop or Connecting</option>
-                        <option value="dom_or_int">Domestic or International</option>
-                        <option value="base_price">Base Price</option>
-                        <option value="taxes_and_fees">Taxes and Fees</option>
-                        <option value="total_price">Total Price</option>
-                        <option value="original_currency">Original Currency</option>
-                        <option value="exchange_rate">Exchange Rate</option>
-                        <option value="total_price_usd">Total Price USD</option>
-                        <option value="booked">Booked</option>
-                        <option value="ap_days">AP Days</option>
-                        <option value="departure">Departure</option>
-                        <option value="return">Return</option>
-                        <option value="ticket_count">Ticket Count</option>
-                        <option value="department">Department</option>
-                        <option value="in_pilot">In Pilot</option>
-                        <option value="travel_group">Travel Group</option>
-                        <option value="ticket_number">Ticket Number</option>
-                        <option value="description">Description</option>
-                        <option value="llf">LLF Price</option>
-                        <option value="ignore">Do Not Map</option>
-                    </select>
-                </th>
+            <table border = 1>
+                <tr>
+                    {% for i in headers %}
+                    <th>
+                        <select name="mapping_header_{{ loop.index }}" id="{{ loop.index }}" onchange="checkOptions({{ headers|length }});">
+                            <option disabled hidden="" selected style='display: none' value=''></option>
+                            <option value="employee_name">Employee Name</option>
+                            <option value="employee_id">Employee ID</option>
+                            <option value="organization">Organization</option>
+                            <option value="fare_class">Fare Class</option>
+                            <option value="vendor">Vendor</option>
+                            <option value="route">Route</option>
+                            <option value="route_destinations">Route Destinations</option>
+                            <option value="route_destinations_city">Route Destination Cities</option>
+                            <option value="nonstop_or_connecting">Nonstop or Connecting</option>
+                            <option value="dom_or_int">Domestic or International</option>
+                            <option value="base_price">Base Price</option>
+                            <option value="taxes_and_fees">Taxes and Fees</option>
+                            <option value="total_price">Total Price</option>
+                            <option value="original_currency">Original Currency</option>
+                            <option value="exchange_rate">Exchange Rate</option>
+                            <option value="total_price_usd">Total Price USD</option>
+                            <option value="booked">Booked</option>
+                            <option value="ap_days">AP Days</option>
+                            <option value="departure">Departure</option>
+                            <option value="return">Return</option>
+                            <option value="ticket_count">Ticket Count</option>
+                            <option value="department">Department</option>
+                            <option value="in_pilot">In Pilot</option>
+                            <option value="travel_group">Travel Group</option>
+                            <option value="ticket_number">Ticket Number</option>
+                            <option value="description">Description</option>
+                            <option value="llf">LLF Price</option>
+                            <option value="ignore">Do Not Map</option>
+                        </select>
+                    </th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for item in headers %}
+                    <th> {{ item }} </th>
+                    {% endfor %}
+                </tr>
+                {% for item in data %}
+                <tr>
+                    {% for key, value in item.items() %}
+                    <td> {{ value }} </td>
+                    {% endfor %}
+                </tr>
                 {% endfor %}
-            </tr>
-            <tr>
-                {% for item in headers %}
-                <th> {{ item }} </th>
-                {% endfor %}
-            </tr>
-            {% for item in data %}
-            <tr>
-                {% for key, value in item.items() %}
-                <td> {{ value }} </td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </table>
+            </table>
 
-        <p>Would you like to save your mapping?</p>
-        <input id="yes1" name="new_config" type="radio" value="yes" onchange="yesnoCheck();"> Yes&nbsp;&nbsp;
-        <input id="no1" name="new_config" type="radio" value="no" onchange="yesnoCheck();"> No<br/>
-        <div id="text1" class="hidden">
-            <textarea cols="50" name="new_config_name" placeholder="Please name" rows="1"></textarea>
-        </div>
-        <br/>
-        <p><input type="submit" value="Clean File"></p>
+        </form>
 
     </body>
 </html>
