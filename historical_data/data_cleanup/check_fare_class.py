@@ -1,12 +1,12 @@
 from data_cleanup.python_mysql_connect import connect_to_database
 
 
-def update_fare_class(read_file, flight_headers_in_file):
+def update_fare_class(read_file, headers_in_file):
     """ Identify which column represents the fare class.
         For each row search in the database in the fare class table for the expected standardized fare class.
         Update the file with the expected standardized fare class. """
 
-    header_to_look_for = flight_headers_in_file["fare_class"]
+    header_to_look_for = headers_in_file["fare_class"]
     for row in read_file:
         fare_class_in_file = row[header_to_look_for]
         expected_fare_class = _validate_fare_class((fare_class_in_file, ))

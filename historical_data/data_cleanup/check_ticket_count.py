@@ -1,7 +1,7 @@
 
-def update_ticket_count(read_file, flight_headers_in_file):
+def update_ticket_count(read_file, headers_in_file):
 
-    header_to_look_for = flight_headers_in_file["ticket_count"]
+    header_to_look_for = headers_in_file["ticket_count"]
     for row in read_file:
         if row.get(header_to_look_for) is not None:
             ticket_count_in_file = row[header_to_look_for]

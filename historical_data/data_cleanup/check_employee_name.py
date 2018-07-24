@@ -1,20 +1,21 @@
 import string
 
 
-def update_employee_name(read_file, flight_headers_in_file):
+def update_employee_name(read_file, headers_in_file):
     """ Identify which column represents the employee name.
         Identify if the column contains 'first last' or 'last, first'
         For each row correct the casing for the employee name.
         Update the file with the name. """
 
-    header_to_look_for = flight_headers_in_file["employee_name"]
+    header_to_look_for = headers_in_file["employee_name"]
     format_in_file = _review_name_format(read_file, header_to_look_for)
 
     for row in read_file:
-        name_in_file = row[header_to_look_for]
-        formatted_name = _update_name_format(name_in_file, format_in_file)
-        case_corrected_name = set_name_to_correct_case(formatted_name)
-        row["employee_name"] = case_corrected_name
+        if row.get(header_to_look_for) is not None:
+            name_in_file = row[header_to_look_for]
+            formatted_name = _update_name_format(name_in_file, format_in_file)
+            case_corrected_name = set_name_to_correct_case(formatted_name)
+            row["employee_name"] = case_corrected_name
     return read_file
 
 

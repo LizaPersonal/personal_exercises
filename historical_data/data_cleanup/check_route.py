@@ -1,9 +1,9 @@
 
-def updated_route(read_file, flight_headers_in_file, destination_symbol, connecting_symbol, openjaw_symbol):
+def updated_route(read_file, headers_in_file, destination_symbol, connecting_symbol, openjaw_symbol):
     """ Identify which column represents the route.
         Update the file with the route to match Rocketrip standards. """
 
-    header_to_look_for = flight_headers_in_file["route"]
+    header_to_look_for = headers_in_file["route"]
     for row in read_file:
         route_in_file = row[header_to_look_for]
         route = _validate_route_icons(route_in_file, destination_symbol, connecting_symbol, openjaw_symbol)

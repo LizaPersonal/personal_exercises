@@ -1,13 +1,14 @@
 import datetime
 
 
-def update_booked(read_file, flight_headers_in_file):
+def update_booked(read_file, headers_in_file):
 
-    header_to_look_for = flight_headers_in_file["booked"]
+    header_to_look_for = headers_in_file["booked"]
     for row in read_file:
-        booked_in_file = row[header_to_look_for]
-        formatted_booked = validate_date(booked_in_file)
-        row["booked"] = formatted_booked
+        if row.get(header_to_look_for) is not None:
+            booked_in_file = row[header_to_look_for]
+            formatted_booked = validate_date(booked_in_file)
+            row["booked"] = formatted_booked
     return read_file
 
 

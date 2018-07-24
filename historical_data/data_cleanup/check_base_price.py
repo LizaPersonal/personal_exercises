@@ -1,16 +1,17 @@
 
-def update_base_price(read_file, flight_headers_in_file):
+def update_base_price(read_file, headers_in_file):
 
-    header_to_look_for = flight_headers_in_file["base_price"]
+    header_to_look_for = headers_in_file["base_price"]
     for row in read_file:
-        base_price_in_file = row[header_to_look_for]
-        if base_price_in_file == "":
-            row["base_price"] = base_price_in_file
-        elif base_price_in_file is None:
-            row["base_price"] = base_price_in_file
-        else:
-            base_price = check_price_format(base_price_in_file)
-            row["base_price"] = base_price
+        if row.get(header_to_look_for) is not None:
+            base_price_in_file = row[header_to_look_for]
+            if base_price_in_file == "":
+                row["base_price"] = base_price_in_file
+            elif base_price_in_file is None:
+                row["base_price"] = base_price_in_file
+            else:
+                base_price = check_price_format(base_price_in_file)
+                row["base_price"] = base_price
     return read_file
 
 

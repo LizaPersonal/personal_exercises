@@ -1,9 +1,9 @@
 
-def update_original_currency(read_file, flight_headers_in_file, default_currency):
+def update_original_currency(read_file, headers_in_file, default_currency):
 
-    header_for_currency = flight_headers_in_file["original_currency"]
-    header_for_base_price = flight_headers_in_file["base_price"]
-    header_for_total_price = flight_headers_in_file["total_price"]
+    header_for_currency = headers_in_file["original_currency"]
+    header_for_base_price = headers_in_file["base_price"]
+    header_for_total_price = headers_in_file["total_price"]
     for row in read_file:
         if header_for_currency != 'original_currency':
             currency_in_file = row[header_for_currency]

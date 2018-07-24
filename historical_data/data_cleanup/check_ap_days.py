@@ -1,7 +1,7 @@
 
-def update_ap_days(read_file, flight_headers_in_file):
+def update_ap_days(read_file, headers_in_file):
 
-    header_for_ap_days = flight_headers_in_file["ap_days"]
+    header_for_ap_days = headers_in_file["ap_days"]
 
     for row in read_file:
         ap_days_in_file = row[header_for_ap_days]

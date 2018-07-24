@@ -2,16 +2,17 @@ from data_cleanup.check_employee_name import set_name_to_correct_case
 from data_cleanup.python_mysql_connect import connect_to_database
 
 
-def update_airline_vendor(read_file, flight_headers_in_file):
+def update_airline_vendor(read_file, headers_in_file):
     """ Identify which column represents the vendor.
         For each row search in the database in the airlines table for the vendor code.
         Update the file with the vendor code rather than vendor name. """
 
-    header_to_look_for = flight_headers_in_file["vendor"]
+    header_to_look_for = headers_in_file["vendor"]
     for row in read_file:
-        airline_in_file = row[header_to_look_for]
-        vendor_code = _validate_airline_vendor((airline_in_file,))
-        row["vendor"] = vendor_code[0]
+        if row.get(header_to_look_for) is not None:
+            airline_in_file = row[header_to_look_for]
+            vendor_code = _validate_airline_vendor((airline_in_file,))
+            row["vendor"] = vendor_code[0]
     return read_file
 
 

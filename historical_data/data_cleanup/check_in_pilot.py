@@ -1,9 +1,9 @@
 from data_cleanup.check_employee_name import set_name_to_correct_case
 
 
-def update_in_pilot(read_file, flight_headers_in_file):
+def update_in_pilot(read_file, headers_in_file):
 
-    header_to_look_for = flight_headers_in_file["in_pilot"]
+    header_to_look_for = headers_in_file["in_pilot"]
     for row in read_file:
         if row.get(header_to_look_for) is not None:
             pilot_in_file = row[header_to_look_for]
