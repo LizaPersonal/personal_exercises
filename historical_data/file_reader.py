@@ -142,6 +142,8 @@ def clean_flight_data(file, flight_headers, organization, destination, connectin
     print(u"\u2713"+" Exchange Rate                 55.5%")
     updated_file = check_total_price_usd.update_total_price_usd(updated_file)
     print(u"\u2713"+" Total Price USD               59.2%")
+    updated_file = check_llf.update_llf(updated_file)
+    print(u"\u2713" + " LLF                         62.9%")
 
     updated_file = check_booked.update_booked(updated_file, flight_headers)
     print(u"\u2713"+" Booked Date                   66.6%")
@@ -234,9 +236,9 @@ def clean_hotel_data(file, hotel_headers, organization, currency, travel_type):
 if __name__== "__main__":
 
     filename = input("What file would you like to read? ")
-    # filename = "/Users/lizajohn/Documents/Clients/ServiceNow/International/AU_Hotel_Rocketrip_Extract.csv"
+    filename = "/Users/lizajohn/Documents/Clients/ServiceNow/International/SG_Hotel_Rocketrip_Extract.csv"
     # filename = "/Users/lizajohn/Documents/CWT_Flight_Template_test.csv"
-    filename = "/Users/lizajohn/Documents/CWT_Hotel_Template_test.csv"
+    # filename = "/Users/lizajohn/Documents/CWT_Hotel_Template_test.csv"
     template_to_use = validate_tmc()
     travel_mode = validate_travel_mode()
 

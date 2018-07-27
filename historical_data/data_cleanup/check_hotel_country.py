@@ -7,8 +7,11 @@ def update_hotel_country(read_file, headers_in_file):
     for row in read_file:
         if row.get(header_to_look_for) is not None:
             hotel_country_in_file = row[header_to_look_for]
-            hotel_country = _hotel_country_from_db(hotel_country_in_file)
-            row["hotel_country_id"] = hotel_country[0]
+            if hotel_country_in_file != "":
+                hotel_country = _hotel_country_from_db(hotel_country_in_file)
+                row["hotel_country_id"] = hotel_country[0]
+            else:
+                row["hotel_country_id"] = ""
     return read_file
 
 
@@ -24,6 +27,8 @@ def _hotel_country_from_db(country_in_file):
             search_results = _search_by_iso_2_code(cursor, country_in_file)
             if search_results is None:
                 search_results = _search_by_iso_3_code(cursor, country_in_file)
+                if search_results is None:
+                    search_results = ("",)
         return search_results
     except Exception as e:
         print(e)

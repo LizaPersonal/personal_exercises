@@ -12,7 +12,7 @@ def update_ap_days(read_file, headers_in_file, travel_type):
             leave_date_in_file = row["checkout"]
         booked_in_file = row["booked"]
         if row.get(header_to_look_for) is not None:
-            ap_days_in_file = row["ap_days"]
+            ap_days_in_file = row[header_to_look_for]
             if ap_days_in_file != "":
                 row["ap_days"] = ap_days_in_file
             elif booked_in_file != "" and leave_date_in_file != "":
