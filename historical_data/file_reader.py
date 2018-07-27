@@ -106,7 +106,7 @@ def create_new_output_file(updated_file, travel_type, header_provider=HeaderProv
     writer.writerows(updated_file)
 
 
-def clean_flight_data(file, flight_headers, organization, destination, connecting, openjaw, currency):
+def clean_flight_data(file, flight_headers, organization, destination, connecting, openjaw, currency, travel_type):
 
     updated_file = check_employee_name.update_employee_name(file,flight_headers)
     print("\n"+u"\u2713"+" Employee Name                 3.7%")
@@ -149,7 +149,7 @@ def clean_flight_data(file, flight_headers, organization, destination, connectin
     print(u"\u2713"+" Departure Date                70.3%")
     updated_file = check_return.update_return(updated_file, flight_headers)
     print(u"\u2713"+" Return Date                   74.0%")
-    updated_file = check_ap_days.update_ap_days(updated_file)
+    updated_file = check_ap_days.update_ap_days(updated_file, flight_headers, travel_type)
     print(u"\u2713"+" AP Days                       77.7%")
 
     updated_file = check_ticket_count.update_ticket_count(updated_file, flight_headers)
@@ -168,7 +168,7 @@ def clean_flight_data(file, flight_headers, organization, destination, connectin
     return updated_file
 
 
-def clean_hotel_data(file, hotel_headers, organization, currency):
+def clean_hotel_data(file, hotel_headers, organization, currency, travel_type):
 
     updated_file = check_employee_name.update_employee_name(file, hotel_headers)
     print("\n" + u"\u2713" + " Employee Name                 3.8%")
@@ -211,7 +211,7 @@ def clean_hotel_data(file, hotel_headers, organization, currency):
     print(u"\u2713" + " Check-in Date                 68.4%")
     updated_file = check_checkout.update_checkout(updated_file, hotel_headers)
     print(u"\u2713" + " Check-out Date                72.2%")
-    updated_file = check_ap_days.update_ap_days(updated_file)
+    updated_file = check_ap_days.update_ap_days(updated_file, hotel_headers, travel_type)
     print(u"\u2713" + " AP Date                       76.0%")
 
     updated_file = check_hotel_nights.update_hotel_nights(updated_file, hotel_headers)
@@ -257,9 +257,9 @@ if __name__== "__main__":
     if travel_mode == "flight":
         compare_headers(headers_after_reading, template_to_use.flight_headers, travel_mode)
         new_flight_file = clean_flight_data(file_after_reading, template_to_use.flight_headers, organization_name,
-                                            destination_symbol, connecting_symbol, openjaw_symbol, default_currency)
+                                            destination_symbol, connecting_symbol, openjaw_symbol, default_currency, travel_mode)
         create_new_output_file(new_flight_file, travel_mode)
     elif travel_mode == "hotel":
         compare_headers(headers_after_reading, template_to_use.hotel_headers, travel_mode)
-        new_hotel_file = clean_hotel_data(file_after_reading, template_to_use.hotel_headers, organization_name, default_currency)
+        new_hotel_file = clean_hotel_data(file_after_reading, template_to_use.hotel_headers, organization_name, default_currency, travel_mode)
         create_new_output_file(new_hotel_file, travel_mode)
