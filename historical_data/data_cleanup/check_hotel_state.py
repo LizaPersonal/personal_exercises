@@ -10,14 +10,14 @@ def update_hotel_state(read_file, headers_in_file):
             hotel_state_in_file = row[header_to_look_for]
             if hotel_state_in_file != "":
                 hotel_country_in_file = str(row["hotel_country_id"])
-                hotel_state = _hotel_state_from_db(hotel_state_in_file, hotel_country_in_file)
+                hotel_state = _validate_hotel_state(hotel_state_in_file, hotel_country_in_file)
                 row["hotel_state_id"] = hotel_state[0]
             else:
                 row["hotel_state_id"] = ""
     return read_file
 
 
-def _hotel_state_from_db(state_in_file, country_in_file):
+def _validate_hotel_state(state_in_file, country_in_file):
 
     cursor = None
     historical_db_connection = None
@@ -33,6 +33,7 @@ def _hotel_state_from_db(state_in_file, country_in_file):
                     search_results = _search_similar_subdivisions(cursor, state_in_file, country_in_file)
                     if search_results is None:
                         search_results = _missing_state(cursor, state_in_file, country_in_file)
+                        _update_database_with_new_subdivision_alias(historical_db_connection, cursor, state_in_file, search_results)
         return search_results
     except Exception as e:
         print(e)
@@ -117,7 +118,6 @@ def _find_country_name(cursor, country_id):
 
 def _suggest_similar_states(cursor, missing_country):
 
-    # results = []
     query = "SELECT subdivision_name, " \
             "iso_3166_2_code, " \
             "id " \
@@ -135,7 +135,7 @@ def _print_suggestions(suggested_states):
 
 def _update_database_with_new_subdivision_alias(connection, cursor, missing_alias, missing_subdivision_id):
 
-    update_query = "INSERT INTO subdivisions_aliases (airline_alias_name, subdivision_id) " \
+    update_query = "INSERT INTO subdivisions_aliases (alias_name, subdivision_id) " \
                    "VALUES (%s, %s)"
     data = (missing_alias, missing_subdivision_id)
     print(data)
