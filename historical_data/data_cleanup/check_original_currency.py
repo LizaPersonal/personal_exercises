@@ -21,8 +21,10 @@ def update_original_currency(read_file, headers_in_file, default_currency):
             if total_price_in_file != '':
                 price_currency = _get_currency_from_price(total_price_in_file, default_currency)
                 row["original_currency"] = price_currency
+            else:
+                row["original_currency"] = default_currency
         else:
-            row["original_currency"] = 'USD'
+            row["original_currency"] = default_currency
     return read_file
 
 
@@ -54,6 +56,10 @@ def _get_currency_from_price(price, default_currency):
 def _define_currency(currency_symbol):
     if currency_symbol == "$":
         currency_name = "USD"
+    elif currency_symbol == "€":
+        currency_name = "EUR"
+    elif currency_symbol == "£":
+        currency_name = "GBP"
     else:
         currency_name = input("What currency is "+currency_symbol)
     return currency_name
