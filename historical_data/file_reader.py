@@ -58,6 +58,18 @@ def validate_travel_mode():
         validate_travel_mode()
 
 
+def validate_sysadmin_id():
+
+    organization_sysadmin_id = input("What is the sysadmin ID of the organization? ")
+    if organization_id is None:
+        validate_sysadmin_id()
+    elif type(organization_sysadmin_id) == int:
+        return organization_id
+    else:
+        print("That is not a valid sysadmin ID.")
+        validate_sysadmin_id()
+
+
 class HeaderProvider(object):
 
     def get_flight_headers(self):
@@ -93,6 +105,15 @@ def update_organization(read_file, headers_in_file, organization):
     return read_file
 
 
+def update_sysadmin_id(read_file, headers_in_file, sysadmin_id):
+    """ Populate the organization column with the organization name provided by the user. """
+
+    header_to_look_for = headers_in_file["sysadmin_id"]
+    for row in read_file:
+        row[header_to_look_for] = sysadmin_id
+    return read_file
+
+
 def create_new_output_file(updated_file, travel_type, header_provider=HeaderProvider()):
     """ Write to a new file all the changes made. """
 
@@ -106,7 +127,7 @@ def create_new_output_file(updated_file, travel_type, header_provider=HeaderProv
     writer.writerows(updated_file)
 
 
-def clean_flight_data(file, flight_headers, organization, destination, connecting, openjaw, currency, travel_type):
+def clean_flight_data(file, flight_headers, organization, sysadmin_id, destination, connecting, openjaw, currency, travel_type):
 
     updated_file = check_employee_name.update_employee_name(file,flight_headers)
     print("\n"+u"\u2713"+" Employee Name                 3.7%")
@@ -114,6 +135,8 @@ def clean_flight_data(file, flight_headers, organization, destination, connectin
     print(u"\u2713"+" Employee ID                   7.4%")
     updated_file = update_organization(updated_file, flight_headers, organization)
     print(u"\u2713"+" Organization                  11.1%")
+    updated_file = update_sysadmin_id(updated_file, flight_headers, sysadmin_id)
+    print(u"\u2713" + " Sysadmin ID                   11.4%")
     updated_file = check_fare_class.update_fare_class(updated_file, flight_headers)
     print(u"\u2713"+" Fare Class                    14.8%")
     updated_file = check_airline_vendors.update_airline_vendor(updated_file, flight_headers)
@@ -170,7 +193,7 @@ def clean_flight_data(file, flight_headers, organization, destination, connectin
     return updated_file
 
 
-def clean_hotel_data(file, hotel_headers, organization, currency, travel_type):
+def clean_hotel_data(file, hotel_headers, organization, sysadmin_id, currency, travel_type):
 
     updated_file = check_employee_name.update_employee_name(file, hotel_headers)
     print("\n" + u"\u2713" + " Employee Name                 3.8%")
@@ -178,6 +201,8 @@ def clean_hotel_data(file, hotel_headers, organization, currency, travel_type):
     print(u"\u2713" + " Employee ID                   7.6%")
     updated_file = update_organization(updated_file, hotel_headers, organization)
     print(u"\u2713" + " Organization                  11.4%")
+    updated_file = update_sysadmin_id(updated_file, hotel_headers, sysadmin_id)
+    print(u"\u2713" + " Sysadmin ID                   11.4%")
 
     updated_file = check_room_type.update_room_type(updated_file, hotel_headers)
     print(u"\u2713" + " Room Type                     15.2%")
@@ -252,6 +277,7 @@ if __name__== "__main__":
         openjaw_symbol = template_to_use.route_symbols["openjaw"]
 
     organization_name = input("What is the name of the organization? ")
+    organization_id = validate_sysadmin_id()
     default_currency = input("If there is no currency indicated, what should be used as the default? ")
 
     headers_after_reading, file_after_reading = read_historical_data_file(filename)
@@ -259,9 +285,11 @@ if __name__== "__main__":
     if travel_mode == "flight":
         compare_headers(headers_after_reading, template_to_use.flight_headers, travel_mode)
         new_flight_file = clean_flight_data(file_after_reading, template_to_use.flight_headers, organization_name,
-                                            destination_symbol, connecting_symbol, openjaw_symbol, default_currency, travel_mode)
+                                            organization_id, destination_symbol, connecting_symbol, openjaw_symbol,
+                                            default_currency, travel_mode)
         create_new_output_file(new_flight_file, travel_mode)
     elif travel_mode == "hotel":
         compare_headers(headers_after_reading, template_to_use.hotel_headers, travel_mode)
-        new_hotel_file = clean_hotel_data(file_after_reading, template_to_use.hotel_headers, organization_name, default_currency, travel_mode)
+        new_hotel_file = clean_hotel_data(file_after_reading, template_to_use.hotel_headers, organization_name,
+                                          organization_id, default_currency, travel_mode)
         create_new_output_file(new_hotel_file, travel_mode)
