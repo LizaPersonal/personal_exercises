@@ -8,9 +8,10 @@ def update_fare_class(read_file, headers_in_file):
 
     header_to_look_for = headers_in_file["fare_class"]
     for row in read_file:
-        fare_class_in_file = row[header_to_look_for]
-        expected_fare_class = _validate_fare_class((fare_class_in_file, ))
-        row["fare_class"] = expected_fare_class[0]
+        if row.get(header_to_look_for) is not None:
+            fare_class_in_file = row[header_to_look_for]
+            expected_fare_class = _validate_fare_class((fare_class_in_file, ))
+            row["fare_class"] = expected_fare_class[0]
     return read_file
 
 
@@ -44,7 +45,9 @@ def _validate_fare_class(fare_class_in_file):
 def _search_fare_class_database(cursor, fare_class_to_search_for):
     """ Search for the fare class from the file in the historical database table fare_classes. """
 
-    query = "SELECT standardized_value FROM fare_classes WHERE tmc_value = %s"
+    query = "SELECT standardized_value " \
+            "FROM fare_classes " \
+            "WHERE tmc_value = %s"
     cursor.execute(query, fare_class_to_search_for)
     results = cursor.fetchone()
     return results
@@ -54,7 +57,11 @@ def _get_new_fare_class(missing_fare_class):
     """ If the fare class from the file doesn't exist in the database yet,
         request what the fare class standardization should be from the user. """
 
-    updated_fare_class = input(missing_fare_class + " fare class does not exist yet, what should it be mapped to?")
+    updated_fare_class = ""
+    while updated_fare_class not in ["Economy", "Premium Economy", "Business", "First", "Unknown"]:
+        print(missing_fare_class + " fare class does not exist yet, what should it be mapped to?")
+        print("Economy, Premium Economy, Business, First, or Unknown")
+        updated_fare_class = input()
     return updated_fare_class
 
 
