@@ -42,8 +42,6 @@ def _validate_airline_vendor(airline_in_file):
                 _update_database_with_new_airline_alias(historical_db_connection, cursor, missing_airline,
                                                         update_vendor_code)
             search_results = (update_vendor_code, missing_airline)
-        # else:
-        #     print(airline_in_file[0] + ' ---> ' + str(search_results))
         return search_results
     except Exception as e:
         print(e)
@@ -136,7 +134,7 @@ def _collect_additional_new_airline_info(missing_airline, missing_vendor_code):
         active = input("Is this airline still in service? (Y/N)\n")
         active_acceptable_value = _convert_input_to_binary(active)
     low_cost_acceptable_value = 2
-    while low_cost_acceptable_value ==2:
+    while low_cost_acceptable_value == 2:
         low_cost_carrier = input("Is this a low cost carrier? (Y/N)\n")
         low_cost_acceptable_value = _convert_input_to_binary(low_cost_carrier)
     return iata_numeric, icao_code, country, active_acceptable_value, low_cost_acceptable_value
