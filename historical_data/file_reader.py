@@ -61,10 +61,10 @@ def validate_travel_mode():
 def validate_sysadmin_id():
 
     organization_sysadmin_id = input("What is the sysadmin ID of the organization? ")
-    if organization_id is None:
+    if organization_sysadmin_id is None:
         validate_sysadmin_id()
-    elif type(organization_sysadmin_id) == int:
-        return organization_id
+    elif int(organization_sysadmin_id):
+        return organization_sysadmin_id
     else:
         print("That is not a valid sysadmin ID.")
         validate_sysadmin_id()
